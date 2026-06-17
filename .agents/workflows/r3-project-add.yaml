@@ -1,0 +1,13 @@
+name: "r3: add project to workspace"
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.sh" add {{url}} {{name}}'
+description: Clone a project repo into the r3 workspace and wire agent config inheritance (CLAUDE.md, symlinks, .mcp.json, notes).
+tags:
+    - r3
+    - projects
+arguments:
+    - name: url
+      description: Git URL of the project repository (HTTPS or SSH)
+      default_value: ~
+    - name: name
+      description: Optional project name (defaults to repo name in kebab-case)
+      default_value: ""

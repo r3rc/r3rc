@@ -1,0 +1,19 @@
+{
+    "name": "r3",
+    "description": "r3 agent workspace — skills, agents, and rules shared across all projects",
+    "skills": {
+        "paths": [
+            "skills/**"
+        ]
+    },
+    "agents": {
+        "paths": [
+            "agents/**"
+        ]
+    },
+    "rules": {
+        "paths": [
+            "rules/**"
+        ]
+    }
+}

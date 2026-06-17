@@ -1,0 +1,13 @@
+name: "r3: remove reference source"
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" remove {{name}} {{purge}}'
+description: Unlink and unregister a r3 reference source. Store is preserved unless --purge is passed.
+tags:
+    - r3
+    - sources
+arguments:
+    - name: name
+      description: Registered source name
+      default_value: ~
+    - name: purge
+      description: Pass --purge to also delete the store clone from ~/.r3/sources/
+      default_value: ""

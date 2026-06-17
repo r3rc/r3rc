@@ -1,0 +1,10 @@
+name: "r3: sync reference sources"
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" sync {{name}}'
+description: Update one or all r3 reference sources to their latest remote state.
+tags:
+    - r3
+    - sources
+arguments:
+    - name: name
+      description: Source name to sync (leave empty to sync all)
+      default_value: ""

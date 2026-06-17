@@ -1,0 +1,6 @@
+name: "r3: list reference sources"
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" list'
+description: List all registered r3 reference sources with branch, shallow flag, and store path.
+tags:
+    - r3
+    - sources

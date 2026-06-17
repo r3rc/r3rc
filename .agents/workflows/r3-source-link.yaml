@@ -1,0 +1,13 @@
+name: "r3: link reference source"
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" link {{url}} {{name}}'
+description: Clone a repo as a read-only reference source into ~/.r3/sources/ and register it in the r3 registry.
+tags:
+    - r3
+    - sources
+arguments:
+    - name: url
+      description: Git URL of the upstream repository
+      default_value: ~
+    - name: name
+      description: Optional source name (defaults to repo name in kebab-case)
+      default_value: ""
