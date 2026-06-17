@@ -1,0 +1,59 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "r3: setup init",
+            "type": "shell",
+            "command": "${workspaceFolder}/setup.sh init",
+            "problemMatcher": []
+        },
+        {
+            "label": "r3: projects list",
+            "type": "shell",
+            "command": "${workspaceFolder}/.agents/scripts/projects.sh list",
+            "problemMatcher": []
+        },
+        {
+            "label": "r3: project add",
+            "type": "shell",
+            "command": "${workspaceFolder}/.agents/scripts/projects.sh add ${input:gitUrl}",
+            "problemMatcher": []
+        },
+        {
+            "label": "r3: project status",
+            "type": "shell",
+            "command": "${workspaceFolder}/.agents/scripts/projects.sh status ${input:projectName}",
+            "problemMatcher": []
+        },
+        {
+            "label": "r3: sources list",
+            "type": "shell",
+            "command": "${workspaceFolder}/.agents/scripts/sources.sh list",
+            "problemMatcher": []
+        },
+        {
+            "label": "r3: source link",
+            "type": "shell",
+            "command": "${workspaceFolder}/.agents/scripts/sources.sh link ${input:gitUrl}",
+            "problemMatcher": []
+        },
+        {
+            "label": "r3: sources sync",
+            "type": "shell",
+            "command": "${workspaceFolder}/.agents/scripts/sources.sh sync",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "gitUrl",
+            "type": "promptString",
+            "description": "Git URL (HTTPS or SSH)"
+        },
+        {
+            "id": "projectName",
+            "type": "promptString",
+            "description": "Project name in the workspace root"
+        }
+    ]
+}
