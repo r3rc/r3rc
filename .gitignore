@@ -1,0 +1,13 @@
+# Misc
+*.tmp
+
+# Agents
+.agents/sources
+.claude
+.warp
+CLAUDE.md
+
+# Projects
+/samaritan/
+/tinker/
+/vpsctl/
