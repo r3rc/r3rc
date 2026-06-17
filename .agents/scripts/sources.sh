@@ -121,8 +121,8 @@ cmd_link() {
     tmp=$(mktemp)
     jq --indent 4 \
        --arg name "$name" --arg url "$url" --argjson shallow "$shallow" \
-       --arg store "$(_store_portable "$name")" \
-       '.sources += [{"name":$name,"url":$url,"store":$store,"shallow":$shallow}]' \
+       --arg store "$(_store_portable "$name")" --arg branch "$branch" \
+       '.sources += [{"name":$name,"url":$url,"store":$store,"shallow":$shallow,"branch":$branch}]' \
        "$CONFIG" > "$tmp" && mv "$tmp" "$CONFIG"
     _done "registered: $name | .agents/sources/$name → $(_store_portable "$name") | shallow=$shallow"
 }
@@ -184,11 +184,14 @@ cmd_restore() {
         if [[ -d "$store" ]]; then
             _info "[$name] store present"
         else
-            local depth=""
+            local depth="" branch_arg=""
             [[ "$shallow" == "true" ]] && depth="--depth=1"
+            local branch
+            branch=$(echo "$entry" | jq -r '.branch // ""')
+            [[ -n "$branch" ]] && branch_arg="--branch $branch"
             _info "[$name] cloning $url → $store"
             # shellcheck disable=SC2086
-            if ! git clone $depth "$url" "$store"; then
+            if ! git clone $depth $branch_arg "$url" "$store"; then
                 _error "[$name] clone failed"
                 errors=$((errors + 1))
                 continue

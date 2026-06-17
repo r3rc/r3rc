@@ -200,12 +200,20 @@ cmd_remove() {
 
     [[ -z "$name" ]] && _usage "projects.sh remove <name> [--force]"
 
-    [[ "$force" != "true" ]] && \
-        _die "refusing to delete without --force. Run 'projects.sh status $name' first, then re-run with --force."
-
     local dir
     dir=$(_project_dir "$name")
     [[ -d "$dir" ]] || _die "'$name' not found in workspace root"
+
+    local uncommitted
+    uncommitted=$(git -C "$dir" status --short 2>/dev/null)
+    if [[ -n "$uncommitted" ]]; then
+        _warn "uncommitted changes in $name:"
+        echo "$uncommitted" | sed 's/^/  /'
+        [[ "$force" != "true" ]] && \
+            _die "refusing to delete with uncommitted changes. Re-run with --force to override."
+    elif [[ "$force" != "true" ]]; then
+        _die "refusing to delete without --force. Re-run with --force to confirm."
+    fi
 
     rm -rf "$dir"
     _ok "deleted: $dir"
