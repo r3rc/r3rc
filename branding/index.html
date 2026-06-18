@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>r3 — Brand & Design System</title>
+<meta name="description" content="La marca personal de Renzo A. Rosas. Sistema de diseño, identidad y dirección visual.">
+<link rel="stylesheet" href="./tokens.css">
+<style>
+  /* =============================================
+   * Reset & Base
+   * ============================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; color-scheme: light; }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    color: var(--on-surface);
+    background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+  }
+
+  /* =============================================
+   * Layout primitives
+   * ============================================= */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 var(--space-6); }
+
+  section { padding: var(--space-16) 0; border-bottom: var(--border) solid var(--outline); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head { display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-8); }
+  .section-num { font-family: var(--font-mono); font-size: var(--text-mono-sm); color: var(--accent); font-weight: var(--weight-medium); letter-spacing: 0.04em; }
+  .section-title { font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--on-surface); }
+  .section-line { flex: 1; height: 1px; background: var(--outline); }
+
+  .section-h2 { font-size: 32px; font-weight: var(--weight-bold); letter-spacing: -0.025em; line-height: 1.1; margin-bottom: var(--space-4); max-width: 720px; }
+  .section-lead { font-size: 16px; color: var(--on-surface-muted); max-width: 640px; line-height: 1.6; margin-bottom: var(--space-8); }
+
+  /* =============================================
+   * Sticky Nav
+   * ============================================= */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: var(--border) solid var(--outline);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .nav-brand {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: var(--weight-medium);
+    color: var(--on-surface);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-brand .accent { color: var(--accent); }
+
+  .nav-links { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* =============================================
+   * Hero
+   * ============================================= */
+  .hero {
+    padding: var(--space-20) 0 var(--space-16);
+    border-bottom: var(--border) solid var(--outline);
+  }
+
+  .hero-pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--on-surface-subtle);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-title {
+    font-size: 72px;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    margin-bottom: var(--space-3);
+  }
+  .hero-title .accent {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: var(--weight-medium);
+    letter-spacing: -0.02em;
+    margin-left: var(--space-2);
+    vertical-align: super;
+  }
+
+  .hero-role { font-size: 18px; color: var(--on-surface-muted); margin-bottom: var(--space-8); }
+
+  .hero-tagline {
+    font-size: 24px;
+    font-style: italic;
+    color: var(--on-surface);
+    line-height: 1.35;
+    max-width: 560px;
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-10);
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
+    column-gap: var(--space-8);
+    row-gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--on-surface-muted);
+  }
+  .hero-meta a {
+    color: var(--on-surface);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--on-surface-subtle);
+    transition: text-decoration-color var(--transition-fast);
+  }
+  .hero-meta a:hover { text-decoration-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .hero-title { font-size: 48px; }
+    .hero-title .accent { font-size: 20px; }
+    .hero-tagline { font-size: 18px; }
+  }
+
+  /* =============================================
+   * Principles (filosofía)
+   * ============================================= */
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (max-width: 720px) { .principles { grid-template-columns: 1fr; } }
+
+  .principle {
+    border-left: 2px solid var(--accent);
+    padding: var(--space-3) 0 var(--space-3) var(--space-5);
+  }
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-subtle);
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-1);
+  }
+  .principle-name {
+    font-size: 16px;
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-1);
+  }
+  .principle-name code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--on-surface-muted);
+    font-weight: var(--weight-regular);
+    margin-left: var(--space-2);
+  }
+  .principle-desc {
+    font-size: 14px;
+    color: var(--on-surface-muted);
+    line-height: 1.55;
+  }
+
+  /* =============================================
+   * Identity tables
+   * ============================================= */
+  .identity-block { margin-bottom: var(--space-10); }
+  .identity-block:last-child { margin-bottom: 0; }
+
+  .identity-h3 {
+    font-size: 20px;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-2);
+  }
+  .identity-desc {
+    font-size: 14px;
+    color: var(--on-surface-muted);
+    margin-bottom: var(--space-4);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .data-table th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--on-surface-subtle);
+    font-weight: var(--weight-medium);
+    padding: var(--space-2) var(--space-3);
+    border-bottom: var(--border) solid var(--on-surface);
+  }
+  .data-table td {
+    padding: var(--space-3);
+    border-bottom: var(--border) solid var(--outline);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .data-table td:first-child { font-family: var(--font-mono); white-space: nowrap; }
+  .data-table td.nowrap { white-space: nowrap; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .strong { color: var(--accent); font-weight: var(--weight-medium); }
+
+  /* List with em-dash bullets */
+  .dash-list { list-style: none; padding: 0; }
+  .dash-list li {
+    position: relative;
+    padding-left: var(--space-5);
+    margin-bottom: var(--space-2);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--on-surface);
+  }
+  .dash-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--on-surface-subtle);
+  }
+  .dash-list strong { font-weight: var(--weight-bold); }
+
+  /* Inline code */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--accent-soft);
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* =============================================
+   * Inspirations
+   * ============================================= */
+  .insp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  @media (max-width: 720px) { .insp-grid { grid-template-columns: 1fr; } }
+
+  .insp-card {
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    background: var(--surface-pure);
+  }
+  .insp-name {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: var(--weight-medium);
+    margin-bottom: var(--space-1);
+  }
+  .insp-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--space-3);
+  }
+  .insp-desc {
+    font-size: 13.5px;
+    color: var(--on-surface-muted);
+    line-height: 1.6;
+  }
+
+  /* =============================================
+   * Positioning scale
+   * ============================================= */
+  .position-scale {
+    margin-top: var(--space-6);
+    padding: var(--space-6);
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    background: var(--surface-pure);
+  }
+  .position-track {
+    position: relative;
+    height: 8px;
+    background: linear-gradient(to right, var(--surface), var(--on-surface));
+    border-radius: var(--radius-sm);
+    margin: var(--space-8) 0 var(--space-3);
+    border: var(--border) solid var(--outline);
+  }
+  .position-marker {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .position-marker::after {
+    content: '6.5 / 10';
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+  }
+  .position-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* =============================================
+   * Visual principles
+   * ============================================= */
+  .vis-principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  @media (max-width: 720px) { .vis-principles { grid-template-columns: 1fr; } }
+
+  .vis-principle {
+    background: var(--surface-pure);
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+  }
+  .vis-principle-num {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: var(--weight-bold);
+    color: var(--accent-soft);
+    line-height: 1;
+    margin-bottom: var(--space-3);
+  }
+  .vis-principle-name {
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-2);
+  }
+  .vis-principle-desc {
+    font-size: 13px;
+    color: var(--on-surface-muted);
+    line-height: 1.55;
+  }
+
+  /* =============================================
+   * Color swatches
+   * ============================================= */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-3);
+  }
+  .swatch {
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface-pure);
+  }
+  .swatch-color { height: 80px; border-bottom: var(--border) solid var(--outline); }
+  .swatch-meta { padding: var(--space-3); }
+  .swatch-name { font-size: 13px; font-weight: var(--weight-medium); margin-bottom: 2px; }
+  .swatch-token { font-family: var(--font-mono); font-size: 10px; color: var(--on-surface-muted); margin-bottom: 4px; }
+  .swatch-hex { font-family: var(--font-mono); font-size: 11px; color: var(--on-surface); }
+
+  /* =============================================
+   * Type scale
+   * ============================================= */
+  .type-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: var(--space-6);
+    padding: var(--space-4) 0;
+    border-bottom: var(--border) solid var(--outline);
+    align-items: baseline;
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-meta { font-family: var(--font-mono); font-size: 11px; color: var(--on-surface-muted); }
+  .type-meta strong { display: block; color: var(--on-surface); font-weight: var(--weight-medium); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+
+  .type-display { font-size: 56px; font-weight: var(--weight-bold); letter-spacing: -0.04em; line-height: 0.95; }
+  .type-h1 { font-size: 24px; font-weight: var(--weight-bold); letter-spacing: -0.02em; line-height: 1.2; }
+  .type-h2 { font-size: 18px; font-weight: var(--weight-bold); letter-spacing: -0.015em; line-height: 1.3; }
+  .type-h3 { font-size: 15px; font-weight: var(--weight-bold); letter-spacing: -0.015em; line-height: 1.3; }
+  .type-body { font-size: 13px; line-height: 1.5; }
+  .type-caption { font-size: 12px; color: var(--on-surface-muted); line-height: 1.5; }
+  .type-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--on-surface-subtle); font-family: var(--font-mono); }
+  .type-mono { font-family: var(--font-mono); font-size: 11px; color: var(--on-surface); }
+
+  @media (max-width: 640px) { .type-display { font-size: 36px; } }
+
+  /* =============================================
+   * Spacing
+   * ============================================= */
+  .space-grid { display: flex; flex-direction: column; gap: var(--space-2); }
+  .space-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 60px;
+    gap: var(--space-4);
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .space-token { color: var(--on-surface); }
+  .space-bar { height: 12px; background: var(--accent); border-radius: var(--radius-sm); }
+  .space-px { color: var(--on-surface-muted); text-align: right; }
+
+  /* =============================================
+   * Components
+   * ============================================= */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (max-width: 720px) { .comp-grid { grid-template-columns: 1fr; } }
+
+  .comp-card {
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    background: var(--surface-pure);
+  }
+  .comp-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--on-surface-subtle);
+    margin-bottom: var(--space-3);
+  }
+  .comp-demo { margin-bottom: var(--space-3); font-size: 13.5px; }
+  .comp-code {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--on-surface-muted);
+    background: var(--accent-soft);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    line-height: 1.5;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* Component samples */
+  .demo-link {
+    color: var(--on-surface);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--on-surface-subtle);
+    transition: text-decoration-color var(--transition-fast);
+  }
+  .demo-link:hover { text-decoration-color: var(--accent); }
+  .demo-tag {
+    display: inline-block;
+    background: var(--surface);
+    border: var(--border) solid var(--outline);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    color: var(--on-surface);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-medium);
+    margin-right: 4px;
+  }
+  .demo-tag-accent {
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+    color: var(--accent);
+  }
+  .demo-handle {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: var(--weight-medium);
+  }
+  .demo-tagline {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--on-surface-muted);
+  }
+  .demo-tagline::before { content: '« '; color: var(--accent); font-style: normal; }
+  .demo-tagline::after { content: ' »'; color: var(--accent); font-style: normal; }
+
+  /* =============================================
+   * Iconography
+   * ============================================= */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-2); }
+  .icon-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    background: var(--surface-pure);
+  }
+  .icon-cell svg {
+    width: 22px; height: 22px;
+    stroke: var(--on-surface);
+    stroke-width: 1.5; fill: none;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .icon-cell-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--on-surface-muted);
+  }
+
+  /* =============================================
+   * Process (paletas evaluadas)
+   * ============================================= */
+  .process-list { display: flex; flex-direction: column; gap: var(--space-3); }
+  .process-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: var(--border) solid var(--outline);
+    align-items: center;
+  }
+  .process-item:last-child { border-bottom: none; }
+
+  .process-swatches { display: flex; gap: 4px; }
+  .process-swatch {
+    width: 28px; height: 28px;
+    border-radius: var(--radius-sm);
+    border: var(--border) solid var(--outline);
+  }
+
+  .process-meta { font-size: 13px; }
+  .process-name { font-weight: var(--weight-bold); margin-bottom: 2px; font-size: 14px; }
+  .process-name .status { font-family: var(--font-mono); font-size: 10px; color: var(--on-surface-subtle); margin-left: var(--space-2); letter-spacing: 0.08em; text-transform: uppercase; font-weight: var(--weight-regular); }
+  .process-name .status.chosen { color: var(--accent); }
+  .process-reason { color: var(--on-surface-muted); font-size: 12.5px; line-height: 1.5; }
+
+  /* =============================================
+   * Application examples
+   * ============================================= */
+  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (max-width: 720px) { .app-grid { grid-template-columns: 1fr; } }
+
+  .app-card {
+    border: var(--border) solid var(--outline);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    background: var(--surface-pure);
+  }
+  .app-context {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+  .app-name { font-size: 16px; font-weight: var(--weight-bold); margin-bottom: var(--space-3); }
+  .app-desc { font-size: 13px; color: var(--on-surface-muted); line-height: 1.6; }
+
+  /* =============================================
+   * Footer
+   * ============================================= */
+  footer {
+    padding: var(--space-8) 0;
+    border-top: var(--border) solid var(--outline);
+    margin-top: var(--space-8);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-subtle);
+  }
+  .footer-inner a {
+    color: var(--on-surface-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--outline);
+    padding-bottom: 1px;
+  }
+  .footer-inner a:hover { color: var(--accent); border-color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">r3<span class="accent">/system</span></a>
+    <div class="nav-links">
+      <a href="#filosofia">Filosofía</a>
+      <a href="#identidad">Identidad</a>
+      <a href="#direccion">Dirección</a>
+      <a href="#sistema">Sistema</a>
+      <a href="#aplicacion">Aplicación</a>
+      <a href="#resumen">Resumen</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="top">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-pre">Brand & Design System · 2026</div>
+    <h1 class="hero-title">Renzo A. Rosas<span class="accent">/r3</span></h1>
+    <div class="hero-role">Senior Frontend Engineer · Tech Lead</div>
+    <p class="hero-tagline">Construyo lo que no existe — o no encaja.</p>
+    <div class="hero-meta">
+      <a href="mailto:renzo.r3rc@gmail.com">renzo.r3rc@gmail.com</a>
+      <a href="https://github.com/r3rc">github.com/r3rc</a>
+      <a href="https://linkedin.com/in/r3rc">linkedin.com/in/r3rc</a>
+      <span>Lima, Perú · UTC−5</span>
+    </div>
+  </header>
+
+  <!-- §01 FILOSOFÍA -->
+  <section id="filosofia">
+    <div class="section-head">
+      <span class="section-num">§01</span>
+      <span class="section-title">Filosofía</span>
+      <span class="section-line"></span>
+    </div>
+    <h2 class="section-h2">Cinco principios que rigen tanto el código como las decisiones de marca.</h2>
+    <p class="section-lead">El stack es contexto. Los principios son los mismos. Architecture-first — diseño el sistema antes de escribir código, antes de elegir tipografía, antes de tomar cualquier decisión irreversible.</p>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-num">01</div>
+        <div class="principle-name">KISS <code>Keep It Simple, Stupid</code></div>
+        <div class="principle-desc">La simplicidad gana. Si una decisión requiere explicación compleja, probablemente está mal.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <div class="principle-name">YAGNI <code>You Aren't Gonna Need It</code></div>
+        <div class="principle-desc">No construyo abstracciones por adelantado. Construyo lo que el problema real demanda hoy.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">03</div>
+        <div class="principle-name">DRY <code>Don't Repeat Yourself</code></div>
+        <div class="principle-desc">Una fuente de verdad por concepto. Tokens, no hardcodes. Componentes, no copy-paste.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <div class="principle-name">Lightweight First</div>
+        <div class="principle-desc">Elige la herramienta más liviana que resuelve el problema. Si Bun resuelve, no traigas Node + npm.</div>
+      </div>
+      <div class="principle" style="grid-column: 1 / -1;">
+        <div class="principle-num">05</div>
+        <div class="principle-name">Architecture-first</div>
+        <div class="principle-desc">Diseño el sistema antes de escribir código. Esto se nota en commits, en PRs, en cómo nombro carpetas — y en cómo construyo esta marca.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §02 IDENTIDAD -->
+  <section id="identidad">
+    <div class="section-head">
+      <span class="section-num">§02</span>
+      <span class="section-title">Identidad</span>
+      <span class="section-line"></span>
+    </div>
+    <h2 class="section-h2">Cómo se comporta la marca cuando hay decisiones que tomar.</h2>
+    <p class="section-lead">El sistema visual define cómo se ve. Esta sección define qué es, cómo se nombra, cómo habla y, sobre todo, lo que <em>no</em> es.</p>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">El nombre</h3>
+      <p class="identity-desc"><strong>r3</strong> son las dos consonantes de <strong>R</strong>enzo <strong>R</strong>osas, más el 3 que las une. No es acrónimo ni nombre comercial. Es un handle: corto, técnico, memorable, escribible en mono.</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>Forma</th><th>Uso</th><th>Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>r3</code></td><td>Default. Marca personal en cualquier contexto técnico.</td><td><code>/r3</code>, <code>r3rc.dev</code>, scope npm</td></tr>
+          <tr><td><code>R3</code></td><td><span class="strong">Nunca.</span> Mayuscula sugiere corporativo/agencia.</td><td>—</td></tr>
+          <tr><td><code>@r3rc</code></td><td>Handles donde necesito disambiguar.</td><td><code>@r3rc/ssh2</code>, <code>github.com/r3rc</code></td></tr>
+          <tr><td><code>@we-r3</code></td><td>Org de GitHub. Reservado para colaboraciones futuras o R3 Studio.</td><td><code>github.com/we-r3</code></td></tr>
+          <tr><td>Renzo A. Rosas</td><td>Documentos formales (CV, contratos).</td><td>CV header</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Voz</h3>
+      <p class="identity-desc">La marca habla en singular. Técnica, directa, sin hedging. Sustantivos específicos sobre adjetivos vacíos.</p>
+      <table class="data-table">
+        <thead>
+          <tr><th style="width: 50%;">Evita</th><th>Prefiere</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Contribuí al desarrollo de un design system</td><td>Arquitecté un design system de 6 paquetes</td></tr>
+          <tr><td>Trabajé con tecnologías modernas</td><td>TypeScript, Zig, PHP</td></tr>
+          <tr><td>Somos apasionados por el código limpio</td><td>KISS, YAGNI, DRY, Lightweight First como reglas ejecutables</td></tr>
+          <tr><td>Experiencia en frontend</td><td>Vue 3, Nuxt 4, MCP, Claude Code</td></tr>
+          <tr><td>Soluciones escalables</td><td>Arquitectura por features, sin abstracciones prematuras</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">El tagline</h3>
+      <p class="identity-desc"><span class="demo-tagline">Construyo lo que no existe — o no encaja.</span></p>
+      <p class="identity-desc">Resume la postura técnica: cuando la herramienta no existe o no calza con el problema, la construyo. <strong>Es declarativa, no aspiracional.</strong> Refleja lo que ya hago, no lo que quiero hacer.</p>
+      <ul class="dash-list">
+        <li><strong>Sí:</strong> Headers de sitios personales. Bio corta de Twitter/X o LinkedIn. Como negrita dentro del primer párrafo del CV. Footer/colofón de proyectos importantes.</li>
+        <li><strong>No:</strong> Email casual. Subtítulo decorativo sin contexto. Repetida más de una vez en el mismo documento. Traducida al inglés (pierde el ritmo).</li>
+      </ul>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Lo que <code>r3</code> <em>no</em> es</h3>
+      <p class="identity-desc">Definir lo que no somos protege la marca cuando hay tentación de drift. Esta sección importa tanto como las anteriores.</p>
+      <ul class="dash-list">
+        <li><strong>No es una agencia.</strong> No vendemos “soluciones”, no cotizamos “proyectos”, no hablamos en plural.</li>
+        <li><strong>No es una marca corporativa.</strong> No usamos <code>R3</code> mayuscula. No tenemos clientes; tenemos colaboraciones.</li>
+        <li><strong>No es aspiracional.</strong> No promete lo que no hace. Lo que aparece en la marca es lo que ya entregué.</li>
+        <li><strong>No es decoración.</strong> Cada elemento visual tiene una razón. Si no aporta, no está.</li>
+        <li><strong>No imita a otros.</strong> No es “como Vercel pero personal”. Es lo que sale cuando aplico mis principios.</li>
+      </ul>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Identidad pública</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Plataforma</th><th>Handle</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GitHub personal</td><td><a href="https://github.com/r3rc" class="demo-link">@r3rc</a></td></tr>
+          <tr><td>GitHub org</td><td><a href="https://github.com/we-r3" class="demo-link">@we-r3</a></td></tr>
+          <tr><td>LinkedIn</td><td><a href="https://linkedin.com/in/r3rc" class="demo-link">in/r3rc</a></td></tr>
+          <tr><td>Email</td><td><a href="mailto:renzo.r3rc@gmail.com" class="demo-link">renzo.r3rc@gmail.com</a></td></tr>
+          <tr><td>Web</td><td><a href="https://r3rc.dev" class="demo-link">r3rc.dev</a></td></tr>
+          <tr><td>Package scope</td><td><code>@r3rc/*</code> (npm), <code>@r3/*</code> (JSR)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- §03 DIRECCIÓN VISUAL -->
+  <section id="direccion">
+    <div class="section-head">
+      <span class="section-num">§03</span>
+      <span class="section-title">Dirección visual</span>
+      <span class="section-line"></span>
+    </div>
+    <h2 class="section-h2">Swiss-Industrial. Rigor técnico con calidez humana.</h2>
+    <p class="section-lead">El estilo visual destila rigor estructural y precisión editorial sin caer en “startup genérica” ni en frialdad corporativa. Tres marcas lo informan, una metáfora lo gobierna.</p>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Inspiraciones</h3>
+      <div class="insp-grid">
+        <div class="insp-card">
+          <div class="insp-name">Microsoft</div>
+          <div class="insp-label">Lo que tomo</div>
+          <div class="insp-desc">Rigor técnico, sistemas de diseño estructurados, Fluent. La sensación de que cada pixel está donde debe estar.</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-name">SpaceX</div>
+          <div class="insp-label">Lo que tomo</div>
+          <div class="insp-desc">Estética industrial, precisión ingenieril, datos como elementos visuales, la sensación de estar construyendo algo importante.</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-name">Anthropic</div>
+          <div class="insp-label">Lo que tomo</div>
+          <div class="insp-desc">Minimalismo inteligente, eficiencia sin arrogancia, tipografía como protagonista, espacios que respiran.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">La metáfora: el sensei</h3>
+      <p class="identity-desc">Así como un sensei lidera pero no impone, exige pero es justo, es serio cuando importa y ameno cuando se puede — el estilo visual debe ser <strong>estructurado pero no rígido, técnico pero no frío, preciso pero no aburrido</strong>. Esa es la postura.</p>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Posicionamiento</h3>
+      <p class="identity-desc">En la escala cálido/humano (1) a frío/tecnológico (10), <code>r3</code> está en el punto medio-alto. Sofisticado pero no frío. Técnico pero con alma.</p>
+      <div class="position-scale">
+        <div class="position-track">
+          <div class="position-marker"></div>
+        </div>
+        <div class="position-labels">
+          <span>1 · Cálido / Humano</span>
+          <span>10 · Frío / Tecnológico</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Seis principios visuales</h3>
+      <p class="identity-desc">Cómo se traduce la postura en decisiones concretas de diseño.</p>
+      <div class="vis-principles">
+        <div class="vis-principle">
+          <div class="vis-principle-num">01</div>
+          <div class="vis-principle-name">Tipografía como estructura</div>
+          <div class="vis-principle-desc">La tipografía es el elemento principal, no el complemento. Jerarquía clara: títulos grandes y bold, cuerpo regular, labels en uppercase pequeño.</div>
+        </div>
+        <div class="vis-principle">
+          <div class="vis-principle-num">02</div>
+          <div class="vis-principle-name">Datos como visuales</div>
+          <div class="vis-principle-desc">En lugar de ilustraciones decorativas, números y datos como elementos visuales. “1,344 íconos”, “12 tools”, “6 paquetes”.</div>
+        </div>
+        <div class="vis-principle">
+          <div class="vis-principle-num">03</div>
+          <div class="vis-principle-name">Grid flexible</div>
+          <div class="vis-principle-desc">Usamos un grid pero no somos esclavos de él. Permite layouts asimétricos y editoriales mientras mantiene alineación y estructura.</div>
+        </div>
+        <div class="vis-principle">
+          <div class="vis-principle-num">04</div>
+          <div class="vis-principle-name">Espacio intencional</div>
+          <div class="vis-principle-desc">El espacio en blanco no es “vacío”, es un elemento de diseño. Crea respiración, jerarquía, y sensación de calidad premium.</div>
+        </div>
+        <div class="vis-principle">
+          <div class="vis-principle-num">05</div>
+          <div class="vis-principle-name">Cero ruido</div>
+          <div class="vis-principle-desc">Sin gradientes innecesarios, sin sombras dramáticas, sin efectos de “startup genérica”. Cada elemento justifica su existencia.</div>
+        </div>
+        <div class="vis-principle">
+          <div class="vis-principle-num">06</div>
+          <div class="vis-principle-name">Calidez en la paleta</div>
+          <div class="vis-principle-desc">El crema (Warm Stone) y los grises con undertone cálido evitan el feeling “frío y corporativo” del Swiss tradicional.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Direcciones evaluadas</h3>
+      <p class="identity-desc">El proceso destiló múltiples direcciones antes de llegar a Warm Stone + Burgundy. Documentar lo descartado previene revisitar decisiones ya tomadas.</p>
+      <div class="process-list">
+        <div class="process-item">
+          <div class="process-swatches">
+            <div class="process-swatch" style="background: #FAF8F5;"></div>
+            <div class="process-swatch" style="background: #1A1A1A;"></div>
+            <div class="process-swatch" style="background: #8B1F2C;"></div>
+          </div>
+          <div class="process-meta">
+            <div class="process-name">Warm Stone + Burgundy <span class="status chosen">→ Elegida</span></div>
+            <div class="process-reason">Crema cálido + accent burgundy contenido. Diferenciación vs azul-tech genérico, sigue siendo editorial-serio. Sweet spot de Swiss-Industrial.</div>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-swatches">
+            <div class="process-swatch" style="background: #FFFBF5;"></div>
+            <div class="process-swatch" style="background: #1C1917;"></div>
+            <div class="process-swatch" style="background: #7F1D1D;"></div>
+          </div>
+          <div class="process-meta">
+            <div class="process-name">Ivory & Burgundy <span class="status">Predecesora</span></div>
+            <div class="process-reason">Versión más pálida y burgundy más saturado. Refinada hacia Warm Stone para mayor calidez y un accent ligeramente más editorial.</div>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-swatches">
+            <div class="process-swatch" style="background: #F5F1EA;"></div>
+            <div class="process-swatch" style="background: #2C2825;"></div>
+            <div class="process-swatch" style="background: #C84B31;"></div>
+          </div>
+          <div class="process-meta">
+            <div class="process-name">Sand & Crimson <span class="status">Descartada</span></div>
+            <div class="process-reason">Crimson saturado se leía demasiado “marketing”. Burgundy más oscuro comunica seriedad sin gritar.</div>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-swatches">
+            <div class="process-swatch" style="background: #0E1B26;"></div>
+            <div class="process-swatch" style="background: #2DD4BF;"></div>
+            <div class="process-swatch" style="background: #FFFFFF;"></div>
+          </div>
+          <div class="process-meta">
+            <div class="process-name">Midnight Aqua / Deep Teal <span class="status">Descartada</span></div>
+            <div class="process-reason">Tech-forward pero genérico. Toda startup con dark mode y teal: Vercel, Linear, Resend. Sin diferenciación.</div>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-swatches">
+            <div class="process-swatch" style="background: #0A0A0A;"></div>
+            <div class="process-swatch" style="background: #404040;"></div>
+            <div class="process-swatch" style="background: #F59E0B;"></div>
+          </div>
+          <div class="process-meta">
+            <div class="process-name">Dark cálido <span class="status chosen">&rarr; Website</span></div>
+            <div class="process-reason">Paleta oscura con undertone cálido. Base <code>#0B0908</code>, texto <code>#EDE8E0</code>, accent <code>#9E2535</code>. Implementada en <code>tokens.css</code> via <code>light-dark()</code>. El website activa dark con <code>html { color-scheme: dark }</code>. CV y documentos de impresión fuerzan <code>color-scheme: light</code>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §04 SISTEMA -->
+  <section id="sistema">
+    <div class="section-head">
+      <span class="section-num">§04</span>
+      <span class="section-title">Sistema</span>
+      <span class="section-line"></span>
+    </div>
+    <h2 class="section-h2">Tokens, escalas y componentes base.</h2>
+    <p class="section-lead">Todo lo que sigue está en <a href="./tokens.css" class="demo-link">tokens.css</a>. Impórtalo en cualquier proyecto y obtenés la marca completa.</p>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Color</h3>
+      <p class="identity-desc">Roles, no valores. Los tokens usan <code>light-dark()</code> — cada uno tiene valor light y dark respondiendo a <code>prefers-color-scheme</code>. Para forzar: <code>html { color-scheme: light }</code> en documentos de impresión, <code>color-scheme: dark</code> en el website. El accent aparece en pocos lugares: handles, code inline, separadores, hover states.</p>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-color" style="background: var(--surface);"></div><div class="swatch-meta"><div class="swatch-name">Surface</div><div class="swatch-token">--surface</div><div class="swatch-hex">#FAF8F5</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--surface-pure);"></div><div class="swatch-meta"><div class="swatch-name">Surface Pure</div><div class="swatch-token">--surface-pure</div><div class="swatch-hex">#FFFFFF</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--on-surface);"></div><div class="swatch-meta"><div class="swatch-name">On Surface</div><div class="swatch-token">--on-surface</div><div class="swatch-hex">#1A1A1A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--on-surface-muted);"></div><div class="swatch-meta"><div class="swatch-name">On Surface Muted</div><div class="swatch-token">--on-surface-muted</div><div class="swatch-hex">#5C5853</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--on-surface-subtle);"></div><div class="swatch-meta"><div class="swatch-name">On Surface Subtle</div><div class="swatch-token">--on-surface-subtle</div><div class="swatch-hex">#A8A39C</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--outline);"></div><div class="swatch-meta"><div class="swatch-name">Outline</div><div class="swatch-token">--outline</div><div class="swatch-hex">#E8E2D9</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--accent);"></div><div class="swatch-meta"><div class="swatch-name">Accent</div><div class="swatch-token">--accent</div><div class="swatch-hex">#8B1F2C</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background: var(--accent-soft); border: 1px dashed var(--accent);"></div><div class="swatch-meta"><div class="swatch-name">Accent Soft</div><div class="swatch-token">--accent-soft</div><div class="swatch-hex">8% opacity</div></div></div>
+      </div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Tipografía</h3>
+      <p class="identity-desc">Satoshi para display y body. JetBrains Mono para identidad técnica (handles, fechas, código).</p>
+      <div class="type-row"><div class="type-meta"><strong>Display</strong>56px / 0.95 / -0.04em</div><div class="type-display">Renzo A. Rosas</div></div>
+      <div class="type-row"><div class="type-meta"><strong>H1</strong>24px / 1.2 / -0.02em</div><div class="type-h1">Construyo lo que no encaja.</div></div>
+      <div class="type-row"><div class="type-meta"><strong>H2</strong>18px / 1.3 / -0.015em</div><div class="type-h2">Architecture-first engineering</div></div>
+      <div class="type-row"><div class="type-meta"><strong>H3</strong>15px / 1.3 / -0.015em</div><div class="type-h3">Frontend Lead · Arigroup S.A.C.</div></div>
+      <div class="type-row"><div class="type-meta"><strong>Body</strong>13px / 1.5</div><div class="type-body">Tech Lead de frontend con más de 6 años de experiencia y enfoque architecture-first.</div></div>
+      <div class="type-row"><div class="type-meta"><strong>Caption</strong>12px / 1.5 muted</div><div class="type-caption">Software empresarial de ventas. Lidero un equipo de hasta 3 ingenieros.</div></div>
+      <div class="type-row"><div class="type-meta"><strong>Label</strong>10px / 0.18em / mono</div><div class="type-label">Brand & Design System — 2026</div></div>
+      <div class="type-row"><div class="type-meta"><strong>Mono SM</strong>11px / mono</div><div class="type-mono">renzo.r3rc@gmail.com</div></div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Spacing</h3>
+      <p class="identity-desc">Escala de 4px. Predecible, escalable.</p>
+      <div class="space-grid">
+        <div class="space-row"><span class="space-token">--space-1</span><div class="space-bar" style="width: 4px;"></div><span class="space-px">4px</span></div>
+        <div class="space-row"><span class="space-token">--space-2</span><div class="space-bar" style="width: 8px;"></div><span class="space-px">8px</span></div>
+        <div class="space-row"><span class="space-token">--space-3</span><div class="space-bar" style="width: 12px;"></div><span class="space-px">12px</span></div>
+        <div class="space-row"><span class="space-token">--space-4</span><div class="space-bar" style="width: 16px;"></div><span class="space-px">16px</span></div>
+        <div class="space-row"><span class="space-token">--space-5</span><div class="space-bar" style="width: 20px;"></div><span class="space-px">20px</span></div>
+        <div class="space-row"><span class="space-token">--space-6</span><div class="space-bar" style="width: 24px;"></div><span class="space-px">24px</span></div>
+        <div class="space-row"><span class="space-token">--space-8</span><div class="space-bar" style="width: 32px;"></div><span class="space-px">32px</span></div>
+        <div class="space-row"><span class="space-token">--space-10</span><div class="space-bar" style="width: 40px;"></div><span class="space-px">40px</span></div>
+        <div class="space-row"><span class="space-token">--space-12</span><div class="space-bar" style="width: 48px;"></div><span class="space-px">48px</span></div>
+        <div class="space-row"><span class="space-token">--space-16</span><div class="space-bar" style="width: 64px;"></div><span class="space-px">64px</span></div>
+        <div class="space-row"><span class="space-token">--space-20</span><div class="space-bar" style="width: 80px;"></div><span class="space-px">80px</span></div>
+      </div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Componentes base</h3>
+      <p class="identity-desc">Patrones recurrentes. Así se ven los elementos primitivos del sistema.</p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="comp-label">Code inline</div>
+          <div class="comp-demo">Implementación del paquete <code>@aricore/web-library</code> usando <code>Vue 3.5</code>.</div>
+          <div class="comp-code">&lt;code&gt;@aricore/web-library&lt;/code&gt;</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-label">Link</div>
+          <div class="comp-demo">Visitá mi <a href="#" class="demo-link">github.com/r3rc</a> para más detalles.</div>
+          <div class="comp-code">&lt;a class="demo-link"&gt;...&lt;/a&gt;</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-label">Tags</div>
+          <div class="comp-demo">
+            <span class="demo-tag">JavaScript</span>
+            <span class="demo-tag demo-tag-accent">TypeScript</span>
+            <span class="demo-tag">Zig</span>
+          </div>
+          <div class="comp-code">&lt;span class="demo-tag"&gt;...&lt;/span&gt;</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-label">Handle</div>
+          <div class="comp-demo"><span class="demo-handle">/r3</span> · <span class="demo-handle">@r3rc</span></div>
+          <div class="comp-code">color: var(--accent);
+font-family: var(--font-mono);</div>
+        </div>
+        <div class="comp-card" style="grid-column: 1 / -1;">
+          <div class="comp-label">Tagline</div>
+          <div class="comp-demo"><span class="demo-tagline">Construyo lo que no existe — o no encaja.</span></div>
+          <div class="comp-code">font-style: italic;
+color: var(--on-surface-muted);
+/* « » en burgundy via ::before/::after */</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity-block">
+      <h3 class="identity-h3">Iconografía</h3>
+      <p class="identity-desc">Lucide outline, stroke 1.5px. Sin fill. Color hereda de <code>currentColor</code>.</p>
+      <div class="icon-grid">
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><span class="icon-cell-name">mail</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="icon-cell-name">phone</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="icon-cell-name">map-pin</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span class="icon-cell-name">github</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span class="icon-cell-name">linkedin</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg><span class="icon-cell-name">arrow-up-right</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span class="icon-cell-name">code</span></div>
+        <div class="icon-cell"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg><span class="icon-cell-name">terminal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §05 APLICACIÓN -->
+  <section id="aplicacion">
+    <div class="section-head">
+      <span class="section-num">§05</span>
+      <span class="section-title">Aplicación</span>
+      <span class="section-line"></span>
+    </div>
+    <h2 class="section-h2">Cómo se traduce el sistema en contextos reales.</h2>
+    <p class="section-lead">El sistema visual sirve a múltiples artefactos. Cada contexto adapta el peso de los elementos sin romper la coherencia del sistema.</p>
+
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-context">CV / Documento formal</div>
+        <div class="app-name">El primer artefacto del sistema</div>
+        <div class="app-desc">A4, una sola columna, sidebar asimétrica con § secciones. Títulos en Satoshi bold, código en JetBrains Mono. Tagline integrado en el resumen como negrita, no como decoración. Imprime a PDF con márgenes 16mm. <a href="./cv/RARR_CV_26_04_2026.html" class="demo-link">Ver CV ↗</a></div>
+      </div>
+      <div class="app-card">
+        <div class="app-context">Sitio personal · r3rc.dev</div>
+        <div class="app-name">Identidad pública completa</div>
+        <div class="app-desc">Single page, dark mode (<code>color-scheme: dark</code>). Hero con tagline. Sections: now, proyectos, contacto. Sin tracking, sin newsletter, sin pop-ups. Deploy en Cloudflare Pages. Prompt para pencil.dev en <code>pencil-prompt.md</code>.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-context">README de paquetes <code>@r3rc/*</code></div>
+        <div class="app-name">Documentación técnica directa</div>
+        <div class="app-desc">Markdown, sin badges decorativos. Estructura: tagline, install, quickstart, why, API. Code blocks con la misma paleta. Tablas con bordes sutiles. Sin GIFs animados ni “hero” ASCII art.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-context">LinkedIn / Twitter / X</div>
+        <div class="app-name">Bio y posts</div>
+        <div class="app-desc">Bio: “Senior Frontend Engineer · Tech Lead” + tagline. Posts técnicos directos: lo que construí, cómo lo construí, qué aprendí. Sin threads de motivación. Sin emojis decorativos.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-context">Email signature</div>
+        <div class="app-name">Contacto profesional</div>
+        <div class="app-desc">Texto plano, sin imágenes. Tres líneas: nombre + role, web/github, email/tel. Mono opcional para handles. Cero disclaimer corporativo.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-context">Charlas / Slides</div>
+        <div class="app-name">Una idea por slide</div>
+        <div class="app-desc">Slides limpios. Tipografía grande, datos como visuales. Sin templates genéricos de PowerPoint. Sin transiciones animadas. El contenido manda, el estilo apoya.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §06 RESUMEN -->
+  <section id="resumen">
+    <div class="section-head">
+      <span class="section-num">§06</span>
+      <span class="section-title">Resumen</span>
+      <span class="section-line"></span>
+    </div>
+    <h2 class="section-h2">Todo definido en una sola tabla.</h2>
+    <p class="section-lead">Si solo tuvieras que recordar una página del sistema, esta es. Los valores que rigen toda la marca.</p>
+
+    <table class="data-table">
+      <tbody>
+        <tr><td class="nowrap">Estilo</td><td>Swiss-Industrial — rigor técnico con calidez humana</td></tr>
+        <tr><td class="nowrap">Tipografía</td><td><code>Satoshi</code> (display/body) + <code>JetBrains Mono</code> (technical)</td></tr>
+        <tr><td class="nowrap">Paleta</td><td>Light: Warm Stone (<code>#FAF8F5</code>) + Burgundy (<code>#8B1F2C</code>). Dark: <code>#0B0908</code> + <code>#EDE8E0</code> + Burgundy (<code>#9E2535</code>). Dual-mode via <code>light-dark()</code>.</td></tr>
+        <tr><td class="nowrap">Iconografía</td><td>Lucide outline, stroke 1.5px</td></tr>
+        <tr><td class="nowrap">Tagline</td><td><span class="demo-tagline">Construyo lo que no existe — o no encaja</span></td></tr>
+        <tr><td class="nowrap">Posicionamiento</td><td>6.5/10 (técnico con calidez)</td></tr>
+        <tr><td class="nowrap">Voz</td><td>Singular, directa, sin hedging. Sustantivos técnicos específicos.</td></tr>
+        <tr><td class="nowrap">Metáfora</td><td>Sensei — estructurado pero no rígido</td></tr>
+        <tr><td class="nowrap">Wordmark</td><td><code>r3</code> lowercase (<span class="strong">nunca</span> <code>R3</code>)</td></tr>
+        <tr><td class="nowrap">Scope npm</td><td><code>@r3rc/*</code></td></tr>
+        <tr><td class="nowrap">Scope JSR</td><td><code>@r3/*</code></td></tr>
+        <tr><td class="nowrap">Org GitHub</td><td><code>@we-r3</code> (reservado)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>r3 · brand & system · 2026</span>
+      <span>
+        <a href="./tokens.css">tokens.css</a> ·
+        <a href="./cv/RARR_CV_17_06_2026.html">CV</a> ·
+        <a href="https://github.com/r3rc">github.com/r3rc</a> ·
+        <a href="https://r3rc.dev">r3rc.dev</a>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

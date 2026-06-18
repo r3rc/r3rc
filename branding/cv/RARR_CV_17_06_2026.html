@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renzo A. Rosas — CV</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  /* Fuerza light mode — el CV es un documento de impresión */
+  html { color-scheme: light; }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+    hyphens: none;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 40px 48px;
+  }
+
+  /* ========== HEADER ========== */
+  header { margin-bottom: 28px; }
+
+  .name-line {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  h1.name {
+    font-size: 56px;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+  .handle {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    color: var(--accent);
+    font-weight: var(--weight-medium);
+    letter-spacing: -0.02em;
+  }
+  .role {
+    font-size: 15px;
+    color: var(--on-surface-muted);
+    margin-bottom: 18px;
+  }
+
+  .contact-stack {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    column-gap: 24px;
+    row-gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-muted);
+  }
+  .contact-stack a {
+    color: var(--on-surface);
+    text-decoration: none;
+    border-bottom: 1px solid var(--outline);
+    padding-bottom: 1px;
+  }
+
+  /* ========== SECTIONS — ASYMMETRIC LAYOUT ========== */
+  section {
+    margin-bottom: 28px;
+    position: relative;
+  }
+  section::after { content: ''; display: block; clear: both; }
+
+  .section-meta {
+    float: left;
+    width: 80px;
+    padding-top: 2px;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--on-surface);
+    font-weight: var(--weight-medium);
+    hyphens: none;
+    word-break: keep-all;
+  }
+
+  .section-content { margin-left: 104px; }
+
+  /* Summary */
+  .summary p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 10px;
+    color: var(--on-surface);
+  }
+  .summary p:last-child { margin-bottom: 0; }
+  .summary strong { font-weight: var(--weight-bold); }
+
+  /* Entry */
+  .entry { margin-bottom: 22px; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+    gap: 12px;
+  }
+  .entry-title {
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.015em;
+  }
+  .entry-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-muted);
+    white-space: nowrap;
+  }
+  .entry-subtitle {
+    font-size: 12.5px;
+    color: var(--on-surface-muted);
+    margin-bottom: 6px;
+  }
+  .entry-subtitle code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface);
+  }
+
+  ul.bullets { list-style: none; padding: 0; }
+  ul.bullets li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--on-surface);
+    margin-bottom: 5px;
+  }
+  ul.bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--on-surface-subtle);
+  }
+  ul.bullets li:last-child { margin-bottom: 0; }
+  ul.bullets li code {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--on-surface);
+    background: var(--accent-soft);
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+  ul.bullets strong { font-weight: var(--weight-bold); }
+  ul.bullets em { font-style: italic; color: var(--on-surface-muted); }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 16px;
+    row-gap: 6px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .skill-key {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--on-surface-subtle);
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+  .skill-val { color: var(--on-surface); }
+
+  /* Education */
+  .edu-block { margin-bottom: 8px; }
+  .edu-block:last-child { margin-bottom: 0; }
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .edu-title { font-size: 13px; font-weight: var(--weight-medium); }
+  .edu-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-surface-muted);
+    white-space: nowrap;
+  }
+  .edu-sub { font-size: 12px; color: var(--on-surface-muted); }
+
+  /* ========== PRINT HINT ========== */
+  .print-hint {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background: var(--surface-pure);
+    border: 1px solid var(--outline);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--on-surface-muted);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .print-hint strong {
+    display: block;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .print-hint ul { list-style: none; padding: 0; }
+  .print-hint li {
+    padding-left: 10px;
+    position: relative;
+    margin-bottom: 2px;
+  }
+  .print-hint li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* ========== PRINT ========== */
+  @media print {
+    @page { size: A4; margin: 0; }
+    html, body { background: white; }
+    .page { max-width: none; margin: 0; padding: 0; }
+    .print-hint { display: none; }
+    section { break-inside: avoid; page-break-inside: avoid; }
+    .entry { break-inside: avoid; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-hint">
+  <strong>Imprimir / PDF</strong>
+  <ul>
+    <li>Ctrl+P (Cmd+P)</li>
+    <li>Tamaño: A4</li>
+    <li>Márgenes: Custom 16mm</li>
+    <li>Background graphics: ON</li>
+  </ul>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="name-line">
+      <h1 class="name">Renzo A. Rosas</h1>
+      <span class="handle">/r3</span>
+    </div>
+    <div class="role">Senior Frontend Engineer · Tech Lead</div>
+    <div class="contact-stack">
+      <a href="mailto:renzo.r3rc@gmail.com">renzo.r3rc@gmail.com</a>
+      <a href="https://wa.me/51967146839">wa.me/51967146839</a>
+      <span>Lima, Perú · UTC−5</span>
+      <a href="https://github.com/r3rc">github.com/r3rc</a>
+      <a href="https://linkedin.com/in/r3rc">linkedin.com/in/r3rc</a>
+      <a href="https://r3rc.dev">r3rc.dev</a>
+    </div>
+  </header>
+
+  <!-- §01 RESUMEN -->
+  <section>
+    <div class="section-meta">
+      <div class="section-num">§01</div>
+      <div class="section-title">Resumen</div>
+    </div>
+    <div class="section-content summary">
+      <p>Tech Lead de frontend con <strong>6+ años de experiencia</strong> y enfoque <strong>architecture-first</strong>. Diseño el sistema antes de escribir código, y <strong>cuando la herramienta no existe o no encaja, la construyo</strong>.</p>
+      <p>Lidero el área de frontend en Arigroup (equipo de 3 ingenieros): arquitecté un design system de 6 paquetes sobre Vue 3, refactoricé microservicios backend (NestJS, Node, Bun) y construyo tooling, frameworks y protocolos propios en TypeScript, Zig y PHP.</p>
+      <p>Alcance end-to-end: del componente UI al microservicio, del CLI a la criptografía. Lo que haga falta para entregar producto.</p>
+    </div>
+  </section>
+
+  <!-- §02 EXPERIENCIA -->
+  <section>
+    <div class="section-meta">
+      <div class="section-num">§02</div>
+      <div class="section-title">Experiencia</div>
+    </div>
+    <div class="section-content">
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Tech Lead · Frontend</div>
+          <div class="entry-meta">2021 — Presente</div>
+        </div>
+        <div class="entry-subtitle">Arigroup S.A.C. · Lima (remoto) · Software empresarial de ventas</div>
+        <ul class="bullets">
+          <li>Arquitecté <code>@aricore/web-library</code> — monorepo de design system con <strong>6 paquetes independientes</strong> (theme/tokens, components, CDK de composables, graphics con 1,344 íconos SVG y <strong>pipeline propio de optimización + generación de componentes Vue 3</strong>, validator reactivo, developer toolkit) implementando Material 3 Expressive sobre Vue 3.5. Publicados en AWS CodeArtifact con release pipeline automatizado.</li>
+          <li>Diseñé y construí <code>@aricore/tinker</code>: CLI (codegen desde OpenAPI, catalog indexing, scaffolding) + <strong>MCP server con 12 tools</strong> que expone el catálogo técnico al equipo.</li>
+          <li>Refactoricé el <strong>microservicio de sincronización MongoDB → SQLite</strong> migrando de NestJS + RxJS a una arquitectura con <strong>iterators y disposables nativos</strong> (menor consumo de recursos, mayor throughput, base sostenible para próximos años). Adicionalmente construí servicio CRUD sobre <strong>MongoDB + Elasticsearch</strong> dentro del ecosistema de microservicios.</li>
+          <li>Lideré la <strong>modernización del stack frontend</strong>: Webpack→Vite/tsdown, ESLint/Prettier→OXC, adopción de Bun, Turbo, Vitest + Playwright.</li>
+          <li>Construí <strong>Arisale WebCMS</strong> (Nuxt 4, TanStack Query, Pinia, UnoCSS, PWA) consumiendo el design system.</li>
+          <li>Automatización de <strong>pipelines de plantillas de correo HTML y PDFs</strong> que eliminan intervención manual del equipo de operaciones.</li>
+          <li>Integré <strong>desarrollo asistido por IA</strong> (Claude Code) en el workflow del equipo. La IA acelera la escritura; arquitectura, criterio técnico y refactor final quedan en mí.</li>
+          <li>Definí los <strong>principios de arquitectura del área</strong> (KISS, YAGNI, DRY, Lightweight First) formalizados como <strong>reglas de OXC linter, documentación de arquitectura y skill de IA</strong> que audita cumplimiento en code review.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Frontend Developer</div>
+          <div class="entry-meta">2019 — 2020</div>
+        </div>
+        <div class="entry-subtitle">Tismart S.A.C. · Lima · Desarrollo de software por proyectos</div>
+        <ul class="bullets">
+          <li>Sitios web para múltiples clientes con Nuxt y WordPress. SEO on-page y plantillas HTML de correo cross-client.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- §03 PROYECTOS PERSONALES -->
+  <section>
+    <div class="section-meta">
+      <div class="section-num">§03</div>
+      <div class="section-title">Proyectos</div>
+    </div>
+    <div class="section-content">
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title"><code style="font-family: var(--font-mono); font-size: 13.5px;">@r3/r3</code> — Personal AI partner and workspace toolkit</div>
+          <div class="entry-meta">github.com/r3rc/r3</div>
+        </div>
+        <ul class="bullets">
+          <li>Monorepo Deno con packages: <code>@r3/tinker</code> (workspace CLI), <code>@r3/jarvis</code> <em>(en diseño)</em>.</li>
+          <li><strong>Tinker</strong>: gestión de reference sources, vault cifrado con AES-256-GCM + PBKDF2-SHA256 (200k iterations), profiles multi-contexto (env vars + git config + SSH agent).</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title"><code style="font-family: var(--font-mono); font-size: 13.5px;">@r3rc/srce</code> — Lightweight package registry</div>
+          <div class="entry-meta">github.com/r3rc/srce</div>
+        </div>
+        <ul class="bullets">
+          <li>Registry privado de paquetes para Bun/Deno con JSR-style imports. Single binary, self-hosted en VPS, sin SaaS.</li>
+          <li>SQLite + filesystem para storage. Sin Redis, sin S3, sin dependencias externas.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- §04 HABILIDADES -->
+  <section>
+    <div class="section-meta">
+      <div class="section-num">§04</div>
+      <div class="section-title">Habilidades</div>
+    </div>
+    <div class="section-content">
+      <div class="skills-grid">
+        <div class="skill-key">Lenguajes</div>
+        <div class="skill-val">TypeScript, JavaScript, Zig, PHP</div>
+        <div class="skill-key">Frontend</div>
+        <div class="skill-val">Vue 3, Nuxt 4, Pinia, TanStack Query, UnoCSS, Material 3 Expressive</div>
+        <div class="skill-key">Backend</div>
+        <div class="skill-val">Node.js, Deno, Bun, NestJS, Oak</div>
+        <div class="skill-key">Tooling</div>
+        <div class="skill-val">Bun, Turbo, tsdown, Vite, OXC, Webpack</div>
+        <div class="skill-key">Testing</div>
+        <div class="skill-val">Vitest, Playwright, bun:test</div>
+        <div class="skill-key">Bases de datos</div>
+        <div class="skill-val">MongoDB, Elasticsearch, MySQL, Redis, SQLite; TypeORM, Mongoose</div>
+        <div class="skill-key">Infra</div>
+        <div class="skill-val">Podman, Docker, Caddy, AWS CodeArtifact, GitHub Actions; Kubernetes (uso operacional)</div>
+        <div class="skill-key">Arquitectura</div>
+        <div class="skill-val">Clean Architecture, SOLID, TDD/BDD, monorepos, design systems</div>
+        <div class="skill-key">Metodologías</div>
+        <div class="skill-val">Scrum, Kanban, Agile</div>
+        <div class="skill-key">Herramientas</div>
+        <div class="skill-val">Figma, MCP, Claude Code</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §05 FORMACIÓN E IDIOMAS -->
+  <section>
+    <div class="section-meta">
+      <div class="section-num">§05</div>
+      <div class="section-title">Formación</div>
+    </div>
+    <div class="section-content">
+
+      <div class="edu-block">
+        <div class="edu-header">
+          <div class="edu-title">Aprendizaje autodidacta continuo</div>
+          <div class="edu-meta">2011 — Presente</div>
+        </div>
+        <div class="edu-sub">Stack técnico, arquitectura, sistemas de bajo nivel. Construyo proyectos como mecanismo principal de aprendizaje.</div>
+      </div>
+
+      <div class="edu-block">
+        <div class="edu-header">
+          <div class="edu-title">Ingeniería de Software</div>
+          <div class="edu-meta">2020 — cursando</div>
+        </div>
+        <div class="edu-sub">Universidad Tecnológica del Perú (UTP)</div>
+      </div>
+
+      <div class="edu-block" style="margin-top: 14px;">
+        <div class="edu-header">
+          <div class="edu-title">Idiomas</div>
+        </div>
+        <div class="edu-sub">Español (Nativo) · Inglés (Comprensión lectora alta. Conversacional básico)</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+/*
+ * r3 — Design Tokens
+ * --------------------
+ * La fuente de verdad del sistema visual.
+ * Importa este archivo en cualquier proyecto y obtenés la marca completa.
+ *
+ * @import url('./tokens.css');
+ *
+ * Convenciones:
+ *   --color-{role}        Roles, no valores. Ej: --on-surface, --accent.
+ *   --font-{family}       Pilas de fuentes con fallback.
+ *   --space-{n}           Escala de 4px. Ej: --space-4 = 16px.
+ *   --radius-{size}       Esquinas. Mantenidas chicas a propósito.
+ *
+ * Modo oscuro:
+ *   Los colores usan light-dark() — responden automáticamente a prefers-color-scheme.
+ *   Para forzar un modo específico, declarar color-scheme en el elemento raíz:
+ *     html { color-scheme: light; }   ← documentos, CV, print
+ *     html { color-scheme: dark; }    ← website
+ */
+
+/* =============================================
+ * Fuentes
+ * =============================================
+ * Satoshi (Fontshare): expresiva pero geométrica. Display + body.
+ * JetBrains Mono (Google Fonts): el monoespaciado más legible.
+ *
+ * Pesos cargados:
+ *   Satoshi: 400, 500, 700
+ *   JetBrains Mono: 400, 500
+ */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Habilita ambos modos. light-dark() requiere esta declaración. */
+  color-scheme: light dark;
+
+  /* =============================================
+   * Color
+   * =============================================
+   * Cada token tiene valor light y dark via light-dark().
+   * Light: Warm Stone + Burgundy.
+   * Dark:  Oscuro cálido (#0B0908) + Near-white cálido (#EDE8E0) + Burgundy ajustado.
+   *
+   * Burgundy es ACCENT, no color principal. Aparece en pocos lugares:
+   * handle, code inline, separadores, hover states.
+   */
+
+  /* Surfaces */
+  --surface:      light-dark(#FAF8F5, #0B0908);
+  --surface-pure: light-dark(#FFFFFF, #131110);
+  --surface-2:    light-dark(#F2EFE9, #1C1916);  /* superficie elevada */
+
+  /* Texto sobre surface */
+  --on-surface:        light-dark(#1A1A1A, #EDE8E0);
+  --on-surface-muted:  light-dark(#5C5853, #918A82);  /* dark 6.3:1 — pasa AA texto pequeño */
+  --on-surface-subtle: light-dark(#A8A39C, #5C5550);  /* dark 3.0:1 — solo decorativo o texto ≥18px */
+
+  /* Bordes */
+  --outline:        light-dark(#E8E2D9, #1E1A16);  /* border default */
+  --outline-mid:    light-dark(#CFC9BF, #2C2620);  /* border medio */
+  --outline-strong: light-dark(#1A1A1A, #EDE8E0);  /* border de énfasis */
+
+  /* Accent */
+  --accent:      light-dark(#8B1F2C, #C94458);  /* dark 4.0:1 — texto ≥18px. Texto pequeño: usar --on-surface-muted */
+  --accent-soft: light-dark(rgba(139, 31, 44, 0.08), rgba(201, 68, 88, 0.15));
+
+  /* =============================================
+   * Tipografía — families
+   * =============================================
+   */
+  --font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* =============================================
+   * Tipografía — type scale
+   * =============================================
+   * Tamaños estándar. Cada uno con su line-height óptimo asociado.
+   * Letter-spacing decrece con el tamaño (negativo en grandes, positivo en uppercase chicos).
+   */
+  --text-display: 56px;    /* Nombres, headings hero. line-height 0.95, tracking -0.04em */
+  --text-h1: 24px;         /* H1 de página. line-height 1.2, tracking -0.02em */
+  --text-h2: 18px;         /* Section heading prominente. line-height 1.3, tracking -0.015em */
+  --text-h3: 15px;         /* Entry/card titles. line-height 1.3, tracking -0.015em */
+  --text-body: 13px;       /* Body default. line-height 1.5 */
+  --text-body-sm: 12.5px;  /* Body chico (bullets, skills). line-height 1.55 */
+  --text-caption: 12px;    /* Descripciones, metadata. line-height 1.5 */
+  --text-label: 10px;      /* Labels uppercase con tracking 0.1em+ */
+  --text-mono-sm: 11px;    /* Mono pequeño (handles, fechas) */
+
+  /* Pesos. Usar 400 (regular), 500 (medium), 700 (bold). */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+
+  /* =============================================
+   * Spacing scale (4px base)
+   * =============================================
+   * Múltiplos de 4. Predecible, escalable.
+   */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* =============================================
+   * Radius
+   * =============================================
+   * Mínimos a propósito. Esto NO es un sistema con cards redondeadas.
+   */
+  --radius-sm: 2px;   /* Code inline, tags */
+  --radius:    4px;   /* Default */
+  --radius-lg: 6px;   /* Cards opcionales */
+
+  /* =============================================
+   * Border weights
+   * =============================================
+   * Solo dos. Default y énfasis.
+   */
+  --border:        1px;
+  --border-strong: 2px;
+
+  /* =============================================
+   * Transitions
+   * =============================================
+   * Rápidas. Sin animaciones florecidas.
+   */
+  --transition-fast: 0.15s ease;
+  --transition:      0.2s ease;
+}
+
+/* =============================================
+ * Defaults sugeridos (opcional)
+ * =============================================
+ * Reset básico + tipografía body. Si tu proyecto ya tiene reset,
+ * podés ignorar esta sección y usar solo las CSS variables.
+ */
+.r3-defaults *,
+.r3-defaults *::before,
+.r3-defaults *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.r3-defaults {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: var(--on-surface);
+  background: var(--surface);
+  font-feature-settings: 'tnum' on, 'ss01' on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-wrap: pretty;
+}
+
+/* Code inline default */
+.r3-defaults code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* Links default */
+.r3-defaults a {
+  color: var(--on-surface);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--on-surface-subtle);
+  transition: text-decoration-color var(--transition-fast);
+}
+
+.r3-defaults a:hover {
+  text-decoration-color: var(--accent);
+}
