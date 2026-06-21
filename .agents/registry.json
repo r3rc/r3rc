@@ -1,3 +1,53 @@
 {
-    "sources": []
+    "sources": [
+        {
+            "name": "gentle-ai",
+            "url": "https://github.com/Gentleman-Programming/gentle-ai.git",
+            "store": "~/.r3/sources/gentle-ai",
+            "shallow": true,
+            "branch": ""
+        },
+        {
+            "name": "spec-kit",
+            "url": "https://github.com/github/spec-kit.git",
+            "store": "~/.r3/sources/spec-kit",
+            "shallow": true,
+            "branch": ""
+        },
+        {
+            "name": "openspec",
+            "url": "https://github.com/Fission-AI/OpenSpec.git",
+            "store": "~/.r3/sources/openspec",
+            "shallow": true,
+            "branch": ""
+        },
+        {
+            "name": "surrealdb",
+            "url": "https://github.com/surrealdb/surrealdb.git",
+            "store": "~/.r3/sources/surrealdb",
+            "shallow": true,
+            "branch": ""
+        },
+        {
+            "name": "rig",
+            "url": "https://github.com/0xPlaygrounds/rig.git",
+            "store": "~/.r3/sources/rig",
+            "shallow": true,
+            "branch": ""
+        },
+        {
+            "name": "nats-rs",
+            "url": "https://github.com/nats-io/nats.rs.git",
+            "store": "~/.r3/sources/nats-rs",
+            "shallow": true,
+            "branch": ""
+        },
+        {
+            "name": "rust-sdk",
+            "url": "https://github.com/modelcontextprotocol/rust-sdk.git",
+            "store": "~/.r3/sources/rust-sdk",
+            "shallow": true,
+            "branch": ""
+        }
+    ]
 }
