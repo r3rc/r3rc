@@ -1,5 +1,6 @@
 ---
 name: source-explorer
+model: claude-sonnet-4-6
 description: >
     Read-only exploration agent for cloned reference sources under .agents/sources/.
     Maps repository structure, locates public APIs, types, and signatures, traces how
