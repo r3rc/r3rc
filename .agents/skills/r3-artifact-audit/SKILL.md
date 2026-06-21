@@ -4,7 +4,7 @@ description: >
     Scan all agent artifacts (skills, rules, agent definitions, Warp workflows, MCP configs)
     for cross-tool consistency issues: missing files, wrong extensions, unregistered entries,
     invalid structure. Use when the user says "audit the artifacts", "check the skills",
-    "revisa los skills", "esta todo consistente", after bulk artifact changes, or before
+    "revisa los skills", "está todo consistente", after bulk artifact changes, or before
     releasing the workspace.
 user-invocable: true
 ---
@@ -46,9 +46,10 @@ Also read `AGENTS.md` to extract the skills listed in all `### <Group>` tables.
 
 ### Step 2 — Check each artifact type
 
-### Skills
+#### Skills
 
-For every directory in `.agents/skills/`:
+For every directory in `.agents/skills/` — **skip directories whose name starts with `_`** (e.g. `_shared/`, which
+holds assets shared across skills, not skills themselves):
 
 - [ ] `SKILL.md` exists inside it. Missing → **ERROR: no SKILL.md**
 - [ ] The directory name follows `r3-<domain>-<action>`. Deviations → **WARNING: non-standard name**
@@ -60,13 +61,13 @@ For every skill listed in `AGENTS.md`:
 
 - [ ] A corresponding `.agents/skills/<name>/` directory exists. Missing → **ERROR: listed in AGENTS.md but no file on disk**
 
-### Rules
+#### Rules
 
 For every file in `.agents/rules/`:
 
 - [ ] Extension is `.md`. Other extensions → **WARNING: harnesses may not load this rule**
 
-### Agent definitions
+#### Agent definitions
 
 For every file in `.agents/agents/`:
 
@@ -74,14 +75,14 @@ For every file in `.agents/agents/`:
 - [ ] File starts with `---` (YAML frontmatter present). Missing → **WARNING: no frontmatter — harnesses may not parse model/description**
 - [ ] Frontmatter contains `model:` and `description:` keys. Missing → **WARNING: incomplete frontmatter**
 
-### Warp workflows
+#### Warp workflows
 
 For every file in `.agents/workflows/`:
 
 - [ ] Extension is `.yaml` or `.yml`. Other extensions → **WARNING: Warp will not load this file**
 - [ ] File contains `name:`, `description:`, and `commands:` keys. Missing → **ERROR: invalid workflow structure**
 
-### MCP configuration
+#### MCP configuration
 
 - [ ] `.mcp.json` exists at workspace root. Missing → **WARNING: no workspace MCP config**
 - [ ] `.mcp.json` is valid JSON and contains `"mcpServers"` key. Invalid → **ERROR: malformed .mcp.json**

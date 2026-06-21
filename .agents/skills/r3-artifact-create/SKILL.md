@@ -36,12 +36,18 @@ If the user did not specify a name, ask. Apply the naming convention for the cho
 | Field         | Value                                                                                                            |
 | ------------- | ---------------------------------------------------------------------------------------------------------------- |
 | Location      | `.agents/skills/<name>/SKILL.md`                                                                                 |
-| Naming        | `r3-<domain>-<action>` — lowercase kebab-case                                                                   |
+| Naming        | `r3-<domain>-<action>` — lowercase kebab-case                                                                    |
 | Discovered by | Claude Code (`.claude/skills` symlink), VSCode (plugin.json), Warp (`.agents/skills/` highest-priority provider) |
 | Side effects  | Add row to the relevant group table in `AGENTS.md`. If no group fits, create a new `###` section.                |
 
 **Format:** follow `references/skill-format.md` — canonical section order, writing rules,
 body budget, and anti-patterns. Read it before writing the skill body.
+
+**Skill type:** procedure (Steps-based, default) or stance (a posture with no fixed procedure, e.g. an explore/think
+mode) — see the "Skill types" section in `references/skill-format.md`.
+
+**Shared assets:** markdown shared across skills (templates, snippets) goes under `.agents/skills/_shared/<group>/`.
+A `_`-prefixed directory is NOT a skill (no `SKILL.md`); harnesses and `r3-artifact-audit` skip `_*` dirs.
 
 **Template** (minimal skeleton — see the format reference for optional sections like
 Arguments, Output Contract, and References):
@@ -202,6 +208,11 @@ For all other types, verify the file is in the right location (no further action
 ## Step 4 — Confirm
 
 Report in one line: what was created and where. If `AGENTS.md` was updated, include that.
+
+## Output Contract
+
+- The artifact file at the type's location: skill → `.agents/skills/<name>/SKILL.md`; rule → `.agents/rules/<name>.md`; agent → `.agents/agents/<name>.md`; workflow → `.agents/workflows/<name>.yaml`; mcp → an entry under `"mcpServers"` in `.mcp.json`.
+- For `skill`: a new row in the relevant `AGENTS.md` group table (or a new `### <Group>` section).
 
 ## References
 

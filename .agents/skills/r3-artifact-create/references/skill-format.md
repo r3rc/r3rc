@@ -5,6 +5,15 @@ Consumed by `r3-artifact-create` (creation) and `r3-artifact-improve` (audit/ref
 
 ---
 
+## Skill types
+
+A skill is one of two shapes. Both share the frontmatter, writing rules, body budget, and anti-patterns below.
+
+- **Procedure skill** (default) — a step-by-step task. Uses the section order below (Steps-based). Most skills.
+- **Stance skill** — a mode/posture with no fixed procedure (e.g. an "explore" / "think" mode). Replaces **Steps**
+  with a **`## Stance`** section (the posture + principles), optionally followed by loose guidance ("What you might
+  do"), then **Constraints**. Use only when the skill genuinely has no ordered procedure — not to dodge writing steps.
+
 ## Frontmatter
 
 ```yaml
@@ -20,6 +29,8 @@ user-invocable: true
 
 ## Section order
 
+(For **procedure** skills. A **stance** skill replaces Steps with a `## Stance` section — see Skill types.)
+
 1. `# <name> — <one-line purpose>` — title plus a 1–2 sentence intro.
 2. **Arguments** — only for skills invoked with parameters: `/name <arg>` synopsis plus one bullet per argument.
 3. **Steps** — numbered `### Step N — <title>` sections with imperative instructions.
@@ -34,8 +45,9 @@ Skips are fine — a section with nothing to say is omitted, not left empty.
 - Everything is written in English. The only exception is trigger phrases inside the frontmatter `description:`, which stay bilingual (English + Spanish) to match user utterances.
 - Imperative instructions: "Read X", "Verify Y", "Produce Z". Explain rationale only when it changes how the agent should act.
 - Decision points with real forks → a situation → action table, not branching prose.
-- Pauses are named and declare their output: `**⏸ <name>** — <what is presented>. Wait for <expected response>.` Never a bare "present and wait".
-- Destructive or irreversible operations always pause for explicit confirmation before executing.
+- **`⏸` marks blocking gates only** — a point where the skill MUST stop and wait for an explicit user decision (approval, confirmation, a choice that changes course, or any destructive/irreversible action). Name it and declare the response: `**⏸ <name>** — <what is presented>. Wait for <expected response>.` Never a bare "present and wait".
+- Clarifying questions (gathering missing input) and a skill ending its own scope (a natural stop/handoff) are normal flow — write them in prose, not as `⏸`.
+- Destructive or irreversible operations are always a `⏸` gate with explicit confirmation before executing.
 - Scripts own the mechanics: if a `.agents/scripts/` script already does the work, the skill invokes it and relays output — it does not reimplement the logic.
 
 ## Body budget

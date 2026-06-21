@@ -17,13 +17,6 @@ Audits a single skill against the canonical format and, after approval, applies 
 Complements `r3-artifact-audit`: audit scans the whole workspace structurally; improve goes
 deep on the content of one artifact.
 
-## Hard rules
-
-- Preserve the skill's intent and original constraints. Never rewrite its business logic.
-- Never delete content without moving it to `references/`. If it exists, someone put it there for a reason.
-- Default mode is audit. Modify files only after the user explicitly approves.
-- Never invent rules, triggers, or outputs that were not in the original skill.
-
 ## Decision gates
 
 | Finding                                 | Action                                                                                                                                                                       |
@@ -77,6 +70,10 @@ Apply mode:
 
 ## Constraints
 
+- Preserve the skill's intent and original constraints. Never rewrite its business logic.
+- Never delete content without moving it to `references/`. If it exists, someone put it there for a reason.
+- Default mode is audit. Modify files only after the user explicitly approves.
+- Never invent rules, triggers, or outputs that were not in the original skill.
 - Scope is skills for now. For rules, agents, workflows, or MCP entries, run
   `r3-artifact-audit` instead — their structure is too thin to need a refactor pass.
 - Never change the skill's `name:` — renaming is `r3-artifact-remove` + `r3-artifact-create`.
