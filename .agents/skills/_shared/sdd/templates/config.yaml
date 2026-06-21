@@ -1,0 +1,14 @@
+schema: spec-driven
+
+# context: |
+#   Project background, injected as authoring constraints (tech stack, architecture,
+#   testing, product language, conventions). NOT copied into artifacts.
+
+# rules:
+#   specs:
+#     - Use Given/When/Then for scenarios
+#     - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+#   design:
+#     - Document architecture decisions with rationale
+#   tasks:
+#     - Keep tasks completable in one session

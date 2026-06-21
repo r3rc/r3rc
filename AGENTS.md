@@ -37,6 +37,7 @@ This repository uses `.agents/` as the canonical, tool-neutral workspace for all
 
 - Use `AGENTS.md` (this file) as the project entrypoint. Do not duplicate it.
 - Put reusable task instructions under `.agents/skills/<skill-name>/SKILL.md`.
+- Put assets shared across skills (templates, snippets) under `.agents/skills/_shared/`. A `_`-prefixed directory there is not a skill (no `SKILL.md`) and tools (harnesses, `r3-artifact-audit`) skip it.
 - Put custom agent definitions under `.agents/agents/<name>.md`. Use YAML frontmatter to set model, tools, and system prompt.
 - Put project-agnostic coding rules under `.agents/rules/<rule-name>.md`. Rules apply automatically — agents must read the relevant rule before generating code in that domain.
 - Put Warp terminal automation workflows under `.agents/workflows/<name>.yaml` (single `command` string plus `arguments`; Warp discovers them through the `.warp/workflows` symlink).
@@ -65,8 +66,8 @@ before using it.
 
 ### Sources — reference library management
 
-| Skill                 | Purpose                                                                      |
-| --------------------- | ---------------------------------------------------------------------------- |
+| Skill                | Purpose                                                                      |
+| -------------------- | ---------------------------------------------------------------------------- |
 | `r3-sources-link`    | Clone an upstream repo into the local sources store and register it          |
 | `r3-sources-sync`    | Update one or all registered sources to their latest remote state            |
 | `r3-sources-restore` | Re-clone missing stores and re-create missing symlinks from the registry     |
@@ -75,27 +76,47 @@ before using it.
 
 ### Git — version control workflows
 
-| Skill             | Purpose                                                             |
-| ----------------- | ------------------------------------------------------------------- |
+| Skill            | Purpose                                                             |
+| ---------------- | ------------------------------------------------------------------- |
 | `r3-git-commit`  | Group pending changes into logical conventional commits             |
 | `r3-git-release` | Analyze commits, propose semver bump, create release commit and tag |
 
 ### Project — workspace project management
 
-| Skill                | Purpose                                                                      |
-| -------------------- | ---------------------------------------------------------------------------- |
+| Skill               | Purpose                                                                      |
+| ------------------- | ---------------------------------------------------------------------------- |
 | `r3-project-add`    | Clone a project repo into the workspace and wire up agent config inheritance |
 | `r3-project-list`   | List all active projects in the workspace                                    |
 | `r3-project-remove` | Remove a project from the workspace with safety checks                       |
 
 ### Artifact — cross-tool artifact management
 
-| Skill                  | Purpose                                                                                                      |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Skill                 | Purpose                                                                                                      |
+| --------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `r3-artifact-create`  | Create a skill, rule, agent definition, Warp workflow, or MCP server with correct structure and side effects |
 | `r3-artifact-audit`   | Scan all artifacts for cross-tool consistency issues (missing files, wrong extensions, unregistered entries) |
 | `r3-artifact-improve` | Audit and refactor a single skill against the canonical format (audit-first, applies on approval)            |
 | `r3-artifact-remove`  | Remove an artifact and clean up all side effects (AGENTS.md entries, JSON keys, etc.)                        |
+
+### SDD — spec-driven development
+
+Engine-free spec-driven development. Specs live under `openspec/` (durable `specs/` + per-change `changes/`); the agent
+performs all logic (scaffold, status, merge, archive, verify) — see the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+
+| Skill                 | Purpose                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| `r3-sdd-init`         | Initialize the `openspec/` structure and config so the SDD workflow can run                       |
+| `r3-sdd-propose`      | Propose a change and generate all planning artifacts (proposal, specs, design, tasks) in one pass |
+| `r3-sdd-new`          | Scaffold a change and show the first artifact to fill, then stop (step-by-step)                   |
+| `r3-sdd-continue`     | Create the next artifact for an in-progress change (one at a time)                                |
+| `r3-sdd-ff`           | Fast-forward — generate every remaining planning artifact until apply-ready                       |
+| `r3-sdd-explore`      | Explore mode — investigate and clarify before committing to a change (never implements code)      |
+| `r3-sdd-apply`        | Implement a change's tasks, checking them off in `tasks.md`                                       |
+| `r3-sdd-sync`         | Merge a change's delta specs into the source-of-truth specs (without archiving)                   |
+| `r3-sdd-verify`       | Verify an implementation matches the change's artifacts (read-only self-check)                    |
+| `r3-sdd-archive`      | Archive a completed change — sync specs, then move it to the dated archive                        |
+| `r3-sdd-bulk-archive` | Archive multiple completed changes at once, resolving cross-change spec conflicts                 |
+| `r3-sdd-onboard`      | Guided tutorial through one full SDD cycle on the user's codebase                                 |
 
 ---
 
