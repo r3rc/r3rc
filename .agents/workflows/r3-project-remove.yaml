@@ -1,5 +1,5 @@
 name: "r3: remove project from workspace"
-command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.sh" remove {{name}} {{force}}'
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.ps1" remove {{name}} {{force}}'
 description: Remove a project from the r3 workspace. Refuses without --force; check status first.
 tags:
     - r3

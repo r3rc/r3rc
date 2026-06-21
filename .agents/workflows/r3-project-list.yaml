@@ -1,5 +1,5 @@
 name: "r3: list workspace projects"
-command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.sh" list'
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.ps1" list'
 description: List all projects registered in the r3 workspace with branch, dirty state, remote, and last commit.
 tags:
     - r3

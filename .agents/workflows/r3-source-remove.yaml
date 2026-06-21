@@ -1,5 +1,5 @@
 name: "r3: remove reference source"
-command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" remove {{name}} {{purge}}'
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.ps1" remove {{name}} {{purge}}'
 description: Unlink and unregister a r3 reference source. Store is preserved unless --purge is passed.
 tags:
     - r3

@@ -1,5 +1,5 @@
 name: "r3: link reference source"
-command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" link {{url}} {{name}}'
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.ps1" link {{url}} {{name}}'
 description: Clone a repo as a read-only reference source into ~/.r3/sources/ and register it in the r3 registry.
 tags:
     - r3

@@ -1,5 +1,5 @@
 name: "r3: sync reference sources"
-command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.sh" sync {{name}}'
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/sources.ps1" sync {{name}}'
 description: Update one or all r3 reference sources to their latest remote state.
 tags:
     - r3

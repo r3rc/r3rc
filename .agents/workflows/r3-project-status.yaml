@@ -1,5 +1,5 @@
 name: "r3: project status"
-command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.sh" status {{name}}'
+command: '"$(git rev-parse --show-toplevel)/.agents/scripts/projects.ps1" status {{name}}'
 description: Show uncommitted and unpushed state of a workspace project before removing or switching context.
 tags:
     - r3
