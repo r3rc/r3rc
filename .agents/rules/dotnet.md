@@ -1,6 +1,6 @@
 # Rule: .NET library project structure
 
-Applies to any project that is a reusable library (not a host/executable).
+Applies to any project that is a reusable library (not a host/executable). Project-agnostic.
 
 ---
 
@@ -16,7 +16,7 @@ MyLibrary/
 │   ├── MyModel.cs
 │   └── MyEnum.cs
 └── Internal/                   everything else — never referenced by consumers
-    ├── SurrealMyStore.cs       concrete implementation of IMyFeature
+    ├── MyFeatureStore.cs       concrete implementation of IMyFeature
     ├── MyDocument.cs           DB/wire mapping types
     ├── MySchema.cs             DDL or schema constants
     └── MyInitializer.cs        IHostedService for startup work
@@ -35,7 +35,7 @@ MyLibrary/
 - **No Clean Architecture layers in libraries.** No `Domain/`, `Services/`, `Repositories/`, `UseCases/` folders. Those are application patterns.
 - **Collapse repository + service into one class** when the repository has no independent consumer. An `IRepository` that is only ever used by one `IService` is dead abstraction — merge them.
 - **All `Internal/` types must be `internal sealed`.** Never `public` or `protected`.
-- **One public interface per capability.** `IMemoryStore`, not `IMemoryService` + `IMemoryRepository`.
+- **One public interface per capability.** `IWidgetStore`, not `IWidgetService` + `IWidgetRepository`.
 - **`Models/` types are immutable records** with `init`-only properties unless mutation is explicitly required.
 
 ## C# conventions
@@ -46,7 +46,7 @@ MyLibrary/
 - Explicit type for: `await` expressions, chained method calls where the type is not the first token (e.g., `service.GetThing()`), ternary operators, indexer access (`list[i]`), property access chains, and all built-in types (`int`, `string`, `bool`, etc.) from any expression.
 
 - Primary constructors for DI (`internal sealed class Foo(IBar bar, IOptions<FooOptions> opts)`).
-- `using Alias = Full.Namespace.Type` to disambiguate type names. Never use `global::` in using-alias directives — it is always redundant because C# resolves alias targets from the global root regardless of the current namespace. Prefer renaming the alias (`MemoryEntry`, `MemoryDomain`) over block-scoped workarounds.
+- `using Alias = Full.Namespace.Type` to disambiguate type names. Never use `global::` in using-alias directives — it is always redundant because C# resolves alias targets from the global root regardless of the current namespace. Prefer renaming the alias (`OrderEntry`, `OrderDomain`) over block-scoped workarounds.
 - `TryAddSingleton` in DI extensions to avoid duplicate registrations.
 - `IHostedService` for startup work (schema creation, connection init) — never in constructors.
 
@@ -54,15 +54,15 @@ MyLibrary/
 
 ```
 // Wrong — Clean Architecture in a library
-Samaritan.Memory/
+MyLibrary/
 ├── Domain/
 ├── Infrastructure/
 ├── Repositories/
 └── Services/
 
 // Right — library pattern
-Samaritan.Memory/
-├── IMemoryStore.cs
+MyLibrary/
+├── IWidgetStore.cs
 ├── Models/
 └── Internal/
 ```
