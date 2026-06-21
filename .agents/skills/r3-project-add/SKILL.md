@@ -29,7 +29,7 @@ Clone a project repository into the workspace and wire it up to inherit the agen
 ### Step 1 — Run the script
 
 ```bash
-.agents/scripts/projects.sh add <url> [name]
+.agents/scripts/projects.ps1 add <url> [name]
 ```
 
 The script handles cloning, `.gitignore` registration, `CLAUDE.md` creation, and `.agents/notes/INDEX.md` scaffolding automatically.
@@ -40,6 +40,6 @@ Relay the script's output to the user. On error, surface the exact message witho
 
 ## Constraints
 
-- Never run git commands directly — always go through `projects.sh`.
+- Never run git commands directly — always go through `projects.ps1`.
 - Never use `--depth` — project repos are for active development, not reference reading.
 - Do not register the project in `.agents/registry.json` — that registry is for read-only reference sources only.

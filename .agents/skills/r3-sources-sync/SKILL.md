@@ -35,10 +35,10 @@ Read `.agents/registry.json`. If it does not exist or `sources` is empty, report
 
 ```bash
 # All sources
-.agents/scripts/sources.sh sync
+.agents/scripts/sources.ps1 sync
 
 # Single source
-.agents/scripts/sources.sh sync <name>
+.agents/scripts/sources.ps1 sync <name>
 ```
 
 The script handles shallow vs. full logic, missing-on-disk detection, and ff-only conflict reporting automatically.
@@ -49,6 +49,6 @@ Relay the script's output to the user as-is. If any source failed, surface the e
 
 ## Constraints
 
-- Never run git commands directly — always go through `sources.sh`.
+- Never run git commands directly — always go through `sources.ps1`.
 - Never re-clone a source automatically. If a re-clone is needed, tell the user to run `/r3-sources-link`.
 - Never force-reset without explicit user confirmation.

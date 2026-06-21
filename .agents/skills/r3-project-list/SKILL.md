@@ -16,7 +16,7 @@ List all project repositories currently registered in the workspace.
 ### Step 1 — Run the script
 
 ```bash
-.agents/scripts/projects.sh list
+.agents/scripts/projects.ps1 list
 ```
 
 ### Step 2 — Present results

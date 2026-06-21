@@ -35,7 +35,7 @@ checking the codebase: if only one is actually implemented, sync that one; if bo
 
 **⏸ Batch confirmation** — show the consolidated table (per change: artifacts, tasks, specs, conflicts, and the
 conflict resolutions) and ask to confirm the batch. Wait for approval. Then, per change in resolved order: perform the
-intelligent spec merge (per `sdd-spec-format`), then `.agents/scripts/sdd.sh archive <slug>`. Isolate failures — if one
+intelligent spec merge (per `sdd-spec-format`), then `.agents/scripts/sdd.ps1 archive <slug>`. Isolate failures — if one
 archive target already exists, fail that one and continue the rest.
 
 ### Step 5 — Report
@@ -50,4 +50,4 @@ Per archived change: source specs synced, and the change moved to `openspec/chan
 
 - Always prompt for selection; one batch confirmation; never auto-select.
 - Resolve same-capability conflicts by codebase evidence before syncing; warn (don't guess) when implementation is missing.
-- Each merge is agent-driven and idempotent (see `sdd-spec-format`); `sdd.sh archive` only moves the folder.
+- Each merge is agent-driven and idempotent (see `sdd-spec-format`); `sdd.ps1 archive` only moves the folder.

@@ -25,7 +25,7 @@ proceed without understanding the change. If a change with that slug already exi
 
 ### Step 2 — Scaffold the change
 
-Run `.agents/scripts/sdd.sh new <slug>` from the project root (or set `SDD_OPENSPEC_DIR`). It creates the empty
+Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_OPENSPEC_DIR`). It creates the empty
 change folder `openspec/changes/<slug>/` (with a `specs/` subdir). You author each artifact by copying its template
 from `.agents/skills/_shared/sdd/templates/` and filling it. If `openspec/` does not exist yet, run `r3-sdd-init` first.
 
@@ -63,4 +63,4 @@ After running, `openspec/changes/<slug>/` contains (filled, not templates):
 - A spec is a **behavior contract** (WHAT), not implementation — keep code/design detail in `design.md`/`tasks.md`.
 - `context`/`rules` from `config.yaml` are constraints for you, never content copied into artifacts.
 - Status is derived from **file existence** (see `sdd-schema`); there is no engine or CLI.
-- Scaffolding and the archive move go through `.agents/scripts/sdd.sh`; everything else is reading/writing markdown.
+- Scaffolding and the archive move go through `.agents/scripts/sdd.ps1`; everything else is reading/writing markdown.

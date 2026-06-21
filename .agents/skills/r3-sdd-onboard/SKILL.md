@@ -26,7 +26,7 @@ user pick or narrow.
 For the chosen task, go through the phases, narrating each:
 
 1. **Explore** (briefly investigate) → PAUSE.
-2. **New** — `r3-sdd-init` if needed, then `.agents/scripts/sdd.sh new <slug>`; SHOW the scaffolded folder.
+2. **New** — `r3-sdd-init` if needed, then `.agents/scripts/sdd.ps1 new <slug>`; SHOW the scaffolded folder.
 3. **Proposal** — draft Why/What Changes/Capabilities/Impact → PAUSE for approval.
 4. **Specs** — write the delta spec (`### Requirement:` / `#### Scenario:` per `sdd-spec-format`).
 5. **Design** — full when warranted, else a one-line note (always create the file).

@@ -33,7 +33,7 @@ before moving on.
 
 ### Step 4 — Move to the archive
 
-Run `.agents/scripts/sdd.sh archive <slug>` from the project root (or set `SDD_OPENSPEC_DIR`). It moves
+Run `.agents/scripts/sdd.ps1 archive <slug>` from the project root (or set `SDD_OPENSPEC_DIR`). It moves
 `openspec/changes/<slug>/` to `openspec/changes/archive/YYYY-MM-DD-<slug>/` (it fails if that target already exists).
 
 ### Step 5 — Report
@@ -48,5 +48,5 @@ Confirm: specs synced (or not), and the archive location.
 ## Constraints
 
 - The archive is an immutable audit trail — never edit archived changes.
-- The spec merge is done by the agent (Step 3) BEFORE the move; `sdd.sh archive` only relocates the folder.
+- The spec merge is done by the agent (Step 3) BEFORE the move; `sdd.ps1 archive` only relocates the folder.
 - Do not block on warnings — inform, confirm, proceed.

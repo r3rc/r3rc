@@ -25,7 +25,7 @@ Remove a project repository from the workspace.
 ### Step 1 — Check project state
 
 ```bash
-.agents/scripts/projects.sh status <name>
+.agents/scripts/projects.ps1 status <name>
 ```
 
 ### Step 2 — Confirm removal
@@ -45,7 +45,7 @@ Proceed? This cannot be undone.
 ### Step 3 — Remove the project
 
 ```bash
-.agents/scripts/projects.sh remove <name> --force
+.agents/scripts/projects.ps1 remove <name> --force
 ```
 
 ### Step 4 — Report
@@ -55,5 +55,5 @@ Relay the script's output. Report in one line: `removed <name> from workspace`.
 ## Constraints
 
 - Never skip the confirmation step, especially when uncommitted or unpushed work is present.
-- Never call `projects.sh remove` without first running `projects.sh status` and getting user confirmation.
+- Never call `projects.ps1 remove` without first running `projects.ps1 status` and getting user confirmation.
 - This operation is irreversible. The confirmation step is non-negotiable.

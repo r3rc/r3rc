@@ -114,7 +114,7 @@ Group findings by artifact type. Use this format:
 - OK
 
 ### MCP
-- WARNING samaritan/.mcp.json: missing — run: projects.sh wire samaritan
+- WARNING samaritan/.mcp.json: missing — run: projects.ps1 wire samaritan
 ```
 
 If no issues found for a type, print `OK`. At the end, print a one-line summary:

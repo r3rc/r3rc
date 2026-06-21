@@ -17,7 +17,7 @@ rules live in the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
 
 ### Step 1 — Get the change
 
-Use a named change, or scaffold a new one: derive a **kebab-case slug** and run `.agents/scripts/sdd.sh new <slug>`
+Use a named change, or scaffold a new one: derive a **kebab-case slug** and run `.agents/scripts/sdd.ps1 new <slug>`
 (run `r3-sdd-init` first if `openspec/` is missing). Don't proceed without understanding what is being built.
 
 ### Step 2 — Loop until apply-ready

@@ -33,10 +33,10 @@ Read `.agents/registry.json`. If it does not exist or `sources` is empty, report
 
 ```bash
 # All sources
-.agents/scripts/sources.sh restore
+.agents/scripts/sources.ps1 restore
 
 # Single source
-.agents/scripts/sources.sh restore <name>
+.agents/scripts/sources.ps1 restore <name>
 ```
 
 The script clones missing stores (honoring the registry's `shallow` flag), re-creates missing symlinks, and skips anything already present.
@@ -47,6 +47,6 @@ Relay the script's output to the user as-is. If any source failed to clone, surf
 
 ## Constraints
 
-- Never run git commands directly — always go through `sources.sh`.
+- Never run git commands directly — always go through `sources.ps1`.
 - Never modify `.agents/registry.json` — restore only re-creates local state from it.
 - Never delete or overwrite an existing store or symlink. If a path exists but is wrong (e.g. a regular directory where the symlink should be), report it and let the user decide.

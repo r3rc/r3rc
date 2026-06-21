@@ -23,7 +23,7 @@ NOT proceed without understanding it. If the slug already exists, suggest `r3-sd
 
 ### Step 2 — Scaffold
 
-Run `.agents/scripts/sdd.sh new <slug>` from the project root. It creates the empty change folder
+Run `.agents/scripts/sdd.ps1 new <slug>` from the project root. It creates the empty change folder
 `openspec/changes/<slug>/` (with a `specs/` subdir); artifacts are authored from the templates in
 `.agents/skills/_shared/sdd/templates/`. If `openspec/` does not exist, run `r3-sdd-init` first.
 

@@ -34,7 +34,7 @@ Extract URL, name, branch, and clone depth from user input.
 ### Step 2 — Run the script
 
 ```bash
-.agents/scripts/sources.sh link <url> [name] [--branch <branch>] [--full]
+.agents/scripts/sources.ps1 link <url> [name] [--branch <branch>] [--full]
 ```
 
 The script handles name derivation, duplicate detection, cloning, and registration in `.agents/registry.json` automatically.
@@ -45,7 +45,7 @@ Relay the script's output to the user. On error, surface the exact message witho
 
 ## Constraints
 
-- Never run git commands directly — always go through `sources.sh`.
+- Never run git commands directly — always go through `sources.ps1`.
 - Never modify files inside `.agents/sources/<name>/`. These are read-only mirrors.
 - Never push, force-pull with rebase, or alter remote history.
 - If the script fails (auth error, network issue, wrong URL), report the exact error and stop. Do not retry silently.

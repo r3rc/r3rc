@@ -18,7 +18,7 @@ Set up the `openspec/` structure so the SDD skills can operate. Conventions live
 From the project root (or with `SDD_OPENSPEC_DIR` set), run:
 
 ```bash
-.agents/scripts/sdd.sh init
+.agents/scripts/sdd.ps1 init
 ```
 
 This creates `openspec/specs/`, `openspec/changes/archive/`, and `openspec/config.yaml` (idempotent — existing files
