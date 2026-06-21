@@ -4,43 +4,43 @@
         {
             "label": "r3: setup init",
             "type": "shell",
-            "command": "${workspaceFolder}/setup.sh init",
+            "command": "${workspaceFolder}/setup.ps1 init",
             "problemMatcher": []
         },
         {
             "label": "r3: projects list",
             "type": "shell",
-            "command": "${workspaceFolder}/.agents/scripts/projects.sh list",
+            "command": "${workspaceFolder}/.agents/scripts/projects.ps1 list",
             "problemMatcher": []
         },
         {
             "label": "r3: project add",
             "type": "shell",
-            "command": "${workspaceFolder}/.agents/scripts/projects.sh add ${input:gitUrl}",
+            "command": "${workspaceFolder}/.agents/scripts/projects.ps1 add ${input:gitUrl}",
             "problemMatcher": []
         },
         {
             "label": "r3: project status",
             "type": "shell",
-            "command": "${workspaceFolder}/.agents/scripts/projects.sh status ${input:projectName}",
+            "command": "${workspaceFolder}/.agents/scripts/projects.ps1 status ${input:projectName}",
             "problemMatcher": []
         },
         {
             "label": "r3: sources list",
             "type": "shell",
-            "command": "${workspaceFolder}/.agents/scripts/sources.sh list",
+            "command": "${workspaceFolder}/.agents/scripts/sources.ps1 list",
             "problemMatcher": []
         },
         {
             "label": "r3: source link",
             "type": "shell",
-            "command": "${workspaceFolder}/.agents/scripts/sources.sh link ${input:gitUrl}",
+            "command": "${workspaceFolder}/.agents/scripts/sources.ps1 link ${input:gitUrl}",
             "problemMatcher": []
         },
         {
             "label": "r3: sources sync",
             "type": "shell",
-            "command": "${workspaceFolder}/.agents/scripts/sources.sh sync",
+            "command": "${workspaceFolder}/.agents/scripts/sources.ps1 sync",
             "problemMatcher": []
         }
     ],

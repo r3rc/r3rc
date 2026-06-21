@@ -7,6 +7,10 @@
     "editor.codeActionsOnSave": {
         "source.organizeImports": "always"
     },
+    "[powershell]": {
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {}
+    },
     "cSpell.language": "en,es",
     "cSpell.words": []
 }
