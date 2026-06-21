@@ -13,13 +13,13 @@ List all project repositories currently registered in the workspace.
 
 ## Steps
 
-### 1. Run the script
+### Step 1 — Run the script
 
 ```bash
 .agents/scripts/projects.sh list
 ```
 
-### 2. Present results
+### Step 2 — Present results
 
 Relay the script's output to the user as-is. If no projects are found, suggest running `/r3-project-add`.
 

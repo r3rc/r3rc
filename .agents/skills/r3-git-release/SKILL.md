@@ -25,7 +25,7 @@ If the repo being released is the r3 workspace (`AGENTS.md` and `.agents/skills/
 the root), run the `r3-artifact-audit` skill first:
 
 - If the audit reports **errors**, stop the release and show them. Do not continue until resolved.
-- If it only reports **warnings**, show them and ask the user whether to continue.
+- If it only reports **warnings**: **⏸ Audit warnings** — show them and ask whether to continue. Wait for the user's decision.
 - In any other repo, skip this step.
 
 ### Step 1 — Verify environment and read current version
@@ -177,6 +177,12 @@ git tag --list "v*" | sort -V | tail -5
 ```
 
 Show the latest commits and tags so the user sees the result.
+
+## Output Contract
+
+- Version file updated per detected type (`package.json` / `Directory.Build.props` or `.csproj` / `Cargo.toml` / `pyproject.toml` / `pubspec.yaml` / `VERSION`); skipped for `tag-only`.
+- Lockfile updated when applicable (`package-lock.json`, `Cargo.lock`).
+- A `chore(release): v<version>` commit (always) and an annotated tag `v<version>` — both local until the user pushes.
 
 ## Constraints
 

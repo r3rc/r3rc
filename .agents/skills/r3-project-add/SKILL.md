@@ -26,7 +26,7 @@ Clone a project repository into the workspace and wire it up to inherit the agen
 
 ## Steps
 
-### 1. Run the script
+### Step 1 — Run the script
 
 ```bash
 .agents/scripts/projects.sh add <url> [name]
@@ -34,7 +34,7 @@ Clone a project repository into the workspace and wire it up to inherit the agen
 
 The script handles cloning, `.gitignore` registration, `CLAUDE.md` creation, and `.agents/notes/INDEX.md` scaffolding automatically.
 
-### 2. Confirm
+### Step 2 — Confirm
 
 Relay the script's output to the user. On error, surface the exact message without rephrasing it.
 

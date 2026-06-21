@@ -22,15 +22,15 @@ Remove a project repository from the workspace.
 
 ## Steps
 
-### 1. Check project state
+### Step 1 — Check project state
 
 ```bash
 .agents/scripts/projects.sh status <name>
 ```
 
-### 2. Present summary and confirm
+### Step 2 — Confirm removal
 
-Show the status output to the user and present a confirmation prompt before proceeding:
+**⏸ Removal confirmation** — show the status output, then present the prompt below and wait for explicit confirmation. If the user does not confirm, stop. This operation is irreversible.
 
 ```
 About to remove project '<name>' from the workspace:
@@ -42,15 +42,13 @@ About to remove project '<name>' from the workspace:
 Proceed? This cannot be undone.
 ```
 
-Wait for explicit user confirmation. If the user does not confirm, stop.
-
-### 3. Remove the project
+### Step 3 — Remove the project
 
 ```bash
 .agents/scripts/projects.sh remove <name> --force
 ```
 
-### 4. Confirm
+### Step 4 — Report
 
 Relay the script's output. Report in one line: `removed <name> from workspace`.
 
