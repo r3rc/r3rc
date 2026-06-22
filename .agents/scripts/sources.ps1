@@ -24,7 +24,7 @@ function Initialize-Config {
         if ($dir -and -not (Test-Path -LiteralPath $dir)) {
             New-Item -ItemType Directory -Path $dir -Force | Out-Null
         }
-        Set-Content -LiteralPath $Config -Value "{`n    `"sources`": []`n}"
+        Write-JsonFile -InputObject ([ordered]@{ sources = @() }) -Path $Config
     }
 }
 
@@ -43,13 +43,11 @@ function Get-Sources {
 
 function Write-Registry {
     param([object[]]$Sources)
+    # Direct @(...) assignment, NOT via an if-expression — a script-block returning @()
+    # collapses to $null (and a 1-elem array to a scalar) through the pipeline. pwsh 7.4+
+    # then renders empty as `[]` and a single element as `[{...}]`.
     $items = @($Sources)
-    if ($items.Count -eq 0) {
-        # ConvertTo-Json renders an empty array as `null`; write the literal `[]` instead.
-        Set-Content -LiteralPath $Config -Value "{`n  `"sources`": []`n}"
-        return
-    }
-    ([ordered]@{ sources = $items } | ConvertTo-Json -Depth 10) | Set-Content -LiteralPath $Config
+    Write-JsonFile -InputObject ([ordered]@{ sources = $items }) -Path $Config
 }
 
 function Test-Registered {

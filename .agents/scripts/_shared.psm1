@@ -186,6 +186,31 @@ function Invoke-Git {
     return [Result]::Ok($text)
 }
 
+# ── json ─────────────────────────────────────────────────────────────────────
+
+# Canonical r3 JSON: 4-space indent. ConvertTo-Json has no indent option and emits 2, so
+# double each line-leading space run — safe because JSON escapes newlines, so no string
+# content ever begins a line. Empty arrays render as `[]` (fixed in pwsh 7.4+).
+function ConvertTo-R3Json {
+    [OutputType([string])]
+    param(
+        [Parameter(Mandatory)][AllowNull()][object]$InputObject,
+        [int]$Depth = 20
+    )
+    $json = $InputObject | ConvertTo-Json -Depth $Depth
+    return [regex]::Replace($json, '(?m)^ +', { param($m) $m.Value * 2 })
+}
+
+# Serialize with ConvertTo-R3Json and write to $Path (Set-Content → UTF-8 no BOM + trailing newline).
+function Write-JsonFile {
+    param(
+        [Parameter(Mandatory)][AllowNull()][object]$InputObject,
+        [Parameter(Mandatory)][string]$Path,
+        [int]$Depth = 20
+    )
+    Set-Content -LiteralPath $Path -Value (ConvertTo-R3Json -InputObject $InputObject -Depth $Depth)
+}
+
 # ── exports ───────────────────────────────────────────────────────────────────
 # Public surface. Format-Ansi stays private. Types (Result, SymlinkOutcome) reach the
 # caller via `using module`, independent of this list.
@@ -193,4 +218,5 @@ function Invoke-Git {
 Export-ModuleMember -Function `
     Bold, Red, Green, Yellow, Cyan, `
     Write-Info, Write-Ok, Write-Warn, Write-Err, Write-Success, `
-    Die, Usage, Assert-Workspace, Get-RepoRoot, Get-AgentsDir, Get-R3Home, Get-NameFromUrl, New-Symlink, Invoke-Git
+    Die, Usage, Assert-Workspace, Get-RepoRoot, Get-AgentsDir, Get-R3Home, Get-NameFromUrl, New-Symlink, Invoke-Git, `
+    ConvertTo-R3Json, Write-JsonFile

@@ -69,7 +69,7 @@ function Set-VSCodePlugin {
         $locations | Add-Member -NotePropertyName $PluginPath -NotePropertyValue $true
     }
 
-    ($json | ConvertTo-Json -Depth 20) | Set-Content -LiteralPath $settings
+    Write-JsonFile -InputObject $json -Path $settings
     Write-Ok "VSCode user settings: chat.pluginLocations → $PluginPath"
     return 'created'
 }
