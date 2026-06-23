@@ -3,7 +3,7 @@ name: r3-sdd-reconcile
 description: >
     Spec-Driven Development — brownfield gap-close: assess existing code against a change's spec/design/tasks and
     APPEND the remaining work as tasks. For code that drifted from the spec, or adopting SDD on existing code.
-    Triggers (EN+ES): "converge", "sdd converge", "close the gaps", "brownfield", "alinea el código con el spec",
+    Triggers (EN+ES): "reconcile", "sdd reconcile", "converge", "close the gaps", "brownfield", "alinea el código con el spec",
     "cierra las brechas", "adopta sdd en código existente".
 user-invocable: true
 ---
