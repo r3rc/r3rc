@@ -19,16 +19,16 @@ deep on the content of one artifact.
 
 ## Decision gates
 
-| Finding                                 | Action                                                                                                                                                                       |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Body over budget (see format reference) | Move examples/anti-patterns to `references/`, preserve every rule. If the overflow is load-bearing (decision tables, generation templates), accept the flag — do not move it |
-| Sections out of canonical order         | Reorder per `artifact-format.md`                                                                                                                                             |
-| Branching written as prose              | Convert to a situation → action table                                                                                                                                        |
-| Constraints mixed into Steps            | Extract to a Constraints section                                                                                                                                             |
-| Description without trigger phrases     | Rewrite: triggers first, English and Spanish                                                                                                                                 |
-| Pauses without name or declared output  | Name them and declare what they present and await                                                                                                                            |
-| Produces files but no Output Contract   | Add one with concrete paths and formats                                                                                                                                      |
-| References to files that do not exist   | Fix the path or remove the reference                                                                                                                                         |
+| Finding                                 | Action                                                                                                                                                         |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Body over budget (see format reference) | Move examples to `references/`, preserve every rule. If the overflow is load-bearing (decision tables, generation templates), accept the flag — do not move it |
+| Sections out of canonical order         | Reorder per `artifact-format.md`                                                                                                                               |
+| Branching written as prose              | Convert to a situation → action table                                                                                                                          |
+| Constraints mixed into Steps            | Extract to a Constraints section                                                                                                                               |
+| Description without trigger phrases     | Rewrite: triggers first, English and Spanish                                                                                                                   |
+| Pauses without name or declared output  | Name them and declare what they present and await                                                                                                              |
+| Produces files but no Output Contract   | Add one with concrete paths and formats                                                                                                                        |
+| References to files that do not exist   | Fix the path or remove the reference                                                                                                                           |
 
 ## Steps
 
