@@ -1,14 +1,14 @@
 ---
-name: r3-sdd-sync
+name: r3-sdd-close
 description: >
-    Spec-Driven Development — close a completed change: reconcile it into the living source specs by editing them
-    directly, then verify integrity via git diff against the change's Spec Impact. Triggers (EN+ES): "sync specs", "sdd sync",
-    "close the change", "reconcile the spec", "sincroniza los specs", "cierra el cambio", "reconcilia el spec",
-    "actualiza el spec vivo".
+    Spec-Driven Development — close a completed change: fold it into the living source specs by editing them
+    directly, then verify integrity via git diff against the change's Spec Impact. Triggers (EN+ES): "close the change",
+    "sdd close", "close specs", "fold into the spec", "cierra el cambio", "cerrar el cambio", "actualiza el spec vivo",
+    "sincroniza los specs".
 user-invocable: true
 ---
 
-# r3-sdd-sync — reconcile a completed change into the living specs
+# r3-sdd-close — close a completed change into the living specs
 
 The close of the SDD cycle. Edit the living `_contracts/specs/<capability>/spec.md` **directly** to reflect a
 completed change, then **verify integrity via `git diff`**. Git is the diff, history, and conflict engine. Conventions live in `sdd-spec-format` and `sdd-schema`.
@@ -69,4 +69,4 @@ touches (created if absent). Does NOT move the change folder.
 - Integrity has two layers: **data (nothing lost) is git** — every prior state is recoverable via history;
   **quality** is the Step 4 verify over the diff. **Never skip Step 4.**
 - Edit only what `## Spec Impact` declares; preserve everything else.
-- The change stays numbered-in-place; closing it = this reconcile + (when ready) committing the result.
+- The change stays numbered-in-place; closing it = this edit-and-verify + (when ready) committing the result.
