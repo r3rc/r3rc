@@ -40,11 +40,11 @@ If the user did not specify a name, ask. Apply the naming convention for the cho
 | Discovered by | Claude Code (`.claude/skills` symlink), VSCode (plugin.json), Warp (`.agents/skills/` highest-priority provider) |
 | Side effects  | Add row to the relevant group table in `AGENTS.md`. If no group fits, create a new `###` section.                |
 
-**Format:** follow `.agents/skills/_shared/skill-format.md` — canonical section order, writing rules,
+**Format:** follow `.agents/skills/_shared/artifact-format.md` — canonical section order, writing rules,
 body budget, and anti-patterns. Read it before writing the skill body.
 
 **Skill type:** procedure (Steps-based, default) or stance (a posture with no fixed procedure, e.g. an explore/think
-mode) — see the "Skill types" section in `.agents/skills/_shared/skill-format.md`.
+mode) — see the "Skill types" section in `.agents/skills/_shared/artifact-format.md`.
 
 **Shared assets:** markdown shared across skills (templates, snippets) goes under `.agents/skills/_shared/<group>/`.
 A `_`-prefixed directory is NOT a skill (no `SKILL.md`); harnesses and `r3-artifact-audit` skip `_*` dirs.

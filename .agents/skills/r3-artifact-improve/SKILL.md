@@ -2,7 +2,7 @@
 name: r3-artifact-improve
 description: >
     Audit and refactor a single skill against the canonical format defined in
-    _shared/skill-format.md: section order, body budget, named
+    _shared/artifact-format.md: section order, body budget, named
     pauses, output contract, broken references. Audit-only by default — applies
     changes only after explicit approval. Use when the user says "improve this
     skill", "mejora el skill", "audita el skill", "refactoriza el skill", "el skill
@@ -22,7 +22,7 @@ deep on the content of one artifact.
 | Finding                                 | Action                                                                                                                                                                       |
 | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Body over budget (see format reference) | Move examples/anti-patterns to `references/`, preserve every rule. If the overflow is load-bearing (decision tables, generation templates), accept the flag — do not move it |
-| Sections out of canonical order         | Reorder per `skill-format.md`                                                                                                                                                |
+| Sections out of canonical order         | Reorder per `artifact-format.md`                                                                                                                                             |
 | Branching written as prose              | Convert to a situation → action table                                                                                                                                        |
 | Constraints mixed into Steps            | Extract to a Constraints section                                                                                                                                             |
 | Description without trigger phrases     | Rewrite: triggers first, English and Spanish                                                                                                                                 |
@@ -35,7 +35,7 @@ deep on the content of one artifact.
 ### Step 1 — Read the target
 
 Read the target `SKILL.md` in full, plus its `references/` directory if present. Read
-`.agents/skills/_shared/skill-format.md` as the audit criteria.
+`.agents/skills/_shared/artifact-format.md` as the audit criteria.
 
 ### Step 2 — Audit
 
