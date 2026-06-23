@@ -101,13 +101,13 @@ before using it.
 
 ### SDD — spec-driven development
 
-Engine-free spec-driven development. A living source contract (`_contracts/specs/`, edited directly — git is the
-history) + numbered per-change records under `_contracts/changes/`; the agent performs all logic (scaffold, status,
+Engine-free spec-driven development. A living source contract (`.covenant/specs/`, edited directly — git is the
+history) + numbered per-change records under `.covenant/changes/`; the agent performs all logic (scaffold, status,
 close, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format` (in `.agents/skills/_shared/`).
 
 | Skill                 | Purpose                                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------------------- |
-| `r3-sdd-init`         | Initialize the `_contracts/` structure (specs, changes, constitution, context-map, explorations)  |
+| `r3-sdd-init`         | Initialize the `.covenant/` structure (specs, changes, constitution, context-map, explorations)   |
 | `r3-sdd-propose`      | Propose a change and generate all planning artifacts (proposal, specs, design, tasks) in one pass |
 | `r3-sdd-scaffold`     | Scaffold a change and show the first artifact to fill, then stop (step-by-step)                   |
 | `r3-sdd-continue`     | Create the next artifact for an in-progress change (one at a time)                                |

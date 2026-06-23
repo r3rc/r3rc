@@ -17,7 +17,7 @@ Implement the tasks of a change, marking progress as you go. Conventions live in
 ### Step 1 — Select the change
 
 Use the change name if given; else infer from the conversation; else auto-select when only one active change exists;
-otherwise list `_contracts/changes/` and ask which one. Announce "Using change: `<slug>`".
+otherwise list `.covenant/changes/` and ask which one. Announce "Using change: `<slug>`".
 
 ### Step 2 — Load context
 
@@ -25,7 +25,7 @@ Read the change's artifacts: `proposal.md`, `spec.md`, `design.md` (if present),
 Confirm the change is apply-ready (`tasks.md` exists — see status derivation in `sdd-schema`); if a required artifact
 is missing, stop and suggest `r3-sdd-continue`. Briefly note which artifacts you loaded and why (context used).
 
-**Resolve strict-TDD mode:** read `_contracts/constitution.md` `## Testing`. If strict-TDD is mandated AND a test
+**Resolve strict-TDD mode:** read `.covenant/constitution.md` `## Testing`. If strict-TDD is mandated AND a test
 runner is present, you are in **Strict TDD mode** — load and follow `references/strict-tdd.md` for
 Step 3. Otherwise (no mandate, or no runnable behavior) use the standard loop. When inactive, `references/strict-tdd.md` is
 never read (0 tokens).
@@ -39,6 +39,9 @@ decision with the user before implementing it. Work the phases/slices in order. 
 slice is the walking skeleton. Respect each slice's **`Owns:`** globs as its write scope, and only work `[P]`
 slices concurrently when their `Owns:` don't overlap (see `r3-sdd-analyze`). **Under Strict TDD mode, follow
 `references/strict-tdd.md` for every behavior task** (RED → GREEN → TRIANGULATE → REFACTOR + Cycle Evidence).
+Before implementing a task that depends on a registered third-party library, consult its checkout under
+`.agents/sources/` (per the source-verification policy in `AGENTS.md`) rather than coding its API from memory; if a
+relevant library is not registered and the work is non-trivial, suggest `r3-sources-learn` / `r3-sources-link` first.
 Otherwise, for each open task (`- [ ]`):
 
 - announce the task; make the minimal, focused code changes it requires (within the slice's `Owns:`);

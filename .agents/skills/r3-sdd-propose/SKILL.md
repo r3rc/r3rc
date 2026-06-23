@@ -26,12 +26,12 @@ proceed without understanding the change. If a change with that slug already exi
 ### Step 2 — Scaffold the change
 
 Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_ROOT`). It creates the empty
-change folder `_contracts/changes/<NNN-slug>/` (the script assigns the next `NNN` and prints a stable `id` — record that `id` in `proposal.md`'s frontmatter). You author each artifact by copying its template
-from `.agents/skills/_shared/` and filling it. If `_contracts/` does not exist yet, run `r3-sdd-init` first.
+change folder `.covenant/changes/<NNN-slug>/` (the script assigns the next `NNN` and prints a stable `id` — record that `id` in `proposal.md`'s frontmatter). You author each artifact by copying its template
+from `.agents/skills/_shared/` and filling it. If `.covenant/` does not exist yet, run `r3-sdd-init` first.
 
 ### Step 3 — Fill artifacts in dependency order, until apply-ready
 
-Per the schema graph `proposal → {spec, design} → tasks`. Read the project's `_contracts/constitution.md`
+Per the schema graph `proposal → {spec, design} → tasks`. Read the project's `.covenant/constitution.md`
 (principles, standards, `## Testing`) and apply it as constraints — **never copy it into the files**. Read each completed dependency for context before writing
 the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `.agents/skills/_shared/`) and filling it as `<artifact>.md`:
 
@@ -44,7 +44,8 @@ the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `
   capability, assign each new requirement the **next free `REQ-###` from the living spec** (never restart at 001).
 - **design.md** — always created (it gates `tasks`); include a `## Constitution Check` (gate vs the constitution)
   and, when the change touches domain data, a `## Domain Model` (DDD-lite, per `sdd-domain-format`). Full depth
-  when warranted, else a one-line "no dedicated design needed" note.
+  when warranted, else a one-line "no dedicated design needed" note. When the design hinges on a third-party
+  library's behavior, consult it first via `r3-sources-learn` — do not design from memory.
 - **tasks.md** — phase/slice structure (Setup / Foundational / Slice P1… / Polish); per slice a
   **`Satisfies: [[REQ-###]]`** line, optional **`Owns:`** (file globs) / **`Depends:`**, and an Independent Test;
   `[P]` markers and `[[REQ-###]]` refs.
@@ -59,14 +60,14 @@ were created, and the status (e.g. "apply-ready"). Point the user to `r3-sdd-app
 
 ## Output Contract
 
-After running, `_contracts/changes/<slug>/` contains (filled, not templates):
+After running, `.covenant/changes/<slug>/` contains (filled, not templates):
 
 - `proposal.md` (incl. `## Spec Impact`), `design.md`, `tasks.md`
 - `spec.md` — the full self-contained spec for what the change establishes
 
 ## Constraints
 
-- One change = one numbered folder under `_contracts/changes/`. Never edit `_contracts/specs/` here (that happens at `r3-sdd-close`).
+- One change = one numbered folder under `.covenant/changes/`. Never edit `.covenant/specs/` here (that happens at `r3-sdd-close`).
 - A spec is a **behavior contract** (WHAT), not implementation — keep code/design detail in `design.md`/`tasks.md`.
 - The constitution's standards/context are constraints for you, never content copied into artifacts.
 - Status is derived from **file existence** (see `sdd-schema`); there is no engine or CLI.

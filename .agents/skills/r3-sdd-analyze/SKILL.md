@@ -23,7 +23,7 @@ If not given, list active changes that have a `tasks.md` and ask which one. Do N
 ### Step 2 — Build the inventories
 
 Read the change's `proposal.md`, `spec.md` (the change's full spec) + its `## Spec Impact`, `design.md`, `tasks.md`, the living source specs it
-touches, `_contracts/constitution.md`, and `_contracts/context-map.md`. Index requirements by `REQ-###`, tasks by
+touches, `.covenant/constitution.md`, and `.covenant/context-map.md`. Index requirements by `REQ-###`, tasks by
 their `[[REQ-###]]` refs, entities from `## Key Entities`, and the constitution's MUST/SHALL principles.
 
 ### Step 3 — Detection passes

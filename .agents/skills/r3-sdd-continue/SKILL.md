@@ -17,7 +17,7 @@ live in `sdd-schema` and `sdd-spec-format`.
 
 ### Step 1 — Select the change
 
-If not given, list `_contracts/changes/`, sorted by the `NNN` prefix (most recent last), and ask which one
+If not given, list `.covenant/changes/`, sorted by the `NNN` prefix (most recent last), and ask which one
 (mark the most recent as recommended). Do NOT auto-select.
 
 ### Step 2 — Derive status and pick the next artifact
@@ -29,7 +29,7 @@ Per `sdd-schema`, derive each artifact's state from file existence: `done` = its
 ### Step 3 — Create that one artifact
 
 Read the completed dependency files for context. Create the artifact by copying its template from
-`.agents/skills/_shared/` and filling it, applying the `_contracts/constitution.md`
+`.agents/skills/_shared/` and filling it, applying the `.covenant/constitution.md`
 standards/context as constraints (never copy them in). Use the format from `sdd-spec-format` / `sdd-domain-format`. Then **STOP** — one artifact per
 invocation. If context is unclear, ask before writing.
 
@@ -40,7 +40,7 @@ implement (`r3-sdd-apply`).
 
 ## Output Contract
 
-Writes exactly ONE artifact file into `_contracts/changes/<slug>/` — the next ready one: `proposal.md`, `spec.md`, `design.md`, or `tasks.md`.
+Writes exactly ONE artifact file into `.covenant/changes/<slug>/` — the next ready one: `proposal.md`, `spec.md`, `design.md`, or `tasks.md`.
 
 ## Constraints
 

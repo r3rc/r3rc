@@ -147,6 +147,8 @@ For small additions, a concise note is enough; do not block on trivial work.
 
 The skill stops at an approved or accepted plan. Implementation happens afterward in the main workflow:
 
+- if the project uses SDD (`.covenant/` exists), this synthesized plan is the input to `r3-sdd-propose` (new
+  change) or feeds the `design.md` / `tasks.md` of an in-progress change; otherwise implement directly;
 - apply the distilled patterns;
 - cover the extracted edge cases;
 - write or update tests for the same concerns;

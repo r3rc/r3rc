@@ -3,7 +3,7 @@ id: <!-- stable opaque change id (8 hex), from `sdd.ps1 new` (mint a fresh 8-hex
 ---
 
 <!-- Link sibling artifacts with WikiLinks: this change's [[design]] and [[tasks]], and each affected
-     capability's [[spec]]; a graduating exploration links back to its `_contracts/explorations/` note. -->
+     capability's [[spec]]; a graduating exploration links back to its `.covenant/explorations/` note. -->
 
 ## Why
 
@@ -27,7 +27,7 @@ id: <!-- stable opaque change id (8 hex), from `sdd.ps1 new` (mint a fresh 8-hex
 
 <!-- Existing capabilities whose REQUIREMENTS are changing (not just implementation).
      Only list here if spec-level behavior changes; the change's spec.md carries the changed requirements in full.
-     Use existing spec names from _contracts/specs/. Leave empty if no requirement changes. -->
+     Use existing spec names from .covenant/specs/. Leave empty if no requirement changes. -->
 
 - `<existing-name>`: <what requirement is changing>
 

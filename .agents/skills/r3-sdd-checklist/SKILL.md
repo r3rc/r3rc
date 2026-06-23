@@ -21,7 +21,7 @@ Pick the change and the concern/domain (security, ux, api, error-handling…). O
 
 ### Step 2 — Author the checklist
 
-Create `_contracts/changes/<slug>/checklists/<concern>.md`. Each item: `- [ ] CHK-### <question testing a
+Create `.covenant/changes/<slug>/checklists/<concern>.md`. Each item: `- [ ] CHK-### <question testing a
 requirement's quality>` — optionally citing the `[[REQ-###]]` it probes, or a `[Gap]` / `[Ambiguity]` /
 `[Conflict]` / `[Assumption]` marker. `CHK-###` ids increment within the file; append if it already exists.
 
@@ -31,7 +31,7 @@ Report the checklist path and item count. `r3-sdd-apply` MAY gate on incomplete 
 
 ## Output Contract
 
-- `_contracts/changes/<slug>/checklists/<concern>.md` — `CHK-###` quality items, optionally citing `[[REQ-###]]`.
+- `.covenant/changes/<slug>/checklists/<concern>.md` — `CHK-###` quality items, optionally citing `[[REQ-###]]`.
 
 ## Constraints
 

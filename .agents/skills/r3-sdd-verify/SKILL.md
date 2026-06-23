@@ -23,7 +23,7 @@ auto-select.
 
 ### Step 2 — Load artifacts
 
-Read the change's `tasks.md`, `spec.md`, `design.md` (if present), and `_contracts/constitution.md`.
+Read the change's `tasks.md`, `spec.md`, `design.md` (if present), and `.covenant/constitution.md`.
 **If strict-TDD is active** (constitution `## Testing` mandate + a test runner present), also load
 `references/strict-tdd-verify.md` for the assertion-quality + TDD-evidence audit; if inactive,
 never load it (0 tokens).

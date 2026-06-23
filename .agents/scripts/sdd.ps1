@@ -14,8 +14,8 @@ Import-Module "$PSScriptRoot/_shared.psm1" -Force
 $TemplatesDir = Join-Path (Get-AgentsDir) 'skills/_shared'
 
 # Mechanical scaffold/list for the r3 SDD convention (engine-free). Operates on the
-# _contracts/ tree in the current project (CWD). Override the target with SDD_ROOT.
-$SddRoot = if ($env:SDD_ROOT) { $env:SDD_ROOT } else { Join-Path $PWD.Path '_contracts' }
+# .covenant/ tree in the current project (CWD). Override the target with SDD_ROOT.
+$SddRoot = if ($env:SDD_ROOT) { $env:SDD_ROOT } else { Join-Path $PWD.Path '.covenant' }
 
 # ── private ───────────────────────────────────────────────────────────────────
 
@@ -51,13 +51,13 @@ function Invoke-InitCommand {
         }
         elseif (Test-Path -LiteralPath $tpl) {
             Copy-Item -LiteralPath $tpl -Destination $dest
-            Write-Ok "created: _contracts/$name"
+            Write-Ok "created: .covenant/$name"
         }
         else {
             Write-Warn "template $name not found — skipped"
         }
     }
-    Write-Success "initialized _contracts/ at $SddRoot"
+    Write-Success "initialized .covenant/ at $SddRoot"
 }
 
 function Invoke-NewCommand {
@@ -67,7 +67,7 @@ function Invoke-NewCommand {
     Assert-Slug $slug
     Assert-Templates
     if (-not (Test-Path -LiteralPath (Join-Path $SddRoot 'changes') -PathType Container)) {
-        Die "no _contracts/changes — run: sdd.ps1 init"
+        Die "no .covenant/changes — run: sdd.ps1 init"
     }
     $changesDir = Join-Path $SddRoot 'changes'
     # Reject a duplicate slug regardless of its NNN prefix.
@@ -87,7 +87,7 @@ function Invoke-NewCommand {
     # "artifact done = file exists" (the status rule in sdd-schema) holds.
     New-Item -ItemType Directory -Path $dir -Force | Out-Null
     $id = [guid]::NewGuid().ToString('N').Substring(0, 8)   # stable opaque change id (durable cross-branch anchor)
-    Write-Ok "scaffolded empty change: _contracts/changes/$nnn-$slug/"
+    Write-Ok "scaffolded empty change: .covenant/changes/$nnn-$slug/"
     Write-Info "stable id: $id  — record it in proposal.md frontmatter (id: $id)"
     Write-Info "author artifacts from $TemplatesDir/ → proposal.md, spec.md, design.md, tasks.md"
     Write-Success "created change: $nnn-$slug"
@@ -96,7 +96,7 @@ function Invoke-NewCommand {
 function Invoke-ListCommand {
     $cdir = Join-Path $SddRoot 'changes'
     if (-not (Test-Path -LiteralPath $cdir -PathType Container)) {
-        Die "no _contracts/changes at $cdir — run: sdd.ps1 init"
+        Die "no .covenant/changes at $cdir — run: sdd.ps1 init"
     }
     $found = $false
     foreach ($d in Get-ChildItem -LiteralPath $cdir -Directory | Sort-Object Name) {
@@ -113,6 +113,6 @@ switch ($Command) {
     'new'  { Invoke-NewCommand -Rest $Rest }
     'list' { Invoke-ListCommand }
     default {
-        Usage "sdd.ps1 <init | new <slug> | list>   (targets `$PWD/_contracts; override with SDD_ROOT)"
+        Usage "sdd.ps1 <init | new <slug> | list>   (targets `$PWD/.covenant; override with SDD_ROOT)"
     }
 }

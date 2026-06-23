@@ -4,7 +4,7 @@
 
 ## Constitution Check
 
-<!-- GATE: must pass before tasks. Derive the checks from _contracts/constitution.md's principles at runtime
+<!-- GATE: must pass before tasks. Derive the checks from .covenant/constitution.md's principles at runtime
      (NOT hardcoded); cite each principle by its [[PRIN-###]] id. Re-verified at r3-sdd-verify. Examples: -->
 <!-- - [ ] [[PRIN-001]] <name> — PASS / NOTED + note -->
 <!-- - [ ] Test-first plan present (strict-TDD mandate) -->

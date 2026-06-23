@@ -9,7 +9,7 @@ below.
 ## Directory model
 
 ```
-_contracts/
+.covenant/
 ├── constitution.md                     # project governance: principles + standards + ## Testing
 ├── context-map.md                      # strategic: relationships between capabilities (see sdd-domain-format)
 ├── specs/                              # SOURCE OF TRUTH (living current behavior, edited directly)
@@ -55,7 +55,7 @@ For a change folder, derive each artifact's state from **file existence**, not f
 
 - `isComplete` = every planning artifact is `done`.
 - "apply-ready" = the schema's `apply.requires` are `done` (for `spec-driven`: `tasks` is done).
-- **list changes** = the subdirectories of `_contracts/changes/` (the whole chronological log; sort by the `NNN`
+- **list changes** = the subdirectories of `.covenant/changes/` (the whole chronological log; sort by the `NNN`
   prefix). A change is **in progress** while `tasks.md` has any open task — `- [ ]` todo, `- [!]` blocked, or
   `- [?]` needs-decision (`- [-]` is a deliberately skipped task); it is **closed** once applied and folded into
   the living spec (git records the close commit; there is no folder move).
@@ -63,7 +63,7 @@ For a change folder, derive each artifact's state from **file existence**, not f
 ## Project configuration & governance
 
 The workflow schema is fixed (`spec-driven`). Per-project background, standards,
-and mandates live in **`_contracts/constitution.md`** (binding principles + a `## Testing` section holding the
+and mandates live in **`.covenant/constitution.md`** (binding principles + a `## Testing` section holding the
 test runner / layers / coverage + the strict-TDD mandate); the SDD conventions themselves
 (`sdd-schema`, `sdd-spec-format`, `sdd-domain-format`) are **canonical under `.agents/skills/_shared/`**, and the
 cross-project tech-agnostic coding rules under `.agents/rules/`. All are **read explicitly** by the workflow
@@ -94,7 +94,7 @@ metadata file.
 
 ## Greppable tokens (the contract graph, without an engine)
 
-Every durable relationship in `_contracts/` is a stable, consistent token, so grep — or the agent, or the
+Every durable relationship in `.covenant/` is a stable, consistent token, so grep — or the agent, or the
 WikiLink MCP — can traverse the contract graph with no engine and no index file:
 
 - `REQ-###` — requirement id (rename-surviving); referenced as `[[REQ-###]]`.

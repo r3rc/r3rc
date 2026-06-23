@@ -5,7 +5,7 @@ notation** — a lightweight, plain-markdown way to model the domain that is to 
 is to behavior. Pairs with [`sdd-schema`](sdd-schema.md) and [`sdd-spec-format`](sdd-spec-format.md).
 
 It has two halves: the **tactical** model (`## Domain Model`, inside a change's `design.md`) and the
-**strategic** map (`_contracts/context-map.md`, durable, project-level).
+**strategic** map (`.covenant/context-map.md`, durable, project-level).
 
 ---
 
@@ -85,7 +85,7 @@ The `## Domain Model` is OPTIONAL — include it only when the change touches do
 
 ---
 
-## Strategic — `_contracts/context-map.md` (durable, project-level)
+## Strategic — `.covenant/context-map.md` (durable, project-level)
 
 A single durable file mapping the relationships **between capabilities** (not entities). Edited directly as
 prose, like `## Purpose` — the author keeps it current as capabilities and relationships evolve. It stays small because
@@ -119,7 +119,7 @@ Notation:
 - Requirements are referenced by their **ID**: `[[REQ-###]]` (see `sdd-spec-format`); principles and checklist
   items likewise: `[[PRIN-###]]`, `[[CHK-###]]`.
 - Sibling artifacts are referenced by filename: `[[proposal]]` / `[[spec]]` / `[[design]]` / `[[tasks]]` /
-  `[[context-map]]` — each resolves to that file in the change folder (or the durable `_contracts/context-map.md`).
+  `[[context-map]]` — each resolves to that file in the change folder (or the durable `.covenant/context-map.md`).
 - The MCP that resolves these is deferred; `[[…]]` is plain text until it is wired.
 
 ---
@@ -127,7 +127,7 @@ Notation:
 ## Structural validity (agent self-check)
 
 - The `## Domain Model` lives in `design.md` (it is per-change design — not part of the living specs).
-- `_contracts/context-map.md` is durable and project-level, edited directly; relationships use the vocabulary above.
+- `.covenant/context-map.md` is durable and project-level, edited directly; relationships use the vocabulary above.
 - Attributes carry **domain nature, never language/storage types**; flag any concrete type as a violation.
 - Invariants use MUST / MUST NOT (RFC 2119).
 - A consistency boundary must not be split across slices in `tasks.md`.

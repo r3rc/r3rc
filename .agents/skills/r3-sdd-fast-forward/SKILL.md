@@ -18,13 +18,13 @@ rules live in `sdd-schema` and `sdd-spec-format`.
 ### Step 1 — Get the change
 
 Use a named change, or scaffold a new one: derive a **kebab-case slug** and run `.agents/scripts/sdd.ps1 new <slug>`
-(run `r3-sdd-init` first if `_contracts/` is missing). Don't proceed without understanding what is being built.
+(run `r3-sdd-init` first if `.covenant/` is missing). Don't proceed without understanding what is being built.
 
 ### Step 2 — Loop until apply-ready
 
 Per the graph `proposal → {spec, design} → tasks`, repeatedly pick the first `ready` artifact (state derived from
 file existence — see `sdd-schema`), read its dependencies, and create the artifact from its template in
-`.agents/skills/_shared/` (apply the `_contracts/constitution.md` standards/context
+`.agents/skills/_shared/` (apply the `.covenant/constitution.md` standards/context
 as constraints; use `sdd-spec-format` / `sdd-domain-format`). Continue until the apply-requires artifact
 (`tasks`) is done. Always create `design.md` (brief note when a dedicated design isn't warranted).
 
@@ -34,7 +34,7 @@ Confirm all planning artifacts are created and the change is apply-ready. Point 
 
 ## Output Contract
 
-After running, `_contracts/changes/<NNN-slug>/` holds every planning artifact through apply-ready: `proposal.md`, `spec.md`, `design.md`, `tasks.md`.
+After running, `.covenant/changes/<NNN-slug>/` holds every planning artifact through apply-ready: `proposal.md`, `spec.md`, `design.md`, `tasks.md`.
 
 ## Constraints
 

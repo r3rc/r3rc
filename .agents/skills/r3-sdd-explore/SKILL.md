@@ -24,20 +24,22 @@ implementing. If the user asks to implement, suggest leaving explore mode for `r
 
 No required order — whatever fits the conversation:
 
-- **Get oriented** — if the user named a change, read its artifacts under `_contracts/changes/<NNN-slug>/`; otherwise scan
-  the relevant code. List changes by reading `_contracts/changes/`.
+- **Get oriented** — if the user named a change, read its artifacts under `.covenant/changes/<NNN-slug>/`; otherwise scan
+  the relevant code. List changes by reading `.covenant/changes/`.
 - **Explore** — investigate the problem space, compare approaches in a table, surface risks and unknowns, and
   visualize flows (ASCII diagrams welcome). Question assumptions; verify against the code rather than guessing.
+  When an approach leans on a third-party library, consult its checkout under `.agents/sources/` (or
+  `r3-sources-learn`) instead of guessing.
 - **Offer to capture (never auto-capture)** — when a durable insight emerges, OFFER to record it in the right place
   and write only on the user's go-ahead:
 
-    | Insight                  | Where                                                                        |
-    | ------------------------ | ---------------------------------------------------------------------------- |
-    | Pre-change investigation | `_contracts/explorations/<topic>.md` (graduates to a change via `[[links]]`) |
-    | New/changed requirement  | `_contracts/changes/<NNN-slug>/spec.md` (the change's full spec)             |
-    | Design decision          | `design.md`                                                                  |
-    | Scope change             | `proposal.md`                                                                |
-    | New work identified      | `tasks.md`                                                                   |
+    | Insight                  | Where                                                                       |
+    | ------------------------ | --------------------------------------------------------------------------- |
+    | Pre-change investigation | `.covenant/explorations/<topic>.md` (graduates to a change via `[[links]]`) |
+    | New/changed requirement  | `.covenant/changes/<NNN-slug>/spec.md` (the change's full spec)             |
+    | Design decision          | `design.md`                                                                 |
+    | Scope change             | `proposal.md`                                                               |
+    | New work identified      | `tasks.md`                                                                  |
 
 ## Constraints
 

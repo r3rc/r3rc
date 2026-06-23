@@ -6,7 +6,7 @@ specs evolve (direct edit + git), and the validation self-check. Pairs with [`sd
 
 ---
 
-## Spec format (the source-of-truth `_contracts/specs/<capability>/spec.md`)
+## Spec format (the source-of-truth `.covenant/specs/<capability>/spec.md`)
 
 ```markdown
 # <Capability> Specification
@@ -40,8 +40,8 @@ step-by-step code — those belong in `design.md`/`tasks.md`. Progressive rigor:
 full only for higher-risk / cross-cutting / contract / migration changes.
 
 The **same format** is used in two places: the living source spec
-(`_contracts/specs/<capability>/spec.md`) and a change's self-contained record
-(`_contracts/changes/<NNN-slug>/spec.md`). Both are **full specs** in the format above (see "How specs evolve"). A change that spans more than one
+(`.covenant/specs/<capability>/spec.md`) and a change's self-contained record
+(`.covenant/changes/<NNN-slug>/spec.md`). Both are **full specs** in the format above (see "How specs evolve"). A change that spans more than one
 capability groups its requirements under `## <Capability>`
 headings in that single file.
 
@@ -107,10 +107,10 @@ headings in that single file.
 
 ## How specs evolve (living spec + git)
 
-A capability's `_contracts/specs/<capability>/spec.md` is a **living document, edited directly** — git is the
+A capability's `.covenant/specs/<capability>/spec.md` is a **living document, edited directly** — git is the
 diff, history, and conflict-resolution engine.
 
-- **During a change:** the work lives in `_contracts/changes/<NNN-slug>/` — a single self-contained `spec.md`
+- **During a change:** the work lives in `.covenant/changes/<NNN-slug>/` — a single self-contained `spec.md`
   (full, same format as a source spec; `## <Capability>` sections if it spans more than one) plus `proposal.md` /
   `design.md` / `tasks.md`. The living source spec is **not touched yet**; the change folder is the in-flight
   boundary.

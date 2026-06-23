@@ -1,16 +1,16 @@
 ---
 name: r3-sdd-init
 description: >
-    Spec-Driven Development — initialize the SDD workspace in a project: create the _contracts/ tree
+    Spec-Driven Development — initialize the SDD workspace in a project: create the .covenant/ tree
     (specs, changes, constitution, context-map, explorations) so the r3-sdd-* workflow can run. Triggers
-    (EN+ES): "init sdd", "sdd init", "set up spec-driven development", "initialize _contracts", "inicializa
+    (EN+ES): "init sdd", "sdd init", "set up spec-driven development", "initialize .covenant", "inicializa
     sdd", "configura spec-driven", "prepara el proyecto para sdd", "arranca sdd".
 user-invocable: true
 ---
 
 # r3-sdd-init — initialize SDD in a project
 
-Set up the `_contracts/` structure so the SDD skills can operate. Conventions live in `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format`.
+Set up the `.covenant/` structure so the SDD skills can operate. Conventions live in `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format`.
 
 ## Steps
 
@@ -22,17 +22,17 @@ From the project root (or with `SDD_ROOT` set), run:
 .agents/scripts/sdd.ps1 init
 ```
 
-This creates `_contracts/specs/`, `_contracts/changes/`, `_contracts/explorations/`, and scaffolds
-`_contracts/constitution.md` + `_contracts/context-map.md` from the templates (idempotent — existing files are
+This creates `.covenant/specs/`, `.covenant/changes/`, `.covenant/explorations/`, and scaffolds
+`.covenant/constitution.md` + `.covenant/context-map.md` from the templates (idempotent — existing files are
 kept).
 
 ### Step 2 — Fill the constitution
 
-Edit `_contracts/constitution.md` — the project's governance: binding **Core Principles** (with rationale),
+Edit `.covenant/constitution.md` — the project's governance: binding **Core Principles** (with rationale),
 free-form **Standards**, and a **`## Testing`** section — detect the test runner from the project (`package.json` /
 `go.mod` / `Cargo.toml` / `pyproject.toml` / `Makefile`) and record the runner command, layers, and coverage, plus
 the strict-TDD mandate. This is read by the Constitution Check gate (in `design`) and re-verified at `verify`. Optionally seed
-`_contracts/context-map.md` if cross-capability relationships already exist.
+`.covenant/context-map.md` if cross-capability relationships already exist.
 
 ### Step 3 — Confirm
 
@@ -43,10 +43,10 @@ the first change.
 
 Creates (idempotent):
 
-- `_contracts/specs/`, `_contracts/changes/`, `_contracts/explorations/`
-- `_contracts/constitution.md` and `_contracts/context-map.md` (scaffolded from templates; never overwritten if present)
+- `.covenant/specs/`, `.covenant/changes/`, `.covenant/explorations/`
+- `.covenant/constitution.md` and `.covenant/context-map.md` (scaffolded from templates; never overwritten if present)
 
 ## Constraints
 
 - Idempotent — safe to run again; never overwrites an existing constitution, context-map, or specs.
-- Targets `$PWD/_contracts` by default; override with `SDD_ROOT` when running outside the project root.
+- Targets `$PWD/.covenant` by default; override with `SDD_ROOT` when running outside the project root.
