@@ -1,13 +1,20 @@
-<!-- Delta spec for one change. The delta DSL also has ## MODIFIED / ## REMOVED / ## RENAMED Requirements
-     — see the sdd-spec-format rule for all four sections, IDs, and the merge.
+<!-- This change's spec: the requirements it ESTABLISHES (new or changed), each in FULL — same format as a
+     source spec (see sdd-spec-format). Write complete ### Requirement: blocks. Removals are recorded in the
+     proposal's ## Spec Impact, not here.
+     New capability → include ## Purpose (+ optional ## Key Entities). Spans >1 capability → group the
+     requirements under ## <Capability> headings in this one file.
      Mark genuine ambiguities inline as [NEEDS CLARIFICATION: <question>] (≤3 in a draft; zero when ready).
      Reference entities as [[Entity]] and related capabilities via [[context-map]]. -->
 
-## ADDED Requirements
+## Purpose <!-- only for a NEW capability; omit when only changing existing requirements -->
+
+<!-- one-paragraph description of this capability's domain -->
+
+## Requirements
 
 ### Requirement: <!-- name -->
 
-- **ID**: REQ-<!-- NNN (unique per capability; never reuse a retired ID) -->
+- **ID**: REQ-<!-- NNN: next free number for a NEW requirement; the EXISTING ID when changing one (never reuse a retired ID) -->
 
 The system SHALL <!-- normative behavior; the SHALL/MUST keyword goes in THIS body line -->.
 

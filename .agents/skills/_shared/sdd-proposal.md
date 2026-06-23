@@ -22,10 +22,21 @@
 ### Modified Capabilities
 
 <!-- Existing capabilities whose REQUIREMENTS are changing (not just implementation).
-     Only list here if spec-level behavior changes. Each needs a delta spec file.
+     Only list here if spec-level behavior changes; the change's spec.md carries the changed requirements in full.
      Use existing spec names from _contracts/specs/. Leave empty if no requirement changes. -->
 
 - `<existing-name>`: <what requirement is changing>
+
+## Spec Impact
+
+<!-- The requirement-level effect on the living specs/. The change's spec.md carries the FULL text of added and
+     changed requirements; this section is the human summary AND the home for removals (which are NOT written in
+     spec.md). At close, `sync` cross-checks every removal/rename in `git diff specs/` against this list. -->
+
+- **Added**: `<capability>` [[REQ-NNN]] <name> — <one line>
+- **Modified**: `<capability>` [[REQ-NNN]] <name> — <what changed>
+- **Removed**: `<capability>` [[REQ-NNN]] <name> — **Reason**: <why> · **Migration**: <what consumers do>
+- **Renamed**: `<capability>` [[REQ-NNN]] "<old>" → "<new>"
 
 ## Impact
 

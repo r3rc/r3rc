@@ -1,6 +1,6 @@
 # Context Map
 
-<!-- Relationships BETWEEN capabilities (not entities). Durable, prose-maintained, non-deltable.
+<!-- Relationships BETWEEN capabilities (not entities). Durable, edited directly as prose.
      See the sdd-domain-format rule. Stays small (sparse edges between capabilities); a large map is a
      coupling smell to fix in design, not a file to split. -->
 

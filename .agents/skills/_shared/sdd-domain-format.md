@@ -85,8 +85,8 @@ The `## Domain Model` is OPTIONAL — include it only when the change touches do
 
 ## Strategic — `_contracts/context-map.md` (durable, project-level)
 
-A single durable file mapping the relationships **between capabilities** (not entities). Non-deltable prose,
-like `## Purpose` — the author keeps it current as capabilities and relationships evolve. It stays small because
+A single durable file mapping the relationships **between capabilities** (not entities). Edited directly as
+prose, like `## Purpose` — the author keeps it current as capabilities and relationships evolve. It stays small because
 it captures only the (sparse) edges between capabilities; a large context map is a coupling smell to address,
 not a file to split.
 
@@ -121,8 +121,8 @@ Notation:
 
 ## Structural validity (agent self-check)
 
-- The `## Domain Model` lives in `design.md`; it is NOT delta-tracked (it is per-change design).
-- `_contracts/context-map.md` is durable and non-deltable; relationships use the vocabulary above.
+- The `## Domain Model` lives in `design.md` (it is per-change design — not part of the living specs).
+- `_contracts/context-map.md` is durable and project-level, edited directly; relationships use the vocabulary above.
 - Attributes carry **domain nature, never language/storage types**; flag any concrete type as a violation.
 - Invariants use MUST / MUST NOT (RFC 2119).
 - A consistency boundary must not be split across slices in `tasks.md`.
