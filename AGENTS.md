@@ -101,8 +101,9 @@ before using it.
 
 ### SDD — spec-driven development
 
-Engine-free spec-driven development. Specs live under `_contracts/` (durable `specs/` + per-change `changes/`); the agent
-performs all logic (scaffold, status, merge, archive, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format` (in `.agents/skills/_shared/`).
+Engine-free spec-driven development. A living source contract (`_contracts/specs/`, edited directly — git is the
+history) + numbered per-change records under `_contracts/changes/`; the agent performs all logic (scaffold, status,
+sync, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format` (in `.agents/skills/_shared/`).
 
 | Skill                 | Purpose                                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------------------- |
@@ -115,11 +116,9 @@ performs all logic (scaffold, status, merge, archive, verify) — see the conven
 | `r3-sdd-analyze`      | Pre-implementation coverage + consistency check (read-only; requirement↔task by `REQ-###`)        |
 | `r3-sdd-checklist`    | Requirement-quality checklist for a concern — "unit tests for English" (optional)                 |
 | `r3-sdd-apply`        | Implement a change's tasks, checking them off in `tasks.md`                                       |
-| `r3-sdd-sync`         | Merge a change's delta specs into the source-of-truth specs (without archiving)                   |
+| `r3-sdd-sync`         | Close a change: reconcile it into the living source specs by direct edit, verified via `git diff` |
 | `r3-sdd-verify`       | Verify an implementation matches the change's artifacts (read-only self-check)                    |
 | `r3-sdd-reconcile`    | Brownfield gap-close — assess code vs spec/tasks, append gap-closing tasks (optional)             |
-| `r3-sdd-archive`      | Archive a completed change — sync specs, then move it to the dated archive                        |
-| `r3-sdd-bulk-archive` | Archive multiple completed changes at once, resolving cross-change spec conflicts                 |
 | `r3-sdd-onboard`      | Guided tutorial through one full SDD cycle on the user's codebase                                 |
 
 ---

@@ -11,7 +11,7 @@ user-invocable: true
 # r3-sdd-propose — propose a change and generate its planning artifacts
 
 Engine-free entry point of the r3 SDD workflow. Creates one change and generates every artifact needed to start
-implementing. The conventions (dir model, artifact graph, status-by-file-existence, spec/delta format, merge) live
+implementing. The conventions (dir model, artifact graph, status-by-file-existence, spec format) live
 in the conventions **`sdd-schema`**, **`sdd-spec-format`**, and **`sdd-domain-format`** — follow them.
 
 ## Steps
@@ -26,7 +26,7 @@ proceed without understanding the change. If a change with that slug already exi
 ### Step 2 — Scaffold the change
 
 Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_ROOT`). It creates the empty
-change folder `_contracts/changes/<slug>/` (with a `specs/` subdir). You author each artifact by copying its template
+change folder `_contracts/changes/<NNN-slug>/` (the script assigns the next `NNN`). You author each artifact by copying its template
 from `.agents/skills/_shared/` and filling it. If `_contracts/` does not exist yet, run `r3-sdd-init` first.
 
 ### Step 3 — Fill artifacts in dependency order, until apply-ready
@@ -35,10 +35,11 @@ Per the schema graph `proposal → {specs, design} → tasks`. Read the project'
 (principles, standards, `## Testing`) and apply it as constraints — **never copy it into the files**. Read each completed dependency for context before writing
 the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `.agents/skills/_shared/`) and filling it as `<artifact>.md`:
 
-- **proposal.md** — Why (+ optional user-story framing) · What Changes · Capabilities (New + Modified) · Impact.
-- **specs/<capability>/spec.md** — one delta spec per capability, using `## ADDED Requirements` etc. with
-  `### Requirement:` (a `**ID**: REQ-###` bullet) + `#### Scenario:` (GWT) per `sdd-spec-format`. Maintain the
-  source spec's `## Key Entities` glossary when entities appear.
+- **proposal.md** — Why (+ optional user-story framing) · What Changes · Capabilities (New + Modified) ·
+  **`## Spec Impact`** (added/modified/removed, with reason+migration for removals) · Impact.
+- **spec.md** — a **full self-contained** spec of the requirements this change establishes: complete
+  `### Requirement:` blocks (a `**ID**: REQ-###` bullet + `#### Scenario:` GWT); `## <Capability>`
+  sections if it spans more than one. Include `## Purpose`/`## Key Entities` for a new capability.
 - **design.md** — always created (it gates `tasks`); include a `## Constitution Check` (gate vs the constitution)
   and, when the change touches domain data, a `## Domain Model` (DDD-lite, per `sdd-domain-format`). Full depth
   when warranted, else a one-line "no dedicated design needed" note.
@@ -57,13 +58,13 @@ were created, and the status (e.g. "apply-ready"). Point the user to `r3-sdd-app
 
 After running, `_contracts/changes/<slug>/` contains (filled, not templates):
 
-- `proposal.md`, `design.md`, `tasks.md`
-- `specs/<capability>/spec.md` — one delta spec per capability in the proposal
+- `proposal.md` (incl. `## Spec Impact`), `design.md`, `tasks.md`
+- `spec.md` — the full self-contained spec for what the change establishes
 
 ## Constraints
 
-- One change = one kebab-case folder under `_contracts/changes/`. Never edit `_contracts/specs/` here (that happens at sync/archive).
+- One change = one numbered folder under `_contracts/changes/`. Never edit `_contracts/specs/` here (that happens at `r3-sdd-sync`).
 - A spec is a **behavior contract** (WHAT), not implementation — keep code/design detail in `design.md`/`tasks.md`.
 - The constitution's standards/context are constraints for you, never content copied into artifacts.
 - Status is derived from **file existence** (see `sdd-schema`); there is no engine or CLI.
-- Scaffolding and the archive move go through `.agents/scripts/sdd.ps1`; everything else is reading/writing markdown.
+- Scaffolding goes through `.agents/scripts/sdd.ps1 new`; the close (editing the living spec) is `r3-sdd-sync`. Everything else is reading/writing markdown.

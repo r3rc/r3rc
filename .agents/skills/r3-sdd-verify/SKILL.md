@@ -2,9 +2,9 @@
 name: r3-sdd-verify
 description: >
     Spec-Driven Development — verify that an implementation matches a change's artifacts (tasks, specs, design)
-    before archiving. Read-only self-check across Completeness, Correctness, Coherence. Triggers (EN+ES): "verify
-    the change", "sdd verify", "check the implementation matches the spec", "is it ready to archive", "verifica el
-    cambio", "revisa que la implementación cumpla el spec", "¿está listo para archivar?".
+    before closing. Read-only self-check across Completeness, Correctness, Coherence. Triggers (EN+ES): "verify
+    the change", "sdd verify", "check the implementation matches the spec", "is it ready to close", "verifica el
+    cambio", "revisa que la implementación cumpla el spec", "¿está listo para cerrar?".
 user-invocable: true
 ---
 
@@ -23,7 +23,7 @@ auto-select.
 
 ### Step 2 — Load artifacts
 
-Read the change's `tasks.md`, `specs/<capability>/spec.md`, `design.md` (if present), and `_contracts/constitution.md`.
+Read the change's `tasks.md`, `spec.md`, `design.md` (if present), and `_contracts/constitution.md`.
 **If strict-TDD is active** (constitution `## Testing` mandate + a test runner present), also load
 `references/strict-tdd-verify.md` for the assertion-quality + TDD-evidence audit; if inactive,
 never load it (0 tokens).
@@ -44,7 +44,7 @@ never load it (0 tokens).
 
 Emit a markdown report: a summary scorecard (Completeness / Correctness / Coherence), then issues grouped CRITICAL /
 WARNING / SUGGESTION (each with a specific, actionable recommendation and `file:line` where applicable), then a final
-assessment: CRITICAL present → "fix before archiving"; only warnings → "ready to archive, with noted improvements";
+assessment: CRITICAL present → "fix before closing"; only warnings → "ready to close, with noted improvements";
 clean → "all checks passed".
 
 ## Constraints

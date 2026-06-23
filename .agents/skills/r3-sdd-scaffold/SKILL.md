@@ -24,7 +24,7 @@ NOT proceed without understanding it. If the slug already exists, suggest `r3-sd
 ### Step 2 — Scaffold
 
 Run `.agents/scripts/sdd.ps1 new <slug>` from the project root. It creates the empty change folder
-`_contracts/changes/<slug>/` (with a `specs/` subdir); artifacts are authored from the templates in
+`_contracts/changes/<NNN-slug>/` (the script assigns the next `NNN`); artifacts are authored from the templates in
 `.agents/skills/_shared/`. If `_contracts/` does not exist, run `r3-sdd-init` first.
 
 ### Step 3 — Show the first artifact and stop
@@ -39,7 +39,7 @@ Summarize: the change slug + location, the artifact sequence (`proposal → {spe
 
 ## Output Contract
 
-Creates the empty change folder `_contracts/changes/<slug>/` (with a `specs/` subdir). No artifact content is written — that happens in `r3-sdd-continue` / `r3-sdd-propose`.
+Creates the empty change folder `_contracts/changes/<NNN-slug>/`. No artifact content is written — that happens in `r3-sdd-continue` / `r3-sdd-propose`.
 
 ## Constraints
 

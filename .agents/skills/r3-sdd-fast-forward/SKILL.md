@@ -34,7 +34,7 @@ Confirm all planning artifacts are created and the change is apply-ready. Point 
 
 ## Output Contract
 
-After running, `_contracts/changes/<slug>/` holds every planning artifact through apply-ready: `proposal.md`, `specs/<capability>/spec.md`, `design.md`, `tasks.md`.
+After running, `_contracts/changes/<NNN-slug>/` holds every planning artifact through apply-ready: `proposal.md`, `spec.md`, `design.md`, `tasks.md`.
 
 ## Constraints
 

@@ -17,11 +17,11 @@ Implement the tasks of a change, marking progress as you go. Conventions live in
 ### Step 1 — Select the change
 
 Use the change name if given; else infer from the conversation; else auto-select when only one active change exists;
-otherwise list `_contracts/changes/` (excluding `archive/`) and ask which one. Announce "Using change: `<slug>`".
+otherwise list `_contracts/changes/` and ask which one. Announce "Using change: `<slug>`".
 
 ### Step 2 — Load context
 
-Read the change's artifacts: `proposal.md`, `specs/<capability>/spec.md`, `design.md` (if present), `tasks.md`.
+Read the change's artifacts: `proposal.md`, `spec.md`, `design.md` (if present), `tasks.md`.
 Confirm the change is apply-ready (`tasks.md` exists — see status derivation in `sdd-schema`); if a required artifact
 is missing, stop and suggest `r3-sdd-continue`.
 
@@ -48,8 +48,7 @@ error or blocker appears (report and wait); or the user interrupts.
 
 ### Step 4 — Report
 
-Show progress (N/M tasks). When all tasks are `- [x]`, say the change is ready to verify (`r3-sdd-verify`) or archive
-(`r3-sdd-archive`).
+Show progress (N/M tasks). When all tasks are `- [x]`, say the change is ready to verify (`r3-sdd-verify`) or close (`r3-sdd-sync`).
 
 ## Constraints
 

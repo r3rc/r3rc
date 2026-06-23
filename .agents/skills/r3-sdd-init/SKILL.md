@@ -22,7 +22,7 @@ From the project root (or with `SDD_ROOT` set), run:
 .agents/scripts/sdd.ps1 init
 ```
 
-This creates `_contracts/specs/`, `_contracts/changes/archive/`, `_contracts/explorations/`, and scaffolds
+This creates `_contracts/specs/`, `_contracts/changes/`, `_contracts/explorations/`, and scaffolds
 `_contracts/constitution.md` + `_contracts/context-map.md` from the templates (idempotent — existing files are
 kept).
 
@@ -43,7 +43,7 @@ the first change.
 
 Creates (idempotent):
 
-- `_contracts/specs/`, `_contracts/changes/archive/`, `_contracts/explorations/`
+- `_contracts/specs/`, `_contracts/changes/`, `_contracts/explorations/`
 - `_contracts/constitution.md` and `_contracts/context-map.md` (scaffolded from templates; never overwritten if present)
 
 ## Constraints

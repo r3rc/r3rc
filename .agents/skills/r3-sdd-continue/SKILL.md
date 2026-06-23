@@ -17,14 +17,14 @@ live in `sdd-schema` and `sdd-spec-format`.
 
 ### Step 1 — Select the change
 
-If not given, list `_contracts/changes/` (excluding `archive/`), sorted by most-recently modified, and ask which one
+If not given, list `_contracts/changes/`, sorted by the `NNN` prefix (most recent last), and ask which one
 (mark the most recent as recommended). Do NOT auto-select.
 
 ### Step 2 — Derive status and pick the next artifact
 
 Per `sdd-schema`, derive each artifact's state from file existence: `done` = its file exists; `ready` = all its
 `requires` are done; `blocked` otherwise. If everything is done, congratulate and stop (suggest `r3-sdd-apply` or
-`r3-sdd-archive`). Otherwise pick the **first `ready`** artifact in graph order (`proposal → {specs, design} → tasks`).
+`r3-sdd-sync`). Otherwise pick the **first `ready`** artifact in graph order (`proposal → {specs, design} → tasks`).
 
 ### Step 3 — Create that one artifact
 
@@ -40,7 +40,7 @@ implement (`r3-sdd-apply`).
 
 ## Output Contract
 
-Writes exactly ONE artifact file into `_contracts/changes/<slug>/` — the next ready one: `proposal.md`, a `specs/<capability>/spec.md`, `design.md`, or `tasks.md`.
+Writes exactly ONE artifact file into `_contracts/changes/<slug>/` — the next ready one: `proposal.md`, `spec.md`, `design.md`, or `tasks.md`.
 
 ## Constraints
 

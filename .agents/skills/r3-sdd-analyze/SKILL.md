@@ -22,7 +22,7 @@ If not given, list active changes that have a `tasks.md` and ask which one. Do N
 
 ### Step 2 — Build the inventories
 
-Read the change's `proposal.md`, `specs/<capability>/spec.md` (delta), `design.md`, `tasks.md`, the source specs it
+Read the change's `proposal.md`, `spec.md` (the change's full spec) + its `## Spec Impact`, `design.md`, `tasks.md`, the living source specs it
 touches, `_contracts/constitution.md`, and `_contracts/context-map.md`. Index requirements by `REQ-###`, tasks by
 their `[[REQ-###]]` refs, entities from `## Key Entities`, and the constitution's MUST/SHALL principles.
 
@@ -34,7 +34,7 @@ their `[[REQ-###]]` refs, entities from `## Key Entities`, and the constitution'
 - **Underspecification** — a requirement with no measurable/testable outcome; a scenario with no clear THEN.
 - **Constitution alignment** — anything conflicting with a MUST principle or a missing mandated gate.
 - **Consistency** — terminology drift; an entity referenced but absent from `## Key Entities`; a capability
-  declared impacted in `proposal.md` with no matching delta (cross-capability ripple).
+  declared impacted in `proposal.md` with no matching requirements in the change's `spec.md` (cross-capability ripple).
 
 ### Step 4 — Report
 
