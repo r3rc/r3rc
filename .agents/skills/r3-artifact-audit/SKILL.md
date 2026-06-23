@@ -80,7 +80,7 @@ For every file in `.agents/agents/`:
 For every file in `.agents/workflows/`:
 
 - [ ] Extension is `.yaml` or `.yml`. Other extensions → **WARNING: Warp will not load this file**
-- [ ] File contains `name:`, `description:`, and `commands:` keys. Missing → **ERROR: invalid workflow structure**
+- [ ] File contains `name:`, `description:`, and `command:` keys. Missing → **ERROR: invalid workflow structure**
 
 #### MCP configuration
 
