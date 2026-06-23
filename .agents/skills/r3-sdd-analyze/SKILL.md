@@ -35,12 +35,23 @@ their `[[REQ-###]]` refs, entities from `## Key Entities`, and the constitution'
 - **Constitution alignment** — anything conflicting with a MUST principle or a missing mandated gate.
 - **Consistency** — terminology drift; an entity referenced but absent from `## Key Entities`; a capability
   declared impacted in `proposal.md` with no matching requirements in the change's `spec.md` (cross-capability ripple).
+- **Parallel safety** — for slices marked `[P]`, compare their `Owns:` globs: an **overlap** between two `[P]`
+  slices → CRITICAL (unsafe to run concurrently). Flag any task that touches files outside its slice's `Owns:`.
 
 ### Step 4 — Report
 
-Emit: a findings table (`ID | Category | Severity | Location | Recommendation`), a **coverage matrix**
-(`REQ-### → tasks`), and metrics (requirement count, coverage %, counts per severity). Severity
-CRITICAL / HIGH / MEDIUM / LOW. Offer remediation but do NOT apply it.
+Emit, every run:
+
+- **Coverage matrix** — one row per `REQ-###`: `REQ-### | status`, status ∈ `✓ covered` (≥1 task satisfies it) /
+  `❌ MISSING` (no task).
+- The three sets explicitly — **mapped** · **unmapped requirements** · **orphan tasks** (a task with no
+  `[[REQ-###]]` / `**Satisfies**` link) — plus a coverage **%**.
+- A findings table (`ID | Category | Severity | Location | Recommendation`), severity CRITICAL / HIGH / MEDIUM / LOW.
+- A one-line **verdict — PASS** (full coverage, no CRITICAL) / **CONCERNS** (only warnings) / **FAIL** (any MISSING
+  or CRITICAL). Master rule: every `REQ-###` has a traceable implementing task.
+- **Context used** — a short list of which artifacts/specs you read and why.
+
+Offer remediation but do NOT apply it.
 
 ## Constraints
 

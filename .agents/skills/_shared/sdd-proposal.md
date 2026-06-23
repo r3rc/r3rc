@@ -1,3 +1,7 @@
+---
+id: <!-- stable opaque change id (8 hex), from `sdd.ps1 new` (mint a fresh 8-hex if not carried over); the durable cross-branch anchor — the NNN-slug folder is just the human name -->
+---
+
 <!-- Link sibling artifacts with WikiLinks: this change's [[design]] and [[tasks]], and each affected
      capability's [[spec]]; a graduating exploration links back to its `_contracts/explorations/` note. -->
 

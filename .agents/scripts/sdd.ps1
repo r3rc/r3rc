@@ -86,7 +86,9 @@ function Invoke-NewCommand {
     # are authored by the agent from the templates — they exist only once filled, so that
     # "artifact done = file exists" (the status rule in sdd-schema) holds.
     New-Item -ItemType Directory -Path $dir -Force | Out-Null
+    $id = [guid]::NewGuid().ToString('N').Substring(0, 8)   # stable opaque change id (durable cross-branch anchor)
     Write-Ok "scaffolded empty change: _contracts/changes/$nnn-$slug/"
+    Write-Info "stable id: $id  — record it in proposal.md frontmatter (id: $id)"
     Write-Info "author artifacts from $TemplatesDir/ → proposal.md, spec.md, design.md, tasks.md"
     Write-Success "created change: $nnn-$slug"
 }

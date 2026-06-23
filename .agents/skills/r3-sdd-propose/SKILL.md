@@ -26,7 +26,7 @@ proceed without understanding the change. If a change with that slug already exi
 ### Step 2 — Scaffold the change
 
 Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_ROOT`). It creates the empty
-change folder `_contracts/changes/<NNN-slug>/` (the script assigns the next `NNN`). You author each artifact by copying its template
+change folder `_contracts/changes/<NNN-slug>/` (the script assigns the next `NNN` and prints a stable `id` — record that `id` in `proposal.md`'s frontmatter). You author each artifact by copying its template
 from `.agents/skills/_shared/` and filling it. If `_contracts/` does not exist yet, run `r3-sdd-init` first.
 
 ### Step 3 — Fill artifacts in dependency order, until apply-ready
@@ -35,16 +35,18 @@ Per the schema graph `proposal → {specs, design} → tasks`. Read the project'
 (principles, standards, `## Testing`) and apply it as constraints — **never copy it into the files**. Read each completed dependency for context before writing
 the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `.agents/skills/_shared/`) and filling it as `<artifact>.md`:
 
-- **proposal.md** — Why (+ optional user-story framing) · What Changes · Capabilities (New + Modified) ·
-  **`## Spec Impact`** (added/modified/removed, with reason+migration for removals) · Impact.
+- **proposal.md** — frontmatter `id` (the stable id from `sdd.ps1 new`) · Why (+ optional user-story framing) ·
+  What Changes · Capabilities (New + Modified) · **`## Spec Impact`** (added/modified/removed, with
+  reason+migration for removals) · Impact.
 - **spec.md** — a **full self-contained** spec of the requirements this change establishes: complete
   `### Requirement:` blocks (a `**ID**: REQ-###` bullet + `#### Scenario:` GWT); `## <Capability>`
   sections if it spans more than one. Include `## Purpose`/`## Key Entities` for a new capability.
 - **design.md** — always created (it gates `tasks`); include a `## Constitution Check` (gate vs the constitution)
   and, when the change touches domain data, a `## Domain Model` (DDD-lite, per `sdd-domain-format`). Full depth
   when warranted, else a one-line "no dedicated design needed" note.
-- **tasks.md** — phase/slice structure (Setup / Foundational / Slice P1… / Polish), an Independent Test per slice,
-  `[P]` markers, and `[[REQ-###]]` refs.
+- **tasks.md** — phase/slice structure (Setup / Foundational / Slice P1… / Polish); per slice a
+  **`Satisfies: [[REQ-###]]`** line, optional **`Owns:`** (file globs) / **`Depends:`**, and an Independent Test;
+  `[P]` markers and `[[REQ-###]]` refs.
 
 Stop when the apply-requires artifact (`tasks`) is done — that is "apply-ready". If an artifact's context is unclear,
 ask the user before writing it.

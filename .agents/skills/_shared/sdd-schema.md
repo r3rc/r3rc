@@ -25,7 +25,7 @@ _contracts/
 ```
 
 Naming is fixed: capabilities are **kebab-case**; change folders are **`NNN-slug`** (zero-padded sequential
-number + kebab slug, `NNN` auto-assigned by `sdd.ps1 new` by scanning existing changes). A closed change stays in place — the numbering is the chronology and git is the history.
+number + kebab slug, `NNN` auto-assigned by `sdd.ps1 new` by scanning existing changes). A closed change stays in place — the numbering is the chronology and git is the history. Each change also carries a stable opaque **id** (assigned by `sdd.ps1 new`) in its `proposal.md` frontmatter — the durable cross-branch anchor; the `NNN-slug` folder name may be renumbered on a collision, but the id never changes.
 
 ## Artifact graph (the `spec-driven` schema)
 
@@ -56,8 +56,9 @@ For a change folder, derive each artifact's state from **file existence**, not f
 - `isComplete` = every planning artifact is `done`.
 - "apply-ready" = the schema's `apply.requires` are `done` (for `spec-driven`: `tasks` is done).
 - **list changes** = the subdirectories of `_contracts/changes/` (the whole chronological log; sort by the `NNN`
-  prefix). A change is **in progress** while `tasks.md` still has unchecked `- [ ]`; it is **closed** once applied
-  and **synced** (the living spec reflects it — git records the sync commit; there is no folder move).
+  prefix). A change is **in progress** while `tasks.md` has any open task — `- [ ]` todo, `- [!]` blocked, or
+  `- [?]` needs-decision (`- [-]` is a deliberately skipped task); it is **closed** once applied and **synced**
+  (the living spec reflects it — git records the sync commit; there is no folder move).
 
 ## Project configuration & governance
 

@@ -75,7 +75,10 @@ Nature, not type: `count`, `money`, `identifier`, `enum: a | b | c`, `text`, `ti
   values.
 - **`### Lifecycle`** — `Entity: stateA → stateB → (stateC | stateD)` for entities that have states.
 - **`### Invariants`** — normative rules in **RFC 2119** (MUST / MUST NOT), the same grammar as spec requirements
-  (see `sdd-spec-format`). These constrain the implementation and drive tests.
+  (see `sdd-spec-format`). These constrain the implementation and drive tests. Invariants may also be
+  **architectural prohibitions** (a `Forbids` flavor) — forbidden dependencies/imports/paths, e.g.
+  "the domain layer MUST NOT import `infrastructure/**`" or "resolve MUST NOT depend on `payments/**`". These are
+  checkable boundaries and are re-checked by the Constitution Check gate.
 - **`### Consistency boundaries`** (optional, Q-driven) — name which entities change **atomically together**
   (the useful core of "aggregates", without the label). A change's slice MUST NOT split a consistency boundary.
 

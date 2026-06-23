@@ -23,7 +23,7 @@ otherwise list `_contracts/changes/` and ask which one. Announce "Using change: 
 
 Read the change's artifacts: `proposal.md`, `spec.md`, `design.md` (if present), `tasks.md`.
 Confirm the change is apply-ready (`tasks.md` exists — see status derivation in `sdd-schema`); if a required artifact
-is missing, stop and suggest `r3-sdd-continue`.
+is missing, stop and suggest `r3-sdd-continue`. Briefly note which artifacts you loaded and why (context used).
 
 **Resolve strict-TDD mode:** read `_contracts/constitution.md` `## Testing`. If strict-TDD is mandated AND a test
 runner is present, you are in **Strict TDD mode** — load and follow `references/strict-tdd.md` for
@@ -36,24 +36,28 @@ Respect the tasks' **Review Workload Forecast** — if a slice is oversized (lar
 decision with the user before implementing it. Work the phases/slices in order. Setup/Foundational tasks
 **scaffold the skeleton first** — empty structural stubs
 (signatures, types, interfaces) derived from the `## Domain Model`; these are structural and TDD-exempt. The P1
-slice is the walking skeleton. **Under Strict TDD mode, follow `references/strict-tdd.md` for every behavior task** (RED →
-GREEN → TRIANGULATE → REFACTOR + Cycle Evidence). Otherwise, for each pending task (`- [ ]`):
+slice is the walking skeleton. Respect each slice's **`Owns:`** globs as its write scope, and only work `[P]`
+slices concurrently when their `Owns:` don't overlap (see `r3-sdd-analyze`). **Under Strict TDD mode, follow
+`references/strict-tdd.md` for every behavior task** (RED → GREEN → TRIANGULATE → REFACTOR + Cycle Evidence).
+Otherwise, for each open task (`- [ ]`):
 
-- announce the task; make the minimal, focused code changes it requires;
-- **mark it complete in `tasks.md`: `- [ ]` → `- [x]`** immediately after finishing it;
+- announce the task; make the minimal, focused code changes it requires (within the slice's `Owns:`);
+- **mark its state in `tasks.md`** immediately: `- [x]` done · `- [!]` blocked · `- [?]` needs-decision ·
+  `- [-]` skipped (note why);
 - continue to the next task.
 
-**Pause if:** a task is unclear (ask); implementation reveals a design issue (suggest updating `design.md`/`specs`); an
-error or blocker appears (report and wait); or the user interrupts.
+**Don't stall silently:** a task is unclear → mark `- [?]` and ask; an error/blocker → mark `- [!]` and report; a
+design issue surfaces → suggest updating `design.md`/`specs`; the user interrupts → stop. Re-attempt `[!]`/`[?]`
+tasks once resolved.
 
 ### Step 4 — Report
 
-Show progress (N/M tasks). When all tasks are `- [x]`, say the change is ready to verify (`r3-sdd-verify`) or close (`r3-sdd-sync`).
+Show progress (N/M tasks; flag any `[!]` blocked / `[?]` needs-decision). When no open tasks remain, say the change is ready to verify (`r3-sdd-verify`) or close (`r3-sdd-sync`).
 
 ## Constraints
 
 - Keep changes minimal and aligned with the spec; the spec/design are the contract.
-- Update the checkbox right after each task — progress is read from `tasks.md` (`- [ ]` vs `- [x]`), there is no tracker.
+- Update the state right after each task — progress is read from `tasks.md` task states (`[ ]`/`[x]`/`[!]`/`[?]`/`[-]`), there is no tracker.
 - If implementation should change the agreed behavior, update the artifacts rather than silently diverging.
 
 ## References
