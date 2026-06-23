@@ -93,3 +93,26 @@ Named content defects to hunt — `r3-artifact-improve` diagnoses against these:
 
 Always-defects, regardless: `<placeholders>` left unfilled, and references to files that do not exist in
 this workspace.
+
+## Feedback log
+
+A skill earns better over time by capturing what its real executions reveal. When a run **deviates** from a
+skill (the steps didn't anticipate the situation, a constraint was missing, the user had to correct it),
+that gap is recorded — not in the `SKILL.md`, but in a per-skill log:
+
+- **Location:** `.agents/skills/_feedback/<skill-name>.md` — one file per skill, in the `_feedback/` dir
+  (`_`-prefixed, so harnesses and `r3-artifact-audit` skip it). Committed; created lazily on the first entry.
+- **Format:** append-only entries, each:
+
+    ```markdown
+    ## <YYYY-MM-DD> — <short title>
+
+    - **Observed**: <what happened during the run — the friction/deviation, concrete, with evidence>
+    - **Gap**: <what the skill failed to anticipate / what is missing or unclear>
+    - **Proposed**: <concrete change to the SKILL.md>
+    - **Status**: open | folded
+    ```
+
+- **The loop:** `r3-artifact-retro` writes entries (capture, read-only on the `SKILL.md`);
+  `r3-artifact-improve` reads `open` entries as real-world evidence, folds confirmed gaps into the
+  `SKILL.md`, and marks them `folded` (history is kept, not deleted). A clean run logs nothing.

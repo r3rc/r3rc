@@ -19,28 +19,31 @@ deep on the content of one artifact.
 
 ## Decision gates
 
-| Finding                                 | Action                                                                                                                                                         |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Body over budget (see format reference) | Move examples to `references/`, preserve every rule. If the overflow is load-bearing (decision tables, generation templates), accept the flag — do not move it |
-| Sections out of canonical order         | Reorder per `artifact-format.md`                                                                                                                               |
-| Branching written as prose              | Convert to a situation → action table                                                                                                                          |
-| Constraints mixed into Steps            | Extract to a Constraints section                                                                                                                               |
-| Description without trigger phrases     | Rewrite: triggers first, English and Spanish                                                                                                                   |
-| Pauses without name or declared output  | Name them and declare what they present and await                                                                                                              |
-| Produces files but no Output Contract   | Add one with concrete paths and formats                                                                                                                        |
-| References to files that do not exist   | Fix the path or remove the reference                                                                                                                           |
+| Finding                                        | Action                                                                                                                                                         |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Body over budget (see format reference)        | Move examples to `references/`, preserve every rule. If the overflow is load-bearing (decision tables, generation templates), accept the flag — do not move it |
+| Sections out of canonical order                | Reorder per `artifact-format.md`                                                                                                                               |
+| Branching written as prose                     | Convert to a situation → action table                                                                                                                          |
+| Constraints mixed into Steps                   | Extract to a Constraints section                                                                                                                               |
+| Description without trigger phrases            | Rewrite: triggers first, English and Spanish                                                                                                                   |
+| Pauses without name or declared output         | Name them and declare what they present and await                                                                                                              |
+| Produces files but no Output Contract          | Add one with concrete paths and formats                                                                                                                        |
+| References to files that do not exist          | Fix the path or remove the reference                                                                                                                           |
+| `open` entries in the skill's `_feedback/` log | Evaluate each as real-world evidence; fold confirmed gaps into the `SKILL.md`, then mark the entry `Status: folded`                                            |
 
 ## Steps
 
 ### Step 1 — Read the target
 
 Read the target `SKILL.md` in full, plus its `references/` directory if present. Read
-`.agents/skills/_shared/artifact-format.md` as the audit criteria.
+`.agents/skills/_shared/artifact-format.md` as the audit criteria, and
+`.agents/skills/_feedback/<skill-name>.md` if it exists — its `open` entries are real-world evidence
+(captured by `r3-artifact-retro`) of where the skill fell short in actual runs.
 
 ### Step 2 — Audit
 
 Check the skill against every row of the decision gates table and every rule in the format
-reference.
+reference. Treat each `open` feedback-log entry as a candidate finding alongside the format-based ones.
 
 **⏸ Audit report of `<skill-name>`** — present findings grouped by severity
 (blocking / improvement / nitpick), each with a concrete proposed change. Wait for the user
@@ -49,7 +52,9 @@ to approve all, some, or none.
 ### Step 3 — Apply (only approved changes)
 
 Apply only what was approved. Create `references/` if material is being moved. Use surgical
-edits — do not rewrite the whole file.
+edits — do not rewrite the whole file. When an approved change folds in an `open` feedback-log entry, mark
+that entry `Status: folded` in `.agents/skills/_feedback/<skill-name>.md` — keep it, don't delete; it is the
+record of what the skill learned.
 
 ### Step 4 — Verify
 
@@ -67,6 +72,7 @@ Apply mode:
 - `.agents/skills/<name>/SKILL.md` refactored
 - `.agents/skills/<name>/references/` with moved content (if any)
 - One-line before/after summary (sections fixed, body budget)
+- any folded-in feedback-log entries marked `Status: folded` in `_feedback/<skill-name>.md`
 
 ## Constraints
 
