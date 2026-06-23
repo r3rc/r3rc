@@ -20,8 +20,9 @@ in the conventions **`sdd-schema`**, **`sdd-spec-format`**, and **`sdd-domain-fo
 
 If the user gave no clear input, ask one open question: "What change do you want to work on? Describe what you
 want to build or fix." Derive a **kebab-case slug** (e.g. "add user authentication" → `add-user-auth`). Do NOT
-proceed without understanding the change. If a change with that slug already exists, ask whether to continue it
-(`r3-sdd-continue`) or choose a new name.
+proceed without understanding the change. If the direction is still soft or the decisions are ambiguous, run
+`r3-craft-drill` first to harden them, then return here. If a change with that slug already exists, ask whether to
+continue it (`r3-sdd-continue`) or choose a new name.
 
 ### Step 2 — Scaffold the change
 

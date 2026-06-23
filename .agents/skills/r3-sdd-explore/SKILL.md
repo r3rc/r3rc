@@ -18,7 +18,9 @@ in the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format`.
 A stance, not a fixed sequence. Be curious, follow open threads, visualize freely, stay grounded in the actual
 codebase, and don't force structure. **You may read files and search the code, but you must NEVER write code or
 implement features.** You MAY create or update SDD artifacts when the user asks — that is capturing thinking, not
-implementing. If the user asks to implement, suggest leaving explore mode for `r3-sdd-propose` / `r3-sdd-apply`.
+implementing. When a direction has emerged but the decisions are still soft, hand off to `r3-craft-drill`
+to harden them one decision at a time before proposing. If the user asks to implement, suggest leaving
+explore mode for `r3-sdd-propose` / `r3-sdd-apply`.
 
 ## What you might do
 

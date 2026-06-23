@@ -121,6 +121,15 @@ close, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd
 | `r3-sdd-reconcile`    | Brownfield gap-close — assess code vs spec/tasks, append gap-closing tasks (optional)             |
 | `r3-sdd-onboard`      | Guided tutorial through one full SDD cycle on the user's codebase                                 |
 
+### Craft — cross-cutting engineering & thinking practices
+
+Disciplines applied to whatever you're working on — not operations on a managed object. Each is a
+reusable practice that composes into the other workflows (the SDD flow hands off to it).
+
+| Skill            | Purpose                                                                                   |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| `r3-craft-drill` | Harden a plan by interrogating every decision, one at a time (convergent; before propose) |
+
 ---
 
 ## Physical persistence
