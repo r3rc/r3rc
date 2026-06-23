@@ -92,12 +92,13 @@ before using it.
 
 ### Artifact — cross-tool artifact management
 
-| Skill                 | Purpose                                                                                                      |
-| --------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `r3-artifact-create`  | Create a skill, rule, agent definition, Warp workflow, or MCP server with correct structure and side effects |
-| `r3-artifact-audit`   | Scan all artifacts for cross-tool consistency issues (missing files, wrong extensions, unregistered entries) |
-| `r3-artifact-improve` | Audit and refactor a single skill against the canonical format (audit-first, applies on approval)            |
-| `r3-artifact-remove`  | Remove an artifact and clean up all side effects (AGENTS.md entries, JSON keys, etc.)                        |
+| Skill                 | Purpose                                                                                                          |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `r3-artifact-create`  | Create a skill, rule, agent definition, Warp workflow, or MCP server with correct structure and side effects     |
+| `r3-artifact-audit`   | Scan all artifacts for cross-tool consistency issues (missing files, wrong extensions, unregistered entries)     |
+| `r3-artifact-improve` | Audit and refactor a single skill against the canonical format (audit-first, applies on approval)                |
+| `r3-artifact-retro`   | Capture execution feedback on a skill into its `_feedback/` log (gaps, deviations) — feeds `r3-artifact-improve` |
+| `r3-artifact-remove`  | Remove an artifact and clean up all side effects (AGENTS.md entries, JSON keys, etc.)                            |
 
 ### SDD — spec-driven development
 
@@ -164,6 +165,9 @@ radius. This is guidance, not a rule engine — keep it short.
 **Reactive (by symptom, not a lifecycle gate)**
 
 - Something broken, throwing, flaky, or slow → `r3-craft-debug`.
+- After a skill run you had to **deviate** from (its steps didn't anticipate the situation, a constraint was
+  missing, you had to be corrected) → offer `r3-artifact-retro` to capture the gap in that skill's
+  `_feedback/` log. A clean run logs nothing.
 
 ---
 
