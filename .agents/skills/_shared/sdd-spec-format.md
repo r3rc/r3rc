@@ -60,6 +60,12 @@ headings in that single file.
 - Each requirement carries a stable ID as a metadata bullet right under the header: `- **ID**: REQ-001`.
 - IDs are `REQ-###` (zero-padded), assigned sequentially and **unique within a capability spec**. When a
   requirement is removed, its ID is **retired, never reused** (so external references stay unambiguous).
+- **Assignment:** a requirement added to an **existing** capability takes the **next free ID from the living
+  capability spec** (highest ever issued + 1 — a retired ID still counts as issued; check git / `## Spec Impact`),
+  **never restarting at `REQ-001`**. A genuinely new capability starts at `REQ-001`. This keeps the ID stable
+  through the close — no renumbering.
+- In a **multi-capability change**, if two capabilities would share a number, qualify the reference by capability:
+  `[[auth/REQ-001]]`.
 - The ID is a **traceability anchor** that **survives a rename** (it rides in the body, not the header). Tasks,
   `/analyze`, and tests reference a requirement as **`[[REQ-###]]`** (the WikiLink-resolving MCP is deferred;
   `[[…]]` is plain text until wired).
@@ -72,7 +78,7 @@ headings in that single file.
 - Like `## Purpose`, it is **prose the author edits directly**. The rigorous, materialized model lives in
   `design.md`'s `## Domain Model` (see `sdd-domain-format`); this glossary is the durable summary. Glossary drift
   (a requirement referencing an undefined entity) is caught by `/analyze`.
-- Entities are referenced by **name** (`[[Product]]`) — the name is the stable anchor.
+- Entities are referenced by **name** (`[[entity:Product]]`) — the name is the stable anchor.
 
 ### Scenarios (Given/When/Then)
 
@@ -108,17 +114,17 @@ diff, history, and conflict-resolution engine.
   (full, same format as a source spec; `## <Capability>` sections if it spans more than one) plus `proposal.md` /
   `design.md` / `tasks.md`. The living source spec is **not touched yet**; the change folder is the in-flight
   boundary.
-- **At close (`r3-sdd-sync`):** edit the living `specs/<capability>/spec.md` **directly** to reflect the completed
+- **At close (`r3-sdd-close`):** edit the living `specs/<capability>/spec.md` **directly** to reflect the completed
   change. The change folder stays as the immutable, numbered record.
 - **`git diff specs/` is the record of what changed** — added lines = new requirements/scenarios, removed lines =
-  removals, changed lines = modifications. `sync` reads this diff to **verify integrity** (see Validation).
+  removals, changed lines = modifications. `close` reads this diff to **verify integrity** (see Validation).
 - **Semantic intent** (what was added / modified / removed, with reason + migration for a removal) is recorded in
   prose in the change's **`## Spec Impact`** section (in `proposal.md`).
 - A **new capability** → at close, its requirements (from the change's `spec.md`) become the living
   `specs/<capability>/spec.md` (essentially a copy).
 
 Integrity has two layers: **data integrity (nothing lost) is git** — structural, always-on, every prior state
-recoverable; **quality validity** (below) is the `sync` verify step over the diff, optionally delegated to a
+recoverable; **quality validity** (below) is the `close` verify step over the diff, optionally delegated to a
 fresh adversarial agent.
 
 ---
@@ -135,7 +141,7 @@ fresh adversarial agent.
 
 ## Validation (an agent self-check, not a binary)
 
-`r3-sdd-sync` runs this over the **living spec** after editing it (using `git diff specs/` as evidence);
+`r3-sdd-close` runs this over the **living spec** after editing it (using `git diff specs/` as evidence);
 `r3-sdd-analyze` and `r3-sdd-verify` run it read-only. Report issues (do not silently fix). In **strict mode**,
 warnings count as failures; default mode fails only on errors.
 
@@ -146,9 +152,12 @@ warnings count as failures; default mode fails only on errors.
 - Every requirement has ≥1 `#### Scenario:` (exactly `####`, with WHEN/THEN).
 - Each requirement's normative keyword (SHALL/MUST, case-sensitive) is in the **body**, not only the header.
 - IDs unique within the capability; a retired ID is not reused.
+- **Referential integrity:** every `[[REQ-###]]` / `[[PRIN-###]]` / `[[CHK-###]]` / `[[entity:Name]]` resolves to a
+  definition — a dangling reference is an ERROR (grep defs vs refs); no two requirements share a `REQ-###` in one
+  capability.
 - Only the expected top-level sections appear (`## Purpose` / `## Key Entities` / `## Requirements`).
 
-**Integrity over the diff (ERROR) — the `sync` verify:**
+**Integrity over the diff (ERROR) — the `close` verify:**
 
 - Every requirement/scenario **removed or renamed** in `git diff specs/` is **accounted for** by the change's
   `## Spec Impact` (an intended removal carries a reason + migration there). An unexplained deletion is an ERROR —

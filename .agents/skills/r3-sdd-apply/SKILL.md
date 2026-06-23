@@ -52,7 +52,7 @@ tasks once resolved.
 
 ### Step 4 — Report
 
-Show progress (N/M tasks; flag any `[!]` blocked / `[?]` needs-decision). When no open tasks remain, say the change is ready to verify (`r3-sdd-verify`) or close (`r3-sdd-sync`).
+Show progress (N/M tasks; flag any `[!]` blocked / `[?]` needs-decision). When no open tasks remain, say the change is ready to verify (`r3-sdd-verify`) or close (`r3-sdd-close`).
 
 ## Constraints
 

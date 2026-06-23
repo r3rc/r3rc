@@ -24,7 +24,7 @@ If not given, list `_contracts/changes/`, sorted by the `NNN` prefix (most recen
 
 Per `sdd-schema`, derive each artifact's state from file existence: `done` = its file exists; `ready` = all its
 `requires` are done; `blocked` otherwise. If everything is done, congratulate and stop (suggest `r3-sdd-apply` or
-`r3-sdd-sync`). Otherwise pick the **first `ready`** artifact in graph order (`proposal → {specs, design} → tasks`).
+`r3-sdd-close`). Otherwise pick the **first `ready`** artifact in graph order (`proposal → {spec, design} → tasks`).
 
 ### Step 3 — Create that one artifact
 

@@ -22,7 +22,7 @@ Use a named change, or scaffold a new one: derive a **kebab-case slug** and run 
 
 ### Step 2 — Loop until apply-ready
 
-Per the graph `proposal → {specs, design} → tasks`, repeatedly pick the first `ready` artifact (state derived from
+Per the graph `proposal → {spec, design} → tasks`, repeatedly pick the first `ready` artifact (state derived from
 file existence — see `sdd-schema`), read its dependencies, and create the artifact from its template in
 `.agents/skills/_shared/` (apply the `_contracts/constitution.md` standards/context
 as constraints; use `sdd-spec-format` / `sdd-domain-format`). Continue until the apply-requires artifact

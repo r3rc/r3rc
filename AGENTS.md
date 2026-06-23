@@ -103,7 +103,7 @@ before using it.
 
 Engine-free spec-driven development. A living source contract (`_contracts/specs/`, edited directly — git is the
 history) + numbered per-change records under `_contracts/changes/`; the agent performs all logic (scaffold, status,
-sync, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format` (in `.agents/skills/_shared/`).
+close, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format` (in `.agents/skills/_shared/`).
 
 | Skill                 | Purpose                                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------------------- |
@@ -116,7 +116,7 @@ sync, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-
 | `r3-sdd-analyze`      | Pre-implementation coverage + consistency check (read-only; requirement↔task by `REQ-###`)        |
 | `r3-sdd-checklist`    | Requirement-quality checklist for a concern — "unit tests for English" (optional)                 |
 | `r3-sdd-apply`        | Implement a change's tasks, checking them off in `tasks.md`                                       |
-| `r3-sdd-sync`         | Close a change: reconcile it into the living source specs by direct edit, verified via `git diff` |
+| `r3-sdd-close`        | Close a change: fold it into the living source specs by direct edit, verified via `git diff`      |
 | `r3-sdd-verify`       | Verify an implementation matches the change's artifacts (read-only self-check)                    |
 | `r3-sdd-reconcile`    | Brownfield gap-close — assess code vs spec/tasks, append gap-closing tasks (optional)             |
 | `r3-sdd-onboard`      | Guided tutorial through one full SDD cycle on the user's codebase                                 |

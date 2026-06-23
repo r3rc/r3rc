@@ -28,7 +28,8 @@ their `[[REQ-###]]` refs, entities from `## Key Entities`, and the constitution'
 
 ### Step 3 — Detection passes
 
-- **Coverage** — every `REQ-###` has ≥1 implementing task; every task maps to a requirement (a gap → CRITICAL).
+- **Coverage** — every `REQ-###` is satisfied by a slice's `**Satisfies**:` (or, secondarily, a task's
+  `[[REQ-###]]`); a slice/task with no requirement link is an orphan (a gap → CRITICAL).
 - **Duplication** — near-duplicate requirements.
 - **Ambiguity** — vague terms (fast / scalable / secure …) and any unresolved `[NEEDS CLARIFICATION]` marker.
 - **Underspecification** — a requirement with no measurable/testable outcome; a scenario with no clear THEN.
@@ -37,6 +38,10 @@ their `[[REQ-###]]` refs, entities from `## Key Entities`, and the constitution'
   declared impacted in `proposal.md` with no matching requirements in the change's `spec.md` (cross-capability ripple).
 - **Parallel safety** — for slices marked `[P]`, compare their `Owns:` globs: an **overlap** between two `[P]`
   slices → CRITICAL (unsafe to run concurrently). Flag any task that touches files outside its slice's `Owns:`.
+- **Referential integrity** — every `[[REQ-###]]` / `[[PRIN-###]]` / `[[CHK-###]]` / `[[entity:Name]]` resolves to
+  a definition (a `- **ID**:` line or a `## Key Entities` entry); a **dangling ref** → CRITICAL, a def referenced
+  nowhere → INFO (orphan), two requirements sharing a `REQ-###` within one capability → CRITICAL. Deterministic
+  via grep — defs: `rg '\*\*ID\*\*:\s*REQ-'` · refs: `rg '\[\[REQ-'` · diff.
 
 ### Step 4 — Report
 

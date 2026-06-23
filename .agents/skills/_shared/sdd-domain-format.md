@@ -75,10 +75,9 @@ Nature, not type: `count`, `money`, `identifier`, `enum: a | b | c`, `text`, `ti
   values.
 - **`### Lifecycle`** — `Entity: stateA → stateB → (stateC | stateD)` for entities that have states.
 - **`### Invariants`** — normative rules in **RFC 2119** (MUST / MUST NOT), the same grammar as spec requirements
-  (see `sdd-spec-format`). These constrain the implementation and drive tests. Invariants may also be
-  **architectural prohibitions** (a `Forbids` flavor) — forbidden dependencies/imports/paths, e.g.
-  "the domain layer MUST NOT import `infrastructure/**`" or "resolve MUST NOT depend on `payments/**`". These are
-  checkable boundaries and are re-checked by the Constitution Check gate.
+  (see `sdd-spec-format`). These constrain the implementation and drive tests. An invariant may also be an
+  **architectural prohibition** — a forbidden dependency/import/path, e.g. "the domain layer MUST NOT import
+  `infrastructure/**`". These are checkable boundaries, re-checked by the Constitution Check gate.
 - **`### Consistency boundaries`** (optional, Q-driven) — name which entities change **atomically together**
   (the useful core of "aggregates", without the label). A change's slice MUST NOT split a consistency boundary.
 
@@ -115,9 +114,12 @@ Notation:
 
 ## Cross-references (WikiLinks)
 
-- Entities are referenced by **name**: `[[Product]]` (the name is the stable anchor — renaming an entity is a
+- Entities are referenced by **name**: `[[entity:Product]]` (the name is the stable anchor — renaming an entity is a
   deliberate ubiquitous-language change).
-- Requirements are referenced by their **ID**: `[[REQ-###]]` (see `sdd-spec-format`).
+- Requirements are referenced by their **ID**: `[[REQ-###]]` (see `sdd-spec-format`); principles and checklist
+  items likewise: `[[PRIN-###]]`, `[[CHK-###]]`.
+- Sibling artifacts are referenced by filename: `[[proposal]]` / `[[spec]]` / `[[design]]` / `[[tasks]]` /
+  `[[context-map]]` — each resolves to that file in the change folder (or the durable `_contracts/context-map.md`).
 - The MCP that resolves these is deferred; `[[…]]` is plain text until it is wired.
 
 ---

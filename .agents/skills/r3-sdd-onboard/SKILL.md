@@ -2,7 +2,7 @@
 name: r3-sdd-onboard
 description: >
     Spec-Driven Development — guided tutorial: walk a first-time user through one complete real cycle (explore →
-    new → proposal → spec → design → tasks → apply → sync) on their own codebase, teaching the workflow.
+    new → proposal → spec → design → tasks → apply → close) on their own codebase, teaching the workflow.
     Triggers (EN+ES): "onboard me to sdd", "sdd tutorial", "teach me the sdd workflow", "walk me through sdd",
     "enséñame el flujo sdd", "tutorial de sdd", "guíame por sdd", "cómo uso sdd".
 user-invocable: true
@@ -27,19 +27,19 @@ For the chosen task, go through the phases, narrating each:
 
 1. **Explore** (briefly investigate) → PAUSE.
 2. **Scaffold** — `r3-sdd-init` if needed (creates `_contracts/` + the constitution), then `.agents/scripts/sdd.ps1 new <slug>`; SHOW the folder.
-3. **Proposal** — draft Why/What Changes/Capabilities/Impact → PAUSE for approval.
+3. **Proposal** — draft Why/What Changes/Capabilities/Spec Impact/Impact → PAUSE for approval.
 4. **Spec** — write the full self-contained `spec.md`: complete `### Requirement:` blocks (`**ID**: REQ-###` + `#### Scenario:` GWT), per `sdd-spec-format`.
 5. **Design** — a `## Constitution Check` (gate vs the constitution) + a `## Domain Model` when domain data is involved; full depth when warranted, else a one-line note.
 6. **Tasks** — phase/slice structure with an Independent Test per slice. **⏸ Approve before implementing** — present the plan; wait for the user's go-ahead.
 7. **Analyze** — `r3-sdd-analyze` (read-only coverage + consistency) before building.
 8. **Apply** — implement each task (under strict-TDD when the constitution mandates it), flipping `- [ ]` → `- [x]`.
 9. **Verify** — `r3-sdd-verify` (implementation vs spec) → PAUSE.
-10. **Close** — `r3-sdd-sync` (edit the living `specs/<cap>/spec.md` directly + verify via `git diff`); the numbered change folder stays as the record. SHOW the result.
+10. **Close** — `r3-sdd-close` (edit the living `specs/<cap>/spec.md` directly + verify via `git diff`); the numbered change folder stays as the record. SHOW the result.
 
 ### Step 3 — Recap
 
 Recap the cycle and list the `r3-sdd-*` skills: **init · propose · scaffold · continue · fast-forward · explore ·
-analyze · checklist · apply · verify · sync · reconcile · onboard**. Suggest
+analyze · checklist · apply · verify · close · reconcile · onboard**. Suggest
 `r3-sdd-propose` for their next real change.
 
 ## Constraints

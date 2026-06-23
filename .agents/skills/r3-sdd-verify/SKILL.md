@@ -33,11 +33,13 @@ never load it (0 tokens).
 - **Completeness** — _Tasks_: parse task states; any open task (`[ ]`/`[!]`/`[?]`) → CRITICAL (a `[-]` skip needs a
   noted reason). _Spec coverage_: for each `### Requirement:`, search the codebase for evidence it is implemented;
   if missing → CRITICAL. _Scope_: a changed file outside the slices' declared `Owns:` globs → WARNING (scope creep).
+  _Refs_: every `[[REQ-###]]` / `[[entity:Name]]` in the change's artifacts resolves to a definition — a dangling
+  reference → WARNING.
 - **Correctness** — for each requirement, find the implementing code and judge whether it matches intent (divergence →
   WARNING with `file:line`). For each `#### Scenario:`, check it is handled and (ideally) tested; uncovered → WARNING.
 - **Coherence** — if `design.md` exists, check the implementation follows its decisions (contradiction → WARNING). Check
   consistency with project code patterns (deviation → SUGGESTION). If no `design.md`, note it as skipped.
-  Re-check the **Constitution Check** asserted at design against the actual implementation — a constitution violation
+  Re-check the **Constitution Check** asserted at design (by `[[PRIN-###]]`) against the actual implementation — a constitution violation
   without a justified `## Complexity Tracking` entry → WARNING. Under Strict TDD, run the `references/strict-tdd-verify.md` audit
   (TDD Cycle Evidence present + no banned assertion patterns).
 

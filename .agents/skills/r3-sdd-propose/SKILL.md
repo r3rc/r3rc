@@ -31,7 +31,7 @@ from `.agents/skills/_shared/` and filling it. If `_contracts/` does not exist y
 
 ### Step 3 — Fill artifacts in dependency order, until apply-ready
 
-Per the schema graph `proposal → {specs, design} → tasks`. Read the project's `_contracts/constitution.md`
+Per the schema graph `proposal → {spec, design} → tasks`. Read the project's `_contracts/constitution.md`
 (principles, standards, `## Testing`) and apply it as constraints — **never copy it into the files**. Read each completed dependency for context before writing
 the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `.agents/skills/_shared/`) and filling it as `<artifact>.md`:
 
@@ -40,7 +40,8 @@ the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `
   reason+migration for removals) · Impact.
 - **spec.md** — a **full self-contained** spec of the requirements this change establishes: complete
   `### Requirement:` blocks (a `**ID**: REQ-###` bullet + `#### Scenario:` GWT); `## <Capability>`
-  sections if it spans more than one. Include `## Purpose`/`## Key Entities` for a new capability.
+  sections if it spans more than one. Include `## Purpose`/`## Key Entities` for a new capability. For an existing
+  capability, assign each new requirement the **next free `REQ-###` from the living spec** (never restart at 001).
 - **design.md** — always created (it gates `tasks`); include a `## Constitution Check` (gate vs the constitution)
   and, when the change touches domain data, a `## Domain Model` (DDD-lite, per `sdd-domain-format`). Full depth
   when warranted, else a one-line "no dedicated design needed" note.
@@ -65,8 +66,8 @@ After running, `_contracts/changes/<slug>/` contains (filled, not templates):
 
 ## Constraints
 
-- One change = one numbered folder under `_contracts/changes/`. Never edit `_contracts/specs/` here (that happens at `r3-sdd-sync`).
+- One change = one numbered folder under `_contracts/changes/`. Never edit `_contracts/specs/` here (that happens at `r3-sdd-close`).
 - A spec is a **behavior contract** (WHAT), not implementation — keep code/design detail in `design.md`/`tasks.md`.
 - The constitution's standards/context are constraints for you, never content copied into artifacts.
 - Status is derived from **file existence** (see `sdd-schema`); there is no engine or CLI.
-- Scaffolding goes through `.agents/scripts/sdd.ps1 new`; the close (editing the living spec) is `r3-sdd-sync`. Everything else is reading/writing markdown.
+- Scaffolding goes through `.agents/scripts/sdd.ps1 new`; the close (editing the living spec) is `r3-sdd-close`. Everything else is reading/writing markdown.

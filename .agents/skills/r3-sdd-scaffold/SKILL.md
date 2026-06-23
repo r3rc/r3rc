@@ -30,11 +30,11 @@ Run `.agents/scripts/sdd.ps1 new <slug>` from the project root. It creates the e
 ### Step 3 — Show the first artifact and stop
 
 Per the schema graph the first ready artifact is `proposal.md`. Show its template structure and what it captures
-(Why, What Changes, Capabilities, Impact). Then **STOP** — do not create artifact content yet.
+(Why, What Changes, Capabilities, Spec Impact, Impact). Then **STOP** — do not create artifact content yet.
 
 ### Step 4 — Hand off
 
-Summarize: the change slug + location, the artifact sequence (`proposal → {specs, design} → tasks`), current status
+Summarize: the change slug + location, the artifact sequence (`proposal → {spec, design} → tasks`), current status
 (0 artifacts filled), and prompt: "Describe the change and I'll draft the proposal, or run `r3-sdd-continue`."
 
 ## Output Contract

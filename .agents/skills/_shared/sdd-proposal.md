@@ -35,7 +35,7 @@ id: <!-- stable opaque change id (8 hex), from `sdd.ps1 new` (mint a fresh 8-hex
 
 <!-- The requirement-level effect on the living specs/. The change's spec.md carries the FULL text of added and
      changed requirements; this section is the human summary AND the home for removals (which are NOT written in
-     spec.md). At close, `sync` cross-checks every removal/rename in `git diff specs/` against this list. -->
+     spec.md). At close, `r3-sdd-close` cross-checks every removal/rename in `git diff specs/` against this list. -->
 
 - **Added**: `<capability>` [[REQ-NNN]] <name> — <one line>
 - **Modified**: `<capability>` [[REQ-NNN]] <name> — <what changed>

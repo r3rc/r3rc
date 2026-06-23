@@ -5,7 +5,8 @@
 ## Constitution Check
 
 <!-- GATE: must pass before tasks. Derive the checks from _contracts/constitution.md's principles at runtime
-     (NOT hardcoded). Re-verified at r3-sdd-verify. Examples: -->
+     (NOT hardcoded); cite each principle by its [[PRIN-###]] id. Re-verified at r3-sdd-verify. Examples: -->
+<!-- - [ ] [[PRIN-001]] <name> — PASS / NOTED + note -->
 <!-- - [ ] Test-first plan present (strict-TDD mandate) -->
 <!-- - [ ] No unjustified complexity / dependencies -->
 
@@ -38,7 +39,7 @@
 
 ### Invariants
 
-<!-- - `X` MUST be ≥ 0  (RFC 2119) -->
+<!-- - `X` MUST be ≥ 0  (RFC 2119); architectural prohibitions too, e.g. the domain MUST NOT import `infra/**` -->
 
 ### Consistency boundaries
 

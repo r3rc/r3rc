@@ -21,10 +21,9 @@ Pick the change and the concern/domain (security, ux, api, error-handling…). O
 
 ### Step 2 — Author the checklist
 
-Create `_contracts/changes/<slug>/checklists/<concern>.md`. Each item: `- [ ] CHK### <question testing a
-requirement's quality> [<dimension>, [[REQ-###]]]`. Dimensions: Completeness / Clarity / Consistency /
-Measurability / Coverage. **≥80% of items MUST cite** a `[[REQ-###]]` or a `[Gap]` / `[Ambiguity]` / `[Conflict]`
-/ `[Assumption]` marker. `CHK###` IDs increment globally; append if the file already exists.
+Create `_contracts/changes/<slug>/checklists/<concern>.md`. Each item: `- [ ] CHK-### <question testing a
+requirement's quality>` — optionally citing the `[[REQ-###]]` it probes, or a `[Gap]` / `[Ambiguity]` /
+`[Conflict]` / `[Assumption]` marker. `CHK-###` ids increment within the file; append if it already exists.
 
 ### Step 3 — Report
 
@@ -32,7 +31,7 @@ Report the checklist path and item count. `r3-sdd-apply` MAY gate on incomplete 
 
 ## Output Contract
 
-- `_contracts/changes/<slug>/checklists/<concern>.md` — `CHK###` quality items with dimension tag + spec refs.
+- `_contracts/changes/<slug>/checklists/<concern>.md` — `CHK-###` quality items, optionally citing `[[REQ-###]]`.
 
 ## Constraints
 

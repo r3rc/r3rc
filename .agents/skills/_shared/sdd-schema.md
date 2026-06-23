@@ -1,7 +1,7 @@
 # Rule: SDD schema & lifecycle (engine-free)
 
 Applies to any project using the r3 Spec-Driven Development workflow (the `r3-sdd-*` skills). There is **no CLI
-engine** — the agent performs every deterministic job (scaffold, status, sync, validate) by following the rules
+engine** — the agent performs every deterministic job (scaffold, status, close, validate) by following the rules
 below.
 
 ---
@@ -30,12 +30,12 @@ number + kebab slug, `NNN` auto-assigned by `sdd.ps1 new` by scanning existing c
 ## Artifact graph (the `spec-driven` schema)
 
 ```
-proposal ──► spec ──► tasks ──► apply ──► sync (close)
+proposal ──► spec ──► tasks ──► apply ──► close
     └──────► design ─┘
 ```
 
 - `proposal` requires nothing. `spec` requires `proposal`. `design` requires `proposal`. `tasks` requires `spec` +
-  `design`. `apply` requires `tasks`. `sync` (the close) requires `apply` done.
+  `design`. `apply` requires `tasks`. `close` requires `apply` done.
 - **`design.md` is conditional in DEPTH, not in existence** — always create it (`tasks` depends on it). Write a full
   design when warranted (cross-cutting change, new dependency/data model, security/perf/migration complexity, or
   genuine ambiguity); otherwise a one-line note ("No dedicated design needed — straightforward; see proposal/tasks.")
@@ -57,8 +57,8 @@ For a change folder, derive each artifact's state from **file existence**, not f
 - "apply-ready" = the schema's `apply.requires` are `done` (for `spec-driven`: `tasks` is done).
 - **list changes** = the subdirectories of `_contracts/changes/` (the whole chronological log; sort by the `NNN`
   prefix). A change is **in progress** while `tasks.md` has any open task — `- [ ]` todo, `- [!]` blocked, or
-  `- [?]` needs-decision (`- [-]` is a deliberately skipped task); it is **closed** once applied and **synced**
-  (the living spec reflects it — git records the sync commit; there is no folder move).
+  `- [?]` needs-decision (`- [-]` is a deliberately skipped task); it is **closed** once applied and folded into
+  the living spec (git records the close commit; there is no folder move).
 
 ## Project configuration & governance
 
@@ -85,9 +85,29 @@ validation is advisory.
 ## No-engine principle
 
 There is no CLI/engine binary. Every deterministic job is done by the agent: scaffolding = `mkdir` + write
-templates; "status"/"list" = read the dirs per the table above; **specs evolve by direct edit — `sync` edits the
+templates; "status"/"list" = read the dirs per the table above; **specs evolve by direct edit — `close` edits the
 living `specs/<capability>/spec.md` and verifies integrity via `git diff`** (see
 [`sdd-spec-format`](sdd-spec-format.md)); "validate" = the agent self-check in the same rule. A closed change stays numbered-in-place and **git is the
 history**. There
 is no per-tool command generation (r3 uses symlinks + AGENTS.md), no workspaces, no telemetry, and no per-change
 metadata file.
+
+## Greppable tokens (the contract graph, without an engine)
+
+Every durable relationship in `_contracts/` is a stable, consistent token, so grep — or the agent, or the
+WikiLink MCP — can traverse the contract graph with no engine and no index file:
+
+- `REQ-###` — requirement id (rename-surviving); referenced as `[[REQ-###]]`.
+- `PRIN-###` — constitution principle id; referenced as `[[PRIN-###]]`.
+- `CHK-###` — checklist-item id; referenced as `[[CHK-###]]`.
+- task id `<phase>.<n>` (e.g. `3.1`) — positional within a change, not a durable cross-doc anchor.
+- `[[entity:Name]]` — entity reference (the name is the ubiquitous-language anchor).
+- `### Requirement:` / `#### Scenario:` — requirement / scenario headers.
+- `**Satisfies**:` / `**Owns**:` / `**Depends**:` — slice → requirement / file-scope / order edges.
+- `## Spec Impact` rows (`**Added**:` / `**Modified**:` / `**Removed**:` / `**Renamed**:`) — change → requirement edges.
+- task states `[ ] [x] [!] [?] [-]` + `[P]` — implementation progress / parallelism.
+- proposal frontmatter `id:` — the change's stable **8-hex opaque** cross-branch id.
+- RFC-2119 keywords (`SHALL` / `MUST`) — the normative line of a requirement or invariant.
+
+Grep these to answer "what implements `REQ-007`?", "which slices touch `src/auth/**`?", or "where is `PRIN-002`
+checked?" — no engine required.

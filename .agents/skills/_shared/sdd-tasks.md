@@ -1,7 +1,7 @@
 <!-- Tasks in phase/slice order. Task states: [ ] todo · [x] done · [-] skipped (note why) · [!] blocked ·
      [?] needs-decision. `[P]` = parallelizable — only safe when the slices' `Owns:` globs do NOT overlap.
-     Each behavior task cites the requirement it implements as [[REQ-###]]; tests go before implementation when
-     the constitution mandates strict-TDD. -->
+     The slice's `**Satisfies**:` is the primary requirement link; a task adds `([[REQ-###]])` only when it maps
+     to a different requirement than its slice. Tests go before implementation when strict-TDD is mandated. -->
 <!-- Review Workload Forecast: <small | medium | large> — flag/split a slice if oversized. -->
 
 ## 1. Setup
@@ -18,7 +18,7 @@
 **Owns**: <!-- file globs this slice may modify, e.g. `src/auth/**` — enables safe [P] and scope-creep checks -->
 **Independent Test**: <!-- how this slice is verified standalone -->
 
-- [ ] 3.1 <!-- behavior (test-first under strict-TDD) --> ([[REQ-###]])
+- [ ] 3.1 <!-- behavior (test-first under strict-TDD) -->
 
 ## 4. Slice P2 — <!-- name -->
 
@@ -27,7 +27,7 @@
 **Depends**: <!-- slice(s) that must finish first, e.g. `P1` — omit if independent -->
 **Independent Test**: <!-- ... -->
 
-- [ ] 4.1 <!-- ... --> ([[REQ-###]])
+- [ ] 4.1 <!-- ... only add ([[REQ-###]]) if it differs from the slice's Satisfies -->
 
 ## N. Polish
 

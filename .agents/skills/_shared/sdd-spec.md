@@ -4,7 +4,7 @@
      New capability → include ## Purpose (+ optional ## Key Entities). Spans >1 capability → group the
      requirements under ## <Capability> headings in this one file.
      Mark genuine ambiguities inline as [NEEDS CLARIFICATION: <question>] (≤3 in a draft; zero when ready).
-     Reference entities as [[Entity]] and related capabilities via [[context-map]]. -->
+     Reference entities as [[entity:Name]] and related capabilities via [[context-map]]. -->
 
 ## Purpose <!-- only for a NEW capability; omit when only changing existing requirements -->
 
@@ -14,7 +14,7 @@
 
 ### Requirement: <!-- name -->
 
-- **ID**: REQ-<!-- NNN: next free number for a NEW requirement; the EXISTING ID when changing one (never reuse a retired ID) -->
+- **ID**: REQ-<!-- NNN: for a NEW requirement, the next free number in the LIVING capability spec (never restart at 001 for an existing capability; never reuse a retired ID); the EXISTING ID when changing one -->
 
 The system SHALL <!-- normative behavior; the SHALL/MUST keyword goes in THIS body line -->.
 
