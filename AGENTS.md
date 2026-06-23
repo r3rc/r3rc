@@ -126,9 +126,44 @@ close, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd
 Disciplines applied to whatever you're working on — not operations on a managed object. Each is a
 reusable practice that composes into the other workflows (the SDD flow hands off to it).
 
-| Skill            | Purpose                                                                                   |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| `r3-craft-drill` | Harden a plan by interrogating every decision, one at a time (convergent; before propose) |
+| Skill             | Purpose                                                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| `r3-craft-drill`  | Harden a plan by interrogating every decision, one at a time (convergent; before propose) |
+| `r3-craft-debug`  | Diagnose a hard bug or perf regression — feedback-loop first, then hypothesise and fix    |
+| `r3-craft-review` | Multi-axis code review (Risk/Readability/Reliability/Resilience) in parallel, by severity |
+
+---
+
+## Agent trigger rules
+
+**Organic recommendations, not gates.** Nothing fires these at runtime — you (the orchestrator) decide when
+to act, guided by the moment in the dev flow. They complement each skill's `description:` triggers (those
+match what the user _says_; these say _where in the workflow_ to reach for a skill). Scale effort to blast
+radius. This is guidance, not a rule engine — keep it short.
+
+**Planning**
+
+- Plan still soft before a change → run `r3-craft-drill` to harden the decisions, then `r3-sdd-propose`.
+- Change apply-ready, before implementing → run `r3-sdd-analyze` (coverage + consistency).
+
+**Tier 1 — advisory (everyday, ~1×)**
+
+- At **pre-commit**, consider a single-pass `code-reviewer` over the staged diff. Keeps the everyday loop light.
+
+**Tier 2 — strong (risky or large, ~4×)**
+
+- At **pre-pr** (or before `r3-sdd-close`), when the diff touches sensitive paths (`**/auth/**`,
+  `**/security/**`, secrets/config) **or** exceeds ~400 changed lines → run `r3-craft-review` (the four
+  lenses in parallel). Reserved for high-blast-radius changes.
+
+**Tier 3 — closing a change**
+
+- Before `r3-sdd-close`, run `r3-sdd-verify` (does the implementation match the spec?); pair it with
+  `r3-craft-review` for code quality on non-trivial changes.
+
+**Reactive (by symptom, not a lifecycle gate)**
+
+- Something broken, throwing, flaky, or slow → `r3-craft-debug`.
 
 ---
 
