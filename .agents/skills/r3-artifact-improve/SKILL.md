@@ -2,7 +2,7 @@
 name: r3-artifact-improve
 description: >
     Audit and refactor a single skill against the canonical format defined in
-    r3-artifact-create/references/skill-format.md: section order, body budget, named
+    _shared/skill-format.md: section order, body budget, named
     pauses, output contract, broken references. Audit-only by default — applies
     changes only after explicit approval. Use when the user says "improve this
     skill", "mejora el skill", "audita el skill", "refactoriza el skill", "el skill
@@ -35,7 +35,7 @@ deep on the content of one artifact.
 ### Step 1 — Read the target
 
 Read the target `SKILL.md` in full, plus its `references/` directory if present. Read
-`.agents/skills/r3-artifact-create/references/skill-format.md` as the audit criteria.
+`.agents/skills/_shared/skill-format.md` as the audit criteria.
 
 ### Step 2 — Audit
 
@@ -77,7 +77,3 @@ Apply mode:
 - Scope is skills for now. For rules, agents, workflows, or MCP entries, run
   `r3-artifact-audit` instead — their structure is too thin to need a refactor pass.
 - Never change the skill's `name:` — renaming is `r3-artifact-remove` + `r3-artifact-create`.
-
-## References
-
-- `../r3-artifact-create/references/skill-format.md` — canonical format and audit criteria
