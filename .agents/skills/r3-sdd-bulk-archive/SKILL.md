@@ -11,13 +11,13 @@ user-invocable: true
 # r3-sdd-bulk-archive — archive multiple changes at once
 
 Batch-archive completed changes, resolving conflicts where several touch the same capability. Conventions live in
-the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+the conventions `sdd-schema` and `sdd-spec-format`.
 
 ## Steps
 
 ### Step 1 — Select changes
 
-List active changes (`openspec/changes/`, excluding `archive/`). Ask the user to multi-select (offer "all"); never
+List active changes (`_contracts/changes/`, excluding `archive/`). Ask the user to multi-select (offer "all"); never
 auto-select.
 
 ### Step 2 — Gather state per change
@@ -44,7 +44,7 @@ Summarize archived / skipped / failed, plus the spec-sync outcomes.
 
 ## Output Contract
 
-Per archived change: source specs synced, and the change moved to `openspec/changes/archive/YYYY-MM-DD-<slug>/`. Reports per-change success / skip / fail.
+Per archived change: source specs synced, and the change moved to `_contracts/changes/archive/YYYY-MM-DD-<slug>/`. Reports per-change success / skip / fail.
 
 ## Constraints
 

@@ -11,7 +11,7 @@ user-invocable: true
 # r3-sdd-explore — think before committing to a change
 
 A thinking partner for the r3 SDD workflow. This is a **stance skill** — a mode, not a procedure. Conventions live
-in the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+in the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format`.
 
 ## Stance
 
@@ -24,19 +24,20 @@ implementing. If the user asks to implement, suggest leaving explore mode for `r
 
 No required order — whatever fits the conversation:
 
-- **Get oriented** — if the user named a change, read its artifacts under `openspec/changes/<slug>/`; otherwise scan
-  the relevant code. List active changes by reading `openspec/changes/` (excluding `archive/`).
+- **Get oriented** — if the user named a change, read its artifacts under `_contracts/changes/<slug>/`; otherwise scan
+  the relevant code. List active changes by reading `_contracts/changes/` (excluding `archive/`).
 - **Explore** — investigate the problem space, compare approaches in a table, surface risks and unknowns, and
   visualize flows (ASCII diagrams welcome). Question assumptions; verify against the code rather than guessing.
 - **Offer to capture (never auto-capture)** — when a durable insight emerges, OFFER to record it in the right place
   and write only on the user's go-ahead:
 
-    | Insight                 | Where                                                        |
-    | ----------------------- | ------------------------------------------------------------ |
-    | New/changed requirement | `openspec/changes/<slug>/specs/<capability>/spec.md` (delta) |
-    | Design decision         | `design.md`                                                  |
-    | Scope change            | `proposal.md`                                                |
-    | New work identified     | `tasks.md`                                                   |
+    | Insight                  | Where                                                                        |
+    | ------------------------ | ---------------------------------------------------------------------------- |
+    | Pre-change investigation | `_contracts/explorations/<topic>.md` (graduates to a change via `[[links]]`) |
+    | New/changed requirement  | `_contracts/changes/<slug>/specs/<capability>/spec.md` (delta)               |
+    | Design decision          | `design.md`                                                                  |
+    | Scope change             | `proposal.md`                                                                |
+    | New work identified      | `tasks.md`                                                                   |
 
 ## Constraints
 

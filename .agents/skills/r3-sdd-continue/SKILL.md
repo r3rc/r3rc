@@ -11,13 +11,13 @@ user-invocable: true
 # r3-sdd-continue — create the next artifact for a change
 
 Advance an in-progress change by creating exactly ONE next artifact, then stop. Conventions and the status rules
-live in the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+live in `sdd-schema` and `sdd-spec-format`.
 
 ## Steps
 
 ### Step 1 — Select the change
 
-If not given, list `openspec/changes/` (excluding `archive/`), sorted by most-recently modified, and ask which one
+If not given, list `_contracts/changes/` (excluding `archive/`), sorted by most-recently modified, and ask which one
 (mark the most recent as recommended). Do NOT auto-select.
 
 ### Step 2 — Derive status and pick the next artifact
@@ -29,8 +29,8 @@ Per `sdd-schema`, derive each artifact's state from file existence: `done` = its
 ### Step 3 — Create that one artifact
 
 Read the completed dependency files for context. Create the artifact by copying its template from
-`.agents/skills/_shared/sdd/templates/` and filling it, applying `config.yaml` `context`/`rules`
-as constraints (never copy them in). Use the format from `sdd-spec-format` for specs. Then **STOP** — one artifact per
+`.agents/skills/_shared/` and filling it, applying the `_contracts/constitution.md`
+standards/context as constraints (never copy them in). Use the format from `sdd-spec-format` / `sdd-domain-format`. Then **STOP** — one artifact per
 invocation. If context is unclear, ask before writing.
 
 ### Step 4 — Report
@@ -40,7 +40,7 @@ implement (`r3-sdd-apply`).
 
 ## Output Contract
 
-Writes exactly ONE artifact file into `openspec/changes/<slug>/` — the next ready one: `proposal.md`, a `specs/<capability>/spec.md`, `design.md`, or `tasks.md`.
+Writes exactly ONE artifact file into `_contracts/changes/<slug>/` — the next ready one: `proposal.md`, a `specs/<capability>/spec.md`, `design.md`, or `tasks.md`.
 
 ## Constraints
 

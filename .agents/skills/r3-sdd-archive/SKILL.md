@@ -9,14 +9,14 @@ user-invocable: true
 
 # r3-sdd-archive — finalize and archive a completed change
 
-Finish a change: sync its specs into the source of truth, then move it to `openspec/changes/archive/`. Conventions
-live in the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+Finish a change: sync its specs into the source of truth, then move it to `_contracts/changes/archive/`. Conventions
+live in `sdd-schema` and `sdd-spec-format`.
 
 ## Steps
 
 ### Step 1 — Select the change
 
-If not given, list `openspec/changes/` (excluding `archive/`) and ask which one — do NOT auto-select.
+If not given, list `_contracts/changes/` (excluding `archive/`) and ask which one — do NOT auto-select.
 
 ### Step 2 — Check task completion
 
@@ -33,8 +33,8 @@ before moving on.
 
 ### Step 4 — Move to the archive
 
-Run `.agents/scripts/sdd.ps1 archive <slug>` from the project root (or set `SDD_OPENSPEC_DIR`). It moves
-`openspec/changes/<slug>/` to `openspec/changes/archive/YYYY-MM-DD-<slug>/` (it fails if that target already exists).
+Run `.agents/scripts/sdd.ps1 archive <slug>` from the project root (or set `SDD_ROOT`). It moves
+`_contracts/changes/<slug>/` to `_contracts/changes/archive/YYYY-MM-DD-<slug>/` (it fails if that target already exists).
 
 ### Step 5 — Report
 
@@ -42,8 +42,8 @@ Confirm: specs synced (or not), and the archive location.
 
 ## Output Contract
 
-- Source specs `openspec/specs/<capability>/spec.md` updated (when synced).
-- The change folder moved to `openspec/changes/archive/YYYY-MM-DD-<slug>/`.
+- Source specs `_contracts/specs/<capability>/spec.md` updated (when synced).
+- The change folder moved to `_contracts/changes/archive/YYYY-MM-DD-<slug>/`.
 
 ## Constraints
 

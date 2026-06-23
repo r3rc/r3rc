@@ -40,6 +40,7 @@ This repository uses `.agents/` as the canonical, tool-neutral workspace for all
 - Put assets shared across skills (templates, snippets) under `.agents/skills/_shared/`. A `_`-prefixed directory there is not a skill (no `SKILL.md`) and tools (harnesses, `r3-artifact-audit`) skip it.
 - Put custom agent definitions under `.agents/agents/<name>.md`. Use YAML frontmatter to set model, tools, and system prompt.
 - Put project-agnostic coding rules under `.agents/rules/<rule-name>.md`. Rules apply automatically — agents must read the relevant rule before generating code in that domain.
+- The SDD conventions (`sdd-schema`, `sdd-spec-format`, `sdd-domain-format`) are **canonical under `.agents/skills/_shared/`** and the `r3-sdd-*` skills **read them explicitly**, so they work on any tool. They are also symlinked into `.agents/rules/` (`sdd-*.md → ../skills/_shared/sdd-*.md`) for harnesses that scan that folder; the source of truth stays in `_shared/`.
 - Put Warp terminal automation workflows under `.agents/workflows/<name>.yaml` (single `command` string plus `arguments`; Warp discovers them through the `.warp/workflows` symlink).
 - Notes are distributed across two levels:
     - **Workspace notes** — `.agents/notes/` — cross-cutting concerns, shared patterns, and decisions that span projects. Entry point: `.agents/notes/INDEX.md`.
@@ -100,20 +101,23 @@ before using it.
 
 ### SDD — spec-driven development
 
-Engine-free spec-driven development. Specs live under `openspec/` (durable `specs/` + per-change `changes/`); the agent
-performs all logic (scaffold, status, merge, archive, verify) — see the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+Engine-free spec-driven development. Specs live under `_contracts/` (durable `specs/` + per-change `changes/`); the agent
+performs all logic (scaffold, status, merge, archive, verify) — see the conventions `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format` (in `.agents/skills/_shared/`).
 
 | Skill                 | Purpose                                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------------------- |
-| `r3-sdd-init`         | Initialize the `openspec/` structure and config so the SDD workflow can run                       |
+| `r3-sdd-init`         | Initialize the `_contracts/` structure (specs, changes, constitution, context-map, explorations)  |
 | `r3-sdd-propose`      | Propose a change and generate all planning artifacts (proposal, specs, design, tasks) in one pass |
-| `r3-sdd-new`          | Scaffold a change and show the first artifact to fill, then stop (step-by-step)                   |
+| `r3-sdd-scaffold`     | Scaffold a change and show the first artifact to fill, then stop (step-by-step)                   |
 | `r3-sdd-continue`     | Create the next artifact for an in-progress change (one at a time)                                |
-| `r3-sdd-ff`           | Fast-forward — generate every remaining planning artifact until apply-ready                       |
+| `r3-sdd-fast-forward` | Fast-forward — generate every remaining planning artifact until apply-ready                       |
 | `r3-sdd-explore`      | Explore mode — investigate and clarify before committing to a change (never implements code)      |
+| `r3-sdd-analyze`      | Pre-implementation coverage + consistency check (read-only; requirement↔task by `REQ-###`)        |
+| `r3-sdd-checklist`    | Requirement-quality checklist for a concern — "unit tests for English" (optional)                 |
 | `r3-sdd-apply`        | Implement a change's tasks, checking them off in `tasks.md`                                       |
 | `r3-sdd-sync`         | Merge a change's delta specs into the source-of-truth specs (without archiving)                   |
 | `r3-sdd-verify`       | Verify an implementation matches the change's artifacts (read-only self-check)                    |
+| `r3-sdd-reconcile`    | Brownfield gap-close — assess code vs spec/tasks, append gap-closing tasks (optional)             |
 | `r3-sdd-archive`      | Archive a completed change — sync specs, then move it to the dated archive                        |
 | `r3-sdd-bulk-archive` | Archive multiple completed changes at once, resolving cross-change spec conflicts                 |
 | `r3-sdd-onboard`      | Guided tutorial through one full SDD cycle on the user's codebase                                 |

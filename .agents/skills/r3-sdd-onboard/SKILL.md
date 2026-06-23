@@ -11,7 +11,7 @@ user-invocable: true
 # r3-sdd-onboard — guided tutorial through one full SDD cycle
 
 Teach the r3 SDD workflow by doing one small, real change end to end, with EXPLAIN → DO → SHOW → PAUSE narration.
-Conventions live in the auto-loaded rules `sdd-schema` and `sdd-spec-format`.
+Conventions live in `sdd-schema`, `sdd-spec-format`, and `sdd-domain-format`.
 
 ## Steps
 
@@ -26,18 +26,21 @@ user pick or narrow.
 For the chosen task, go through the phases, narrating each:
 
 1. **Explore** (briefly investigate) → PAUSE.
-2. **New** — `r3-sdd-init` if needed, then `.agents/scripts/sdd.ps1 new <slug>`; SHOW the scaffolded folder.
+2. **Scaffold** — `r3-sdd-init` if needed (creates `_contracts/` + the constitution), then `.agents/scripts/sdd.ps1 new <slug>`; SHOW the folder.
 3. **Proposal** — draft Why/What Changes/Capabilities/Impact → PAUSE for approval.
-4. **Specs** — write the delta spec (`### Requirement:` / `#### Scenario:` per `sdd-spec-format`).
-5. **Design** — full when warranted, else a one-line note (always create the file).
-6. **Tasks** — checkboxed `- [ ] N.M` → PAUSE before implementing.
-7. **Apply** — implement each task, flipping `- [ ]` → `- [x]`.
-8. **Archive** — `r3-sdd-archive` (sync specs, then move to the dated archive); SHOW the result.
+4. **Specs** — write the delta spec: `### Requirement:` with a `**ID**: REQ-###` bullet + `#### Scenario:` (GWT), per `sdd-spec-format`.
+5. **Design** — a `## Constitution Check` (gate vs the constitution) + a `## Domain Model` when domain data is involved; full depth when warranted, else a one-line note.
+6. **Tasks** — phase/slice structure with an Independent Test per slice. **⏸ Approve before implementing** — present the plan; wait for the user's go-ahead.
+7. **Analyze** — `r3-sdd-analyze` (read-only coverage + consistency) before building.
+8. **Apply** — implement each task (under strict-TDD when the constitution mandates it), flipping `- [ ]` → `- [x]`.
+9. **Verify** — `r3-sdd-verify` (implementation vs spec) → PAUSE.
+10. **Archive** — `r3-sdd-archive` (sync specs, then move to the dated archive); SHOW the result.
 
 ### Step 3 — Recap
 
-Recap the cycle and list the `r3-sdd-*` skills (propose, explore, apply, sync, archive, new, continue, ff, verify,
-bulk-archive). Suggest `r3-sdd-propose` for their next real change.
+Recap the cycle and list the `r3-sdd-*` skills: **init · propose · scaffold · continue · fast-forward · explore ·
+analyze · checklist · apply · verify · sync · archive · bulk-archive · reconcile · onboard**. Suggest
+`r3-sdd-propose` for their next real change.
 
 ## Constraints
 

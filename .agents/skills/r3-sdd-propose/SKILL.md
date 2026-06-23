@@ -12,7 +12,7 @@ user-invocable: true
 
 Engine-free entry point of the r3 SDD workflow. Creates one change and generates every artifact needed to start
 implementing. The conventions (dir model, artifact graph, status-by-file-existence, spec/delta format, merge) live
-in the auto-loaded rules **`sdd-schema`** and **`sdd-spec-format`** — follow them.
+in the conventions **`sdd-schema`**, **`sdd-spec-format`**, and **`sdd-domain-format`** — follow them.
 
 ## Steps
 
@@ -25,22 +25,25 @@ proceed without understanding the change. If a change with that slug already exi
 
 ### Step 2 — Scaffold the change
 
-Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_OPENSPEC_DIR`). It creates the empty
-change folder `openspec/changes/<slug>/` (with a `specs/` subdir). You author each artifact by copying its template
-from `.agents/skills/_shared/sdd/templates/` and filling it. If `openspec/` does not exist yet, run `r3-sdd-init` first.
+Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_ROOT`). It creates the empty
+change folder `_contracts/changes/<slug>/` (with a `specs/` subdir). You author each artifact by copying its template
+from `.agents/skills/_shared/` and filling it. If `_contracts/` does not exist yet, run `r3-sdd-init` first.
 
 ### Step 3 — Fill artifacts in dependency order, until apply-ready
 
-Per the schema graph `proposal → {specs, design} → tasks`. Read `openspec/config.yaml` `context`/`rules` and apply
-them as constraints — **never copy them into the files**. Read each completed dependency for context before writing
-the next. Create each artifact by copying its template from `.agents/skills/_shared/sdd/templates/` and filling it:
+Per the schema graph `proposal → {specs, design} → tasks`. Read the project's `_contracts/constitution.md`
+(principles, standards, `## Testing`) and apply it as constraints — **never copy it into the files**. Read each completed dependency for context before writing
+the next. Create each artifact by copying its template (`sdd-<artifact>.md` in `.agents/skills/_shared/`) and filling it as `<artifact>.md`:
 
-- **proposal.md** — Why · What Changes · Capabilities (New + Modified — this is the contract to the specs) · Impact.
-- **specs/<capability>/spec.md** — one delta spec per capability listed in the proposal, using `## ADDED Requirements`
-  etc. and the `### Requirement:` / `#### Scenario:` format from `sdd-spec-format`.
-- **design.md** — always created (it gates `tasks`); write a full design when warranted (cross-cutting, new
-  dependency/data model, security/perf/migration, or real ambiguity), else a one-line "no dedicated design needed" note.
-- **tasks.md** — checkboxed `- [ ] N.M` items grouped under `## N. <group>`, ordered by dependency.
+- **proposal.md** — Why (+ optional user-story framing) · What Changes · Capabilities (New + Modified) · Impact.
+- **specs/<capability>/spec.md** — one delta spec per capability, using `## ADDED Requirements` etc. with
+  `### Requirement:` (a `**ID**: REQ-###` bullet) + `#### Scenario:` (GWT) per `sdd-spec-format`. Maintain the
+  source spec's `## Key Entities` glossary when entities appear.
+- **design.md** — always created (it gates `tasks`); include a `## Constitution Check` (gate vs the constitution)
+  and, when the change touches domain data, a `## Domain Model` (DDD-lite, per `sdd-domain-format`). Full depth
+  when warranted, else a one-line "no dedicated design needed" note.
+- **tasks.md** — phase/slice structure (Setup / Foundational / Slice P1… / Polish), an Independent Test per slice,
+  `[P]` markers, and `[[REQ-###]]` refs.
 
 Stop when the apply-requires artifact (`tasks`) is done — that is "apply-ready". If an artifact's context is unclear,
 ask the user before writing it.
@@ -52,15 +55,15 @@ were created, and the status (e.g. "apply-ready"). Point the user to `r3-sdd-app
 
 ## Output Contract
 
-After running, `openspec/changes/<slug>/` contains (filled, not templates):
+After running, `_contracts/changes/<slug>/` contains (filled, not templates):
 
 - `proposal.md`, `design.md`, `tasks.md`
 - `specs/<capability>/spec.md` — one delta spec per capability in the proposal
 
 ## Constraints
 
-- One change = one kebab-case folder under `openspec/changes/`. Never edit `openspec/specs/` here (that happens at sync/archive).
+- One change = one kebab-case folder under `_contracts/changes/`. Never edit `_contracts/specs/` here (that happens at sync/archive).
 - A spec is a **behavior contract** (WHAT), not implementation — keep code/design detail in `design.md`/`tasks.md`.
-- `context`/`rules` from `config.yaml` are constraints for you, never content copied into artifacts.
+- The constitution's standards/context are constraints for you, never content copied into artifacts.
 - Status is derived from **file existence** (see `sdd-schema`); there is no engine or CLI.
 - Scaffolding and the archive move go through `.agents/scripts/sdd.ps1`; everything else is reading/writing markdown.
