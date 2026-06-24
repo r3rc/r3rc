@@ -34,11 +34,11 @@ Read `.agents/registry.json`. If it does not exist or `sources` is empty, report
 ### Step 3 — Run the script
 
 ```bash
-# All sources
-.agents/scripts/sources.ps1 sync
+# All sources in the context (per --project <name> / --workspace / CWD)
+.agents/scripts/sources.ps1 sync [--project <name> | --workspace]
 
 # Single source
-.agents/scripts/sources.ps1 sync <name>
+.agents/scripts/sources.ps1 sync <name> [--project <name> | --workspace]
 ```
 
 The script handles shallow vs. full logic, missing-on-disk detection, and ff-only conflict reporting automatically.

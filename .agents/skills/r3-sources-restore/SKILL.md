@@ -32,11 +32,11 @@ Read `.agents/registry.json`. If it does not exist or `sources` is empty, report
 ### Step 2 — Run the script
 
 ```bash
-# All sources
-.agents/scripts/sources.ps1 restore
+# All sources in the context (per --project <name> / --workspace / CWD)
+.agents/scripts/sources.ps1 restore [--project <name> | --workspace]
 
 # Single source
-.agents/scripts/sources.ps1 restore <name>
+.agents/scripts/sources.ps1 restore <name> [--project <name> | --workspace]
 ```
 
 The script clones missing stores (honoring the registry's `shallow` flag), re-creates missing symlinks, and skips anything already present.

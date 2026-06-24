@@ -22,8 +22,8 @@ listed in `.agents/registry.json` and, when present locally, checked out under `
 Use these files as routers, not as implementation sources:
 
 - `AGENTS.md` — repository instructions, quality gates, context routers, and source-verification policy.
-- `.agents/notes/INDEX.md` — workspace notes entry point (cross-cutting concerns, shared patterns).
-- `.agents/registry.json` — names and remotes for available reference sources.
+- a project's `.covenant/context-map.md` + `.covenant/specs/` — its domain/architecture context, when SDD is set up.
+- the context's `.agents/registry.json` — names and remotes for available reference sources.
 
 Reading these routing files does not require user confirmation. Reading source trees under `.agents/sources/` does.
 
@@ -42,13 +42,13 @@ If the request is vague, ask one clarifying question. Do not guess.
 
 ### Step 2 — Evaluate available references
 
-Read `AGENTS.md` and `.agents/registry.json`. If design context is needed, read `.agents/notes/INDEX.md` before
-selecting source repositories.
+Read `AGENTS.md` and the context's `.agents/registry.json`. If design context is needed, read the project's
+`.covenant/context-map.md` + relevant `.covenant/specs/` (when SDD is set up) before selecting source repositories.
 
 For each source listed in `.agents/registry.json`, judge relevance using:
 
 - the source name and remote URL;
-- project context from `.agents/notes/INDEX.md`;
+- project context from `.covenant/context-map.md` / `.covenant/specs/` (if present);
 - the implementation properties identified in step 1;
 - any already-known project conventions in `AGENTS.md`.
 

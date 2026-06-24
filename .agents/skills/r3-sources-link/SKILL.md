@@ -34,10 +34,12 @@ Extract URL, name, branch, and clone depth from user input.
 ### Step 2 — Run the script
 
 ```bash
-.agents/scripts/sources.ps1 link <url> [name] [--branch <branch>] [--full]
+.agents/scripts/sources.ps1 link <url> [name] [--branch <branch>] [--full] [--project <name> | --workspace]
 ```
 
-The script handles name derivation, duplicate detection, cloning, and registration in `.agents/registry.json` automatically.
+The script handles name derivation, duplicate detection, cloning, and registration automatically. The clone
+**store is global** (`~/.r3/sources`); the symlink + `registry.json` entry land in the **resolved context**
+(`--project <name>` / `--workspace` / CWD — see the sources section in `AGENTS.md`).
 
 ### Step 3 — Confirm
 
