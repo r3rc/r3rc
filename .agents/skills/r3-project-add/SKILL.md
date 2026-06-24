@@ -3,8 +3,7 @@ name: r3-project-add
 description: >
     Add a project repository to the workspace. Clones the repo into the workspace root,
     registers it in .gitignore, creates a minimal CLAUDE.md so the project inherits the
-    workspace agent configuration, and creates .agents/notes/INDEX.md as the project's
-    notes entry point for WikiLink-based agent notes.
+    workspace agent configuration.
     Use when the user says "add project", "clone project", "agrega el proyecto", or provides
     a Git URL they want to work on within this workspace.
 allowed-tools: [Bash, Read]
@@ -32,7 +31,7 @@ Clone a project repository into the workspace and wire it up to inherit the agen
 .agents/scripts/projects.ps1 add <url> [name]
 ```
 
-The script handles cloning, `.gitignore` registration, `CLAUDE.md` creation, and `.agents/notes/INDEX.md` scaffolding automatically.
+The script handles cloning, `.gitignore` registration, `CLAUDE.md` creation, and the workspace wiring (symlinks, `.mcp.json`) automatically.
 
 ### Step 2 — Confirm
 

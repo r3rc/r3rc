@@ -69,7 +69,7 @@ function Initialize-Project {
 
     # Project's own .gitignore — exclude workspace wiring from the project's repo
     $projectGitignore = Join-Path $Target '.gitignore'
-    $entries = @('CLAUDE.md', '.claude/', '.agents/scripts', '.warp/')
+    $entries = @('CLAUDE.md', '.claude/', '.agents/scripts', '.agents/sources', '.warp/')
     $added = 0
     foreach ($entry in $entries) {
         if (-not (Test-LineInFile -Path $projectGitignore -Line $entry)) {
@@ -117,29 +117,8 @@ function Initialize-Project {
         Write-Ok "created: $Name/.mcp.json"
     }
 
-    # .agents/notes/INDEX.md — project notes entry point
-    $notesIndex = Join-Path $Target '.agents/notes/INDEX.md'
-    if (Test-Path -LiteralPath $notesIndex) {
-        Write-Warn ".agents/notes/INDEX.md already exists in $Name — skipped"
-    }
-    else {
-        New-Item -ItemType Directory -Path (Split-Path -Parent $notesIndex) -Force | Out-Null
-        $content = @"
-# $Name — Notes
-
-Project notes for AI agents working on this project.
-
-## Overview
-
-_Describe this project here._
-
-## Notes
-
-_Add [[WikiLinks]] to notes as they are created._
-"@
-        Set-Content -LiteralPath $notesIndex -Value $content
-        Write-Ok "created: $Name/.agents/notes/INDEX.md"
-    }
+    # Durable project context (specs, design, decisions) is the SDD `.covenant/` tree — set up separately
+    # and explicitly via `r3 sdd init --project <name>`.
 }
 
 # ── commands ──────────────────────────────────────────────────────────────────
@@ -290,7 +269,7 @@ usage: projects.ps1 <command> [args]
 commands:
   list                     list all workspace projects
   add <url> [name]         clone and register a project
-  wire <name>              wire an already-cloned project (symlinks, CLAUDE.md, notes)
+  wire <name>              wire an already-cloned project (symlinks, CLAUDE.md, .mcp.json)
   status <name>            show uncommitted and unpushed state
   remove <name> [--force]  delete project directory and unregister from .gitignore
 "@)
