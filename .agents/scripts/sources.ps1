@@ -11,9 +11,9 @@ $ErrorActionPreference = 'Stop'
 
 Import-Module "$PSScriptRoot/_shared.psm1" -Force
 
-# R3_REGISTRY overrides the registry path (testing); defaults to the real workspace registry.
-$Config = if ($env:R3_REGISTRY) { $env:R3_REGISTRY } else { Join-Path (Get-AgentsDir) 'registry.json' }
-$LinksDir = Join-Path (Get-AgentsDir) 'sources'
+# The source STORE is global (shared across contexts). The linkage (symlinks + registry) is
+# PER-CONTEXT — $Config and $LinksDir are set in the dispatch block below from the resolved
+# context. R3_REGISTRY overrides the registry path (testing).
 $StoreBase = Join-Path (Get-R3Home) 'sources'
 
 # ── private ───────────────────────────────────────────────────────────────────
@@ -261,15 +261,24 @@ function Invoke-RemoveCommand {
 
 Assert-Workspace
 
+# Source linkage is per-context; the store is global. Resolve the context for the real commands.
+$CmdArgs = $Rest
+if ($Command -in @('list', 'link', 'sync', 'restore', 'remove')) {
+    $ctx = Resolve-Context $Rest
+    $CmdArgs = $ctx.Args
+    $Config = if ($env:R3_REGISTRY) { $env:R3_REGISTRY } else { Join-Path $ctx.Agents 'registry.json' }
+    $LinksDir = Join-Path $ctx.Agents 'sources'
+}
+
 switch ($Command) {
     'list' { Invoke-ListCommand }
-    'link' { Invoke-LinkCommand    -Rest $Rest }
-    'sync' { Invoke-SyncCommand    -Rest $Rest }
-    'restore' { Invoke-RestoreCommand -Rest $Rest }
-    'remove' { Invoke-RemoveCommand  -Rest $Rest }
+    'link' { Invoke-LinkCommand    -Rest $CmdArgs }
+    'sync' { Invoke-SyncCommand    -Rest $CmdArgs }
+    'restore' { Invoke-RestoreCommand -Rest $CmdArgs }
+    'remove' { Invoke-RemoveCommand  -Rest $CmdArgs }
     default {
         [Console]::Error.WriteLine(@"
-usage: sources.ps1 <command> [args]
+usage: sources.ps1 <command> [args] [--project <name> | --workspace]
 
 commands:
   list                                      list registered sources

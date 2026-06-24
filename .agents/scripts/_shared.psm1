@@ -115,6 +115,64 @@ function Assert-Workspace {
     }
 }
 
+# ── context ───────────────────────────────────────────────────────────────────
+# Per-context operations (sdd, sources linkage) target a *context*: the workspace itself or
+# a project under it. Each context owns its own `.agents/` and `.covenant/`. Parse the
+# context flags out of $Rest and return the resolved context plus the remaining args.
+#
+# Resolution — never a silent fallback to the workspace:
+#   --workspace        → the workspace root
+#   --project <name>   → <workspace>/<name> (must be a git project)
+#   (neither)          → the project the current directory is inside; if the CWD is the
+#                        workspace root (or outside it), the context is ambiguous → Die.
+#
+# Returns @{ Root; Agents (= Root/.agents); Covenant (= Root/.covenant); Name; IsWorkspace; Args }.
+function Resolve-Context {
+    [OutputType([hashtable])]
+    param([string[]]$Rest = @())
+
+    $name = $null
+    $workspace = $false
+    $remaining = [System.Collections.Generic.List[string]]::new()
+    for ($i = 0; $i -lt $Rest.Count; $i++) {
+        $a = $Rest[$i]
+        if ($a -eq '--workspace') { $workspace = $true }
+        elseif ($a -eq '--project') {
+            if ($i + 1 -ge $Rest.Count) { Die "--project requires a <name>" }
+            $name = $Rest[$i + 1]; $i++
+        }
+        else { $remaining.Add($a) }
+    }
+    if ($workspace -and $name) { Die "pass either --project <name> or --workspace, not both" }
+
+    $repoRoot = [System.IO.Path]::GetFullPath((Get-RepoRoot))
+
+    if ($workspace) {
+        return @{ Root = $repoRoot; Agents = (Join-Path $repoRoot '.agents'); Covenant = (Join-Path $repoRoot '.covenant'); Name = '(workspace)'; IsWorkspace = $true; Args = $remaining.ToArray() }
+    }
+
+    if (-not $name) {
+        # Detect the project from the current directory; never silently use the workspace.
+        $cwd = [System.IO.Path]::GetFullPath($PWD.Path)
+        $resolved = (Get-Item -LiteralPath $cwd -Force).ResolveLinkTarget($true)
+        if ($resolved) { $cwd = $resolved.FullName }
+        $prefix = $repoRoot.TrimEnd([char]'/', [char]'\') + [System.IO.Path]::DirectorySeparatorChar
+        if ($cwd -eq $repoRoot) {
+            Die "ambiguous context — run inside a project, or pass --project <name> (or --workspace)"
+        }
+        if (-not $cwd.StartsWith($prefix)) {
+            Die "not inside the r3 workspace — pass --project <name> or --workspace"
+        }
+        $name = ($cwd.Substring($prefix.Length) -split '[\\/]')[0]
+    }
+
+    $root = Join-Path $repoRoot $name
+    if (-not (Test-Path -LiteralPath (Join-Path $root '.git'))) {
+        Die "'$name' is not a workspace project (no .git at $root)"
+    }
+    return @{ Root = $root; Agents = (Join-Path $root '.agents'); Covenant = (Join-Path $root '.covenant'); Name = $name; IsWorkspace = $false; Args = $remaining.ToArray() }
+}
+
 # ── helpers ─────────────────────────────────────────────────────────────────
 
 # Derive a lowercase kebab-case name from a repo URL (basename, no `.git`).
@@ -218,5 +276,5 @@ function Write-JsonFile {
 Export-ModuleMember -Function `
     Bold, Red, Green, Yellow, Cyan, `
     Write-Info, Write-Ok, Write-Warn, Write-Err, Write-Success, `
-    Die, Usage, Assert-Workspace, Get-RepoRoot, Get-AgentsDir, Get-R3Home, Get-NameFromUrl, New-Symlink, Invoke-Git, `
+    Die, Usage, Assert-Workspace, Resolve-Context, Get-RepoRoot, Get-AgentsDir, Get-R3Home, Get-NameFromUrl, New-Symlink, Invoke-Git, `
     ConvertTo-R3Json, Write-JsonFile

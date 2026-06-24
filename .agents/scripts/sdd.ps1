@@ -13,9 +13,10 @@ Import-Module "$PSScriptRoot/_shared.psm1" -Force
 
 $TemplatesDir = Join-Path (Get-AgentsDir) 'skills/_shared'
 
-# Mechanical scaffold/list for the r3 SDD convention (engine-free). Operates on the
-# .covenant/ tree in the current project (CWD). Override the target with SDD_ROOT.
-$SddRoot = if ($env:SDD_ROOT) { $env:SDD_ROOT } else { Join-Path $PWD.Path '.covenant' }
+# Mechanical scaffold/list for the r3 SDD convention (engine-free). Operates on the .covenant/
+# tree of the resolved context (--project <name> / --workspace / CWD); SDD_ROOT overrides it.
+# Templates are shared across contexts (always the workspace _shared/, via Get-AgentsDir).
+$SddRoot = $null   # set per resolved context in the dispatch block below
 
 # ── private ───────────────────────────────────────────────────────────────────
 
@@ -108,11 +109,23 @@ function Invoke-ListCommand {
 
 # ── dispatch ──────────────────────────────────────────────────────────────────
 
+$CmdArgs = $Rest
+if ($Command -in @('init', 'new', 'list')) {
+    if ($env:SDD_ROOT) {
+        $SddRoot = $env:SDD_ROOT
+    }
+    else {
+        $ctx = Resolve-Context $Rest
+        $SddRoot = $ctx.Covenant
+        $CmdArgs = $ctx.Args
+    }
+}
+
 switch ($Command) {
     'init' { Invoke-InitCommand }
-    'new'  { Invoke-NewCommand -Rest $Rest }
+    'new'  { Invoke-NewCommand -Rest $CmdArgs }
     'list' { Invoke-ListCommand }
     default {
-        Usage "sdd.ps1 <init | new <slug> | list>   (targets `$PWD/.covenant; override with SDD_ROOT)"
+        Usage "sdd.ps1 <init | new <slug> | list> [--project <name> | --workspace]   (or set SDD_ROOT)"
     }
 }
