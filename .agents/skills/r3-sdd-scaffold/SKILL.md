@@ -23,7 +23,7 @@ NOT proceed without understanding it. If the slug already exists, suggest `r3-sd
 
 ### Step 2 — Scaffold
 
-Run `.agents/scripts/sdd.ps1 new <slug>` from the project root. It creates the empty change folder
+Run `.agents/scripts/sdd.ps1 new <slug> --project <name>` (the project you're working in, or `--workspace`; see Context in `sdd-schema`). It creates the empty change folder
 `.covenant/changes/<NNN-slug>/` (the script assigns the next `NNN`); artifacts are authored from the templates in
 `.agents/skills/_shared/`. If `.covenant/` does not exist, run `r3-sdd-init` first.
 

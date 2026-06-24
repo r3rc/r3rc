@@ -16,10 +16,11 @@ Set up the `.covenant/` structure so the SDD skills can operate. Conventions liv
 
 ### Step 1 — Scaffold
 
-From the project root (or with `SDD_ROOT` set), run:
+For the project you're setting up, run (`--project <name>`, or `--workspace` for the workspace itself; the
+script also detects the project from the current directory — see Context in `sdd-schema`):
 
 ```bash
-.agents/scripts/sdd.ps1 init
+.agents/scripts/sdd.ps1 init --project <name>
 ```
 
 This creates `.covenant/specs/`, `.covenant/changes/`, `.covenant/explorations/`, and scaffolds
@@ -49,4 +50,4 @@ Creates (idempotent):
 ## Constraints
 
 - Idempotent — safe to run again; never overwrites an existing constitution, context-map, or specs.
-- Targets `$PWD/.covenant` by default; override with `SDD_ROOT` when running outside the project root.
+- Targets the resolved context's `.covenant/` (`--project <name>` / `--workspace` / CWD; `SDD_ROOT` overrides). At the workspace root with no context it errors rather than guessing — see Context in `sdd-schema`.

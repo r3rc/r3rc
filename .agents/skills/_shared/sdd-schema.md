@@ -21,11 +21,24 @@ below.
 │       ├── design.md                   # how: Domain Model + Constitution Check (depth optional)
 │       ├── tasks.md                    # implementation checklist (phase/slice structure)
 │       └── checklists/<domain>.md      # optional requirement-quality checklists
-└── explorations/                       # pre-change investigation notes (r3-sdd-explore)
+└── explorations/                       # pre-change investigation (r3-sdd-explore)
 ```
 
 Naming is fixed: capabilities are **kebab-case**; change folders are **`NNN-slug`** (zero-padded sequential
 number + kebab slug, `NNN` auto-assigned by `sdd.ps1 new` by scanning existing changes). A closed change stays in place — the numbering is the chronology and git is the history. Each change also carries a stable opaque **id** (assigned by `sdd.ps1 new`) in its `proposal.md` frontmatter — the durable cross-branch anchor; the `NNN-slug` folder name may be renumbered on a collision, but the id never changes.
+
+## Context (which `.covenant/`)
+
+The `.covenant/` tree belongs to a **context** — a project, or the workspace itself. Every SDD operation
+targets one **explicitly; there is no silent default**:
+
+- working on a project → pass `--project <name>` to `sdd.ps1` (or run from inside the project directory,
+  which the script detects). Paths like `.covenant/changes/…` are then relative to `<project>/`.
+- working on the workspace itself → `--workspace`.
+
+At the workspace root with no context, `sdd.ps1` **errors rather than guessing**. The entrypoint `r3 sdd …`
+forwards the same flags. Resolve the context before any `.covenant/` read or write — and pass it to every
+script call.
 
 ## Artifact graph (the `spec-driven` schema)
 

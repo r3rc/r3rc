@@ -26,7 +26,7 @@ user pick or narrow.
 For the chosen task, go through the phases, narrating each:
 
 1. **Explore** (briefly investigate) → PAUSE.
-2. **Scaffold** — `r3-sdd-init` if needed (creates `.covenant/` + the constitution), then `.agents/scripts/sdd.ps1 new <slug>`; SHOW the folder.
+2. **Scaffold** — `r3-sdd-init` if needed (creates `.covenant/` + the constitution), then `.agents/scripts/sdd.ps1 new <slug> --project <name>` (or `--workspace`); SHOW the folder.
 3. **Proposal** — draft Why/What Changes/Capabilities/Spec Impact/Impact → PAUSE for approval.
 4. **Spec** — write the full self-contained `spec.md`: complete `### Requirement:` blocks (`**ID**: REQ-###` + `#### Scenario:` GWT), per `sdd-spec-format`.
 5. **Design** — a `## Constitution Check` (gate vs the constitution) + a `## Domain Model` when domain data is involved; full depth when warranted, else a one-line note.

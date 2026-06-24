@@ -26,7 +26,7 @@ continue it (`r3-sdd-continue`) or choose a new name.
 
 ### Step 2 — Scaffold the change
 
-Run `.agents/scripts/sdd.ps1 new <slug>` from the project root (or set `SDD_ROOT`). It creates the empty
+Run `.agents/scripts/sdd.ps1 new <slug> --project <name>` (the project you're working in, or `--workspace`; see Context in `sdd-schema`). It creates the empty
 change folder `.covenant/changes/<NNN-slug>/` (the script assigns the next `NNN` and prints a stable `id` — record that `id` in `proposal.md`'s frontmatter). You author each artifact by copying its template
 from `.agents/skills/_shared/` and filling it. If `.covenant/` does not exist yet, run `r3-sdd-init` first.
 

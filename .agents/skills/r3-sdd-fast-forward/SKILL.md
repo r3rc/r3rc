@@ -17,8 +17,8 @@ rules live in `sdd-schema` and `sdd-spec-format`.
 
 ### Step 1 — Get the change
 
-Use a named change, or scaffold a new one: derive a **kebab-case slug** and run `.agents/scripts/sdd.ps1 new <slug>`
-(run `r3-sdd-init` first if `.covenant/` is missing). Don't proceed without understanding what is being built.
+Use a named change, or scaffold a new one: derive a **kebab-case slug** and run `.agents/scripts/sdd.ps1 new <slug> --project <name>`
+(or `--workspace`; see Context in `sdd-schema`. Run `r3-sdd-init` first if `.covenant/` is missing). Don't proceed without understanding what is being built.
 
 ### Step 2 — Loop until apply-ready
 
