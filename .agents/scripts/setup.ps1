@@ -9,9 +9,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# setup.ps1 lives at the workspace root; the shared module is under .agents/scripts.
-$RepoRoot = $PSScriptRoot
-Import-Module "$RepoRoot/.agents/scripts/_shared.psm1" -Force
+# setup.ps1 lives under .agents/scripts; the shared module is a sibling. The workspace root is
+# two levels up (resolved via Get-RepoRoot), where the harness symlinks below are created.
+Import-Module "$PSScriptRoot/_shared.psm1" -Force
+$RepoRoot = Get-RepoRoot
 
 # ── private ───────────────────────────────────────────────────────────────────
 
